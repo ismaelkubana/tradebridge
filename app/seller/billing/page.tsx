@@ -62,6 +62,35 @@ export default async function SellerBillingPage({
         )}
       </div>
 
+      <div className="card">
+        <h2 className="text-lg font-semibold">Official payment destinations</h2>
+        <p className="mt-1 text-sm text-gray-600">Pay only to the destination shown here. If a destination is not configured, contact TradeBridge support and do not transfer money yet.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold">MTN Rwanda MoMo</h3>
+            {process.env.TRADEBRIDGE_MTN_MOMO_NUMBER ? (
+              <dl className="mt-2 space-y-1 text-sm">
+                {process.env.TRADEBRIDGE_MTN_MOMO_ACCOUNT_NAME && <div><dt className="inline text-gray-500">Account name: </dt><dd className="inline">{process.env.TRADEBRIDGE_MTN_MOMO_ACCOUNT_NAME}</dd></div>}
+                <div><dt className="inline text-gray-500">Receiving number: </dt><dd className="inline font-semibold">{process.env.TRADEBRIDGE_MTN_MOMO_NUMBER}</dd></div>
+                {process.env.TRADEBRIDGE_MTN_MOMO_INSTRUCTIONS && <p className="pt-2 text-gray-600">{process.env.TRADEBRIDGE_MTN_MOMO_INSTRUCTIONS}</p>}
+              </dl>
+            ) : <p className="mt-2 text-sm text-amber-800">Not configured yet. Do not send payment until TradeBridge publishes its verified receiving details.</p>}
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold">Equity Bank transfer</h3>
+            {process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NUMBER ? (
+              <dl className="mt-2 space-y-1 text-sm">
+                {process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NAME && <div><dt className="inline text-gray-500">Account name: </dt><dd className="inline">{process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NAME}</dd></div>}
+                <div><dt className="inline text-gray-500">Account number: </dt><dd className="inline font-semibold">{process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NUMBER}</dd></div>
+                {process.env.TRADEBRIDGE_EQUITY_BRANCH && <div><dt className="inline text-gray-500">Branch: </dt><dd className="inline">{process.env.TRADEBRIDGE_EQUITY_BRANCH}</dd></div>}
+                {process.env.TRADEBRIDGE_EQUITY_INSTRUCTIONS && <p className="pt-2 text-gray-600">{process.env.TRADEBRIDGE_EQUITY_INSTRUCTIONS}</p>}
+              </dl>
+            ) : <p className="mt-2 text-sm text-amber-800">Not configured yet. Do not transfer money until TradeBridge publishes its verified account details.</p>}
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-gray-500">Administrators must verify every transfer against the actual MTN or bank transaction before unlocking seller access.</p>
+      </div>
+
       {!paid && (
         <div className="card">
           <h2 className="text-lg font-semibold">Submit registration payment</h2>
