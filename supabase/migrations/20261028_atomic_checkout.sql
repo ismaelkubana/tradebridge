@@ -74,7 +74,7 @@ begin
     where l.id = v_item.listing_id
       and l.shop_id = p_shop_id
       and l.active = true
-    for update;
+    ;
 
     if not found then
       raise exception 'A listing is unavailable';
