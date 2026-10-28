@@ -13,6 +13,7 @@ export default async function SellerLayout({ children }: { children: React.React
     { href: "/seller/listings", label: "Products / Menu / Services" },
     { href: "/seller/orders", label: "Orders & bookings" },
     { href: "/seller/shop", label: "Business profile" },
+    { href: "/seller/billing", label: "Billing & commission" },
   ];
 
   return (
