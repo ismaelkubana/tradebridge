@@ -9,9 +9,10 @@ export const dynamic = "force-dynamic";
 export default async function SellerBillingPage({
   searchParams,
 }: {
-  searchParams: { error?: string; success?: string };
+  searchParams: Promise<{ error?: string; success?: string }>;
 }) {
   const profile = await requireRole(["seller"]);
+  const resolvedSearchParams = await searchParams;
   const supabase = await createClient();
 
   const [{ data: billing }, { data: payments }, { data: commissions }] = await Promise.all([
@@ -35,8 +36,8 @@ export default async function SellerBillingPage({
         <p className="mt-1 text-sm text-gray-600">Your registration trial, fee status, and sales commission.</p>
       </div>
 
-      {searchParams.error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>}
-      {searchParams.success && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{searchParams.success}</p>}
+      {resolvedSearchParams.error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>}
+      {resolvedSearchParams.success && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{resolvedSearchParams.success}</p>}
 
       <div className="card">
         <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Registration fee</p>
