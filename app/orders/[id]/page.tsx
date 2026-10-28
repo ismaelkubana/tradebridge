@@ -18,7 +18,7 @@ export default async function OrderDetailPage({
   searchParams: { placed?: string };
 }) {
   const profile = await requireRole(["buyer", "seller", "admin"]);
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data } = await supabase
     .from("orders")
