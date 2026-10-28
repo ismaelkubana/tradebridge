@@ -50,6 +50,7 @@ function CheckoutForm() {
     <div className="mx-auto max-w-lg">
       <div className="card">
         <h1 className="mb-1 text-2xl font-bold">{isSalon ? "Book appointment" : "Checkout"}</h1>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-700">Step 1 of 2 · Delivery details</p>
         <p className="mb-4 text-sm text-gray-500">
           {cart.shopName} · {formatRWF(cartTotal(cart))}
         </p>
@@ -82,7 +83,7 @@ function CheckoutForm() {
           {fulfillment === "delivery" && (
             <div>
               <label className="label" htmlFor="address">Delivery address / landmark</label>
-              <input id="address" name="address" className="input" placeholder="e.g. KG 11 Ave, near the market" />
+              <input id="address" name="address" required className="input" autoComplete="street-address" placeholder="e.g. KG 11 Ave, near the market" />
             </div>
           )}
 
@@ -93,7 +94,8 @@ function CheckoutForm() {
             </div>
           )}
 
-          <div>
+          <div className="border-t border-gray-100 pt-4">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-700">Step 2 of 2 · Contact and confirm</p>
             <label className="label" htmlFor="contact_phone">Your phone number</label>
             <input id="contact_phone" name="contact_phone" type="tel" required className="input" placeholder="07XXXXXXXX" />
           </div>
