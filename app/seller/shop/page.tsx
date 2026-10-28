@@ -4,7 +4,8 @@ import { KIGALI_DISTRICTS, SHOP_TYPE_LABEL, type ShopType } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-export default async function ShopProfilePage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function ShopProfilePage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+  const resolvedSearchParams = await searchParams;
   const profile = await requireRole(["seller"]);
   const shop = await getMyShop(profile.id);
 
@@ -12,8 +13,8 @@ export default async function ShopProfilePage({ searchParams }: { searchParams: 
     <div className="card max-w-xl">
       <h1 className="mb-4 text-xl font-bold">{shop ? "Business profile" : "Create your business"}</h1>
 
-      {searchParams.error && (
-        <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>
+      {resolvedSearchParams.error && (
+        <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>
       )}
 
       <form action={saveShop} className="space-y-4">

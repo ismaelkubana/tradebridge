@@ -5,7 +5,7 @@ import { formatRWF } from "@/lib/format";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const count = async (table: string, filter?: [string, string]) => {
     let q = supabase.from(table).select("id", { count: "exact", head: true });

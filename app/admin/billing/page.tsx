@@ -19,9 +19,10 @@ type RegistrationPayment = {
 export default async function AdminBillingPage({
   searchParams,
 }: {
-  searchParams: { error?: string; success?: string };
+  searchParams: Promise<{ error?: string; success?: string }>;
 }) {
-  const supabase = createClient();
+  const resolvedSearchParams = await searchParams;
+  const supabase = await createClient();
   const { data } = await supabase
     .from("seller_fee_payments")
     .select("*, profiles!seller_fee_payments_seller_id_fkey(full_name,phone)")
@@ -35,8 +36,8 @@ export default async function AdminBillingPage({
         <h1 className="text-2xl font-bold">Seller registration payments</h1>
         <p className="mt-1 text-sm text-gray-600">Review RWF 5,000 registration-fee submissions. Verify the payment with the provider or bank before approving.</p>
       </div>
-      {searchParams.error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>}
-      {searchParams.success && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{searchParams.success}</p>}
+      {resolvedSearchParams.error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>}
+      {resolvedSearchParams.success && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{resolvedSearchParams.success}</p>}
 
       {payments.length === 0 ? (
         <div className="card text-sm text-gray-500">No seller registration payments have been submitted.</div>

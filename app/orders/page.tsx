@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function MyOrdersPage() {
   const profile = await requireRole(["buyer", "seller", "admin"]);
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase
     .from("orders")
     .select("*, shops(name)")

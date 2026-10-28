@@ -21,7 +21,7 @@ export default async function SellerOverviewPage() {
     );
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const [{ data: billing }, { count: listingCount }, { data: orders }] = await Promise.all([
     supabase.from("profiles").select("seller_trial_started_at,seller_registration_paid_at").eq("id", profile.id).maybeSingle(),
     supabase.from("listings").select("id", { count: "exact", head: true }).eq("shop_id", shop.id),

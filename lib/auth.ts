@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Profile, Role, Shop } from "@/lib/types";
 
 export async function getCurrentProfile(): Promise<Profile | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -21,7 +21,7 @@ export async function requireRole(roles: Role[]): Promise<Profile> {
 }
 
 export async function getMyShop(ownerId: string): Promise<Shop | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase
     .from("shops")
     .select("*")

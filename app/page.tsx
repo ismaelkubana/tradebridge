@@ -18,7 +18,7 @@ export default async function HomePage() {
 
   let shops: Shop[] = [];
   if (configured) {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { data } = await supabase
       .from("shops")
       .select("*")

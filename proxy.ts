@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 // Keeps the login session fresh and sends visitors who are not signed in
 // away from the private portals. Role checks (seller/admin) happen in each portal layout.
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {

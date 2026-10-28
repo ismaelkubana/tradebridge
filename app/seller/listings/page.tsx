@@ -11,13 +11,14 @@ export const dynamic = "force-dynamic";
 export default async function ListingsPage({
   searchParams,
 }: {
-  searchParams: { edit?: string; error?: string };
+  searchParams: Promise<{ edit?: string; error?: string }>;
 }) {
+  const resolvedSearchParams = await searchParams;
   const profile = await requireRole(["seller"]);
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: billing } = await supabase.from("seller_billing").select("trial_ends_at, registration_paid_at").eq("seller_id", profile.id).maybeSingle();
   const sellingLocked = !billing || (!billing.registration_paid_at && new Date(billing.trial_ends_at).getTime() <= Date.now());
   const { data } = await supabase
@@ -26,7 +27,7 @@ export default async function ListingsPage({
     .eq("shop_id", shop.id)
     .order("created_at", { ascending: false });
   const listings = (data as Listing[]) ?? [];
-  const editing = listings.find((l) => l.id === searchParams.edit);
+  const editing = listings.find((l) => l.id === resolvedSearchParams.edit);
 
   const noun = shop.type === "restaurant" ? "menu item" : shop.type === "salon" ? "service" : "product";
 
@@ -43,8 +44,8 @@ export default async function ListingsPage({
 
       {!sellingLocked && <div className="card">
         <h2 className="mb-3 font-semibold">{editing ? `Edit ${noun}` : `Add a ${noun}`}</h2>
-        {searchParams.error && (
-          <p className="mb-3 rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>
+        {resolvedSearchParams.error && (
+          <p className="mb-3 rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>
         )}
         <form action={saveListing} className="grid gap-4 sm:grid-cols-2">
           {editing && <input type="hidden" name="id" value={editing.id} />}

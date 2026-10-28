@@ -16,12 +16,13 @@ const TABS = [
   { label: "Suspended", value: "suspended" },
 ];
 
-export default async function AdminShopsPage({ searchParams }: { searchParams: { status?: string } }) {
-  const filter = ["pending", "approved", "suspended"].includes(searchParams.status ?? "")
-    ? searchParams.status
+export default async function AdminShopsPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
+  const resolvedSearchParams = await searchParams;
+  const filter = ["pending", "approved", "suspended"].includes(resolvedSearchParams.status ?? "")
+    ? resolvedSearchParams.status
     : undefined;
 
-  const supabase = createClient();
+  const supabase = await createClient();
   let query = supabase
     .from("shops")
     .select("*, profiles(full_name, phone)")

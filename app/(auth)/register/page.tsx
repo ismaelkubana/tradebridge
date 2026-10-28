@@ -3,15 +3,16 @@ import { register } from "../actions";
 
 export const dynamic = "force-dynamic";
 
-export default function RegisterPage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+  const resolvedSearchParams = await searchParams;
   return (
     <div className="mx-auto max-w-md">
       <div className="card">
         <h1 className="mb-1 text-2xl font-bold">Create your account</h1>
         <p className="mb-5 text-sm text-gray-500">Buy from local businesses, or sell on TradeBridge.</p>
 
-        {searchParams.error && (
-          <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>
+        {resolvedSearchParams.error && (
+          <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>
         )}
 
         <form action={register} className="space-y-4">

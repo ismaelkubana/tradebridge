@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 type Row = Order & { shops: { name: string } | null; profiles: { full_name: string } | null };
 
 export default async function AdminOrdersPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase
     .from("orders")
     .select("*, shops(name), profiles(full_name)")

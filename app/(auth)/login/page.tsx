@@ -3,26 +3,27 @@ import { login } from "../actions";
 
 export const dynamic = "force-dynamic";
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: { error?: string; message?: string; next?: string };
+  searchParams: Promise<{ error?: string; message?: string; next?: string }>;
 }) {
+  const resolvedSearchParams = await searchParams;
   return (
     <div className="mx-auto max-w-md">
       <div className="card">
         <h1 className="mb-1 text-2xl font-bold">Sign in</h1>
         <p className="mb-5 text-sm text-gray-500">Welcome back.</p>
 
-        {searchParams.error && (
-          <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>
+        {resolvedSearchParams.error && (
+          <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>
         )}
-        {searchParams.message && (
-          <p className="mb-4 rounded-lg bg-green-50 p-3 text-sm text-green-700">{searchParams.message}</p>
+        {resolvedSearchParams.message && (
+          <p className="mb-4 rounded-lg bg-green-50 p-3 text-sm text-green-700">{resolvedSearchParams.message}</p>
         )}
 
         <form action={login} className="space-y-4">
-          <input type="hidden" name="next" value={searchParams.next ?? "/"} />
+          <input type="hidden" name="next" value={resolvedSearchParams.next ?? "/"} />
           <div>
             <label className="label" htmlFor="email">Email</label>
             <input id="email" name="email" type="email" required className="input" />
