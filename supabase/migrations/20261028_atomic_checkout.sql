@@ -59,7 +59,7 @@ begin
     raise exception 'Cart contains duplicate listing items';
   end if;
 
-  -- Lock each listing while validating price, availability and stock.
+  -- Validate each listing's current price, availability and stock.
   for v_item in
     select (entry.value->>'listingId')::uuid as listing_id,
            (entry.value->>'qty')::integer as qty
