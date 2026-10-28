@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireRole } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import { setUserRole } from "../actions";
+import { setUserRole, sendPasswordReset } from "../actions";
 import StatusBadge from "@/components/StatusBadge";
 import { formatDate } from "@/lib/format";
 import type { Profile } from "@/lib/types";
@@ -15,7 +15,7 @@ const TABS = [
   { label: "Admins", value: "admin" },
 ];
 
-export default async function AdminUsersPage({ searchParams }: { searchParams: Promise<{ role?: string; q?: string }> }) {
+export default async function AdminUsersPage({ searchParams }: { searchParams: Promise<{ role?: string; q?: string; error?: string; success?: string }> }) {
   const resolvedSearchParams = await searchParams;
   const me = await requireRole(["admin"]);
   const filter = ["buyer", "seller", "admin"].includes(resolvedSearchParams.role ?? "") ? resolvedSearchParams.role : undefined;
@@ -30,7 +30,10 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Users</h1>
+      <h1 className="text-2xl font-bold">Super-admin · User management</h1>
+      {resolvedSearchParams.error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{resolvedSearchParams.error}</p>}
+      {resolvedSearchParams.success && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{resolvedSearchParams.success}</p>}
+      <p className="text-sm text-gray-600">Change account roles and request secure password-reset emails. Admins cannot see or retrieve a user’s existing password.</p>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-2 text-sm">
@@ -60,6 +63,7 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
               <th className="th">Role</th>
               <th className="th">Joined</th>
               <th className="th">Change role</th>
+              <th className="th">Password recovery</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -83,6 +87,12 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
                       <button className="btn-outline btn-sm" type="submit">Save</button>
                     </form>
                   )}
+                </td>
+                <td className="td">
+                  <form action={sendPasswordReset} className="flex min-w-64 flex-col gap-2">
+                    <input name="email" type="email" required maxLength={254} className="input !py-1" placeholder="Seller account email" aria-label="Email for password reset" />
+                    <button className="btn-outline btn-sm" type="submit">Send reset email</button>
+                  </form>
                 </td>
               </tr>
             ))}
