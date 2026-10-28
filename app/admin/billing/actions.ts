@@ -17,7 +17,7 @@ export async function reviewRegistrationPayment(formData: FormData) {
 
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("seller_fee_payments")
+    .from("seller_registration_payments")
     .update({ status, admin_note: note || null })
     .eq("id", id)
     .eq("status", "pending")
