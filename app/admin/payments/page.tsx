@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { formatDate, formatRWF } from "@/lib/format";
-import { reviewOrderPayment } from "./actions";
+import { reviewOrderPayment } from "../actions";
 
 export const dynamic = "force-dynamic";
 
