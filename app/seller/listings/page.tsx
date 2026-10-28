@@ -17,7 +17,7 @@ export default async function ListingsPage({
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: billing } = await supabase.from("seller_billing").select("trial_ends_at, registration_paid_at").eq("seller_id", profile.id).maybeSingle();
   const sellingLocked = !billing || (!billing.registration_paid_at && new Date(billing.trial_ends_at).getTime() <= Date.now());
   const { data } = await supabase
