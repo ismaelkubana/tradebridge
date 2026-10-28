@@ -1,0 +1,51 @@
+name: Patch PostCSS dependency
+
+on:
+  push:
+    branches:
+      - chore/next-security-upgrade
+
+permissions:
+  contents: write
+
+concurrency:
+  group: postcss-patch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  patch-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Update PostCSS to a patched release
+        run: npm install --save-exact postcss@8.5.23
+      - name: Verify lockfile
+        run: npm ci
+      - name: Fail on high or critical dependency advisories
+        run: npm audit --audit-level=high
+      - name: TypeScript check
+        run: npx tsc --noEmit
+      - name: Production build
+        run: npm run build
+      - name: Commit verified dependency files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Patch PostCSS dependency vulnerability"
+          git push origin chore/next-security-upgrade
+      - name: Remove temporary patch workflow
+        run: |
+          git rm .github/workflows/patch-postcss.yml
+          git commit -m "Remove temporary PostCSS patch workflow"
+          git push origin chore/next-security-upgrade
