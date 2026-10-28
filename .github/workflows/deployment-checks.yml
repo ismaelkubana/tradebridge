@@ -1,0 +1,47 @@
+name: Vercel deployment checks
+
+on:
+  pull_request:
+    branches:
+      - main
+      - feat/seller-trial-registration-commission
+  push:
+    branches:
+      - main
+      - feat/seller-trial-registration-commission
+      - chore/vercel-deployment-hardening
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Typecheck and production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Build-time placeholders only; never use these to access a real project.
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Build production app
+        run: npm run build
