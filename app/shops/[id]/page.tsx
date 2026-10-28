@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AddToCart from "@/components/AddToCart";
+import AddToWishlist from "@/components/AddToWishlist";
 import { formatRWF } from "@/lib/format";
 import { SHOP_TYPE_LABEL, type Listing, type Shop } from "@/lib/types";
 
@@ -43,14 +44,6 @@ export default async function ShopPage({
     if (sort === "name") return a.title.localeCompare(b.title);
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
   });
-  const queryString = (next: { q?: string; sort?: string; stock?: boolean }) => {
-    const values = new URLSearchParams();
-    if (next.q) values.set("q", next.q);
-    if (next.sort && next.sort !== "newest") values.set("sort", next.sort);
-    if (next.stock) values.set("stock", "yes");
-    return values.size ? `?${values.toString()}` : "";
-  };
-
   return (
     <div className="space-y-8">
       <Link href="/browse" className="inline-flex items-center gap-2 text-sm font-bold text-slate-500 transition hover:text-brand-700"><span aria-hidden="true">←</span> Back to marketplace</Link>
@@ -88,7 +81,7 @@ export default async function ShopPage({
                 <div className="flex flex-1 flex-col p-4">
                   <h3 className="line-clamp-1 font-extrabold text-slate-900">{listing.title}</h3>
                   <p className="mt-2 line-clamp-2 min-h-10 text-sm leading-5 text-slate-500">{listing.description || "Contact the seller for more details."}</p>
-                  <div className="mt-4 flex items-end justify-between gap-2 border-t border-slate-100 pt-4"><div><p className="text-lg font-black tracking-tight text-brand-700">{formatRWF(listing.price_rwf)}</p>{listing.duration_min && <p className="mt-1 text-xs text-slate-500">{listing.duration_min} min</p>}{listing.stock !== null && listing.stock > 0 && listing.stock <= 5 && <p className="mt-1 text-xs font-semibold text-amber-700">Only {listing.stock} left</p>}</div><AddToCart shop={shop} listing={listing} /></div>
+                  <div className="mt-4 flex items-end justify-between gap-2 border-t border-slate-100 pt-4"><div><p className="text-lg font-black tracking-tight text-brand-700">{formatRWF(listing.price_rwf)}</p>{listing.duration_min && <p className="mt-1 text-xs text-slate-500">{listing.duration_min} min</p>}{listing.stock !== null && listing.stock > 0 && listing.stock <= 5 && <p className="mt-1 text-xs font-semibold text-amber-700">Only {listing.stock} left</p>}</div><div className="flex items-center gap-2"><AddToWishlist item={{ listingId: listing.id, shopId: shop.id, shopName: shop.name, title: listing.title, price: listing.price_rwf, imageUrl: listing.image_url }} /><AddToCart shop={shop} listing={listing} /></div></div>
                 </div>
               </article>;
             })}
