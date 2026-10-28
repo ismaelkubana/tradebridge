@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireRole } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import { setUserRole } from "../actions";
+import { sendPasswordReset, setUserRole } from "../actions";
 import StatusBadge from "@/components/StatusBadge";
 import { formatDate } from "@/lib/format";
 import type { Profile } from "@/lib/types";
@@ -15,7 +15,7 @@ const TABS = [
   { label: "Admins", value: "admin" },
 ];
 
-export default async function AdminUsersPage({ searchParams }: { searchParams: Promise<{ role?: string; q?: string }> }) {
+export default async function AdminUsersPage({ searchParams }: { searchParams: Promise<{ role?: string; q?: string; success?: string; error?: string }> }) {
   const resolvedSearchParams = await searchParams;
   const me = await requireRole(["admin"]);
   const filter = ["buyer", "seller", "admin"].includes(resolvedSearchParams.role ?? "") ? resolvedSearchParams.role : undefined;
@@ -31,6 +31,19 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-bold">Users</h1>
+
+      {resolvedSearchParams.success && <p role="status" className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{resolvedSearchParams.success}</p>}
+      {resolvedSearchParams.error && <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-800">{resolvedSearchParams.error}</p>}
+
+      <section className="card space-y-3">
+        <h2 className="font-semibold">Send password-reset email</h2>
+        <p className="text-sm text-gray-600">Enter the account email. The customer will receive a link to set a new password on the public TradeBridge website.</p>
+        <form action={sendPasswordReset} className="flex flex-wrap gap-2">
+          <label className="sr-only" htmlFor="reset-account-email">Account email</label>
+          <input id="reset-account-email" name="email" type="email" required maxLength={254} autoComplete="email" placeholder="customer@example.com" className="input min-w-64 flex-1" />
+          <button type="submit" className="btn">Send reset link</button>
+        </form>
+      </section>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-2 text-sm">
