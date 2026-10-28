@@ -46,7 +46,7 @@ export default async function ShopPage({
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
   });
   const { data: feedbackRows } = listings.length
-    ? await supabase.from("listing_feedback").select("listing_id,liked,image_url,comment").in("listing_id", listings.map((item) => item.id)).eq("liked", true)
+    ? await supabase.from("listing_feedback_public").select("listing_id,liked,image_url,comment").in("listing_id", listings.map((item) => item.id)).eq("liked", true)
     : { data: [] as { listing_id: string; liked: boolean; image_url: string | null; comment: string }[] };
   const feedbackByListing = new Map<string, { count: number; photos: string[] }>();
   for (const feedback of feedbackRows ?? []) {
