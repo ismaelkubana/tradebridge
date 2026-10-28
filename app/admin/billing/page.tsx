@@ -21,7 +21,7 @@ export default async function AdminBillingPage({
 }: {
   searchParams: { error?: string; success?: string };
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase
     .from("seller_fee_payments")
     .select("*, profiles!seller_fee_payments_seller_id_fkey(full_name,phone)")
