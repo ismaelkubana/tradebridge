@@ -12,7 +12,7 @@ export default async function SellerBillingPage({
   searchParams: { error?: string; success?: string };
 }) {
   const profile = await requireRole(["seller"]);
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const [{ data: billing }, { data: payments }, { data: commissions }] = await Promise.all([
     supabase.from("seller_billing").select("trial_started_at,trial_ends_at,registration_paid_at").eq("seller_id", profile.id).maybeSingle(),
