@@ -39,3 +39,24 @@ export async function reviewOrderPayment(formData: FormData) {
   revalidatePath("/seller/orders");
   redirect("/admin/payments?success=" + encodeURIComponent(status === "paid" ? "Payment verified." : "Payment rejected."));
 }
+
+export async function sendPasswordReset(formData: FormData) {
+  await requireRole(["admin"]);
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || email.length > 254) {
+    redirect("/admin/users?error=" + encodeURIComponent("Enter a valid account email address."));
+  }
+
+  const supabase = await createClient();
+  // Always use the public production host, never a protected, deployment-specific preview URL.
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://tradebridge-kappa.vercel.app").replace(/\\/$/, "");
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/update-password`,
+  });
+
+  if (error) {
+    console.error("Admin-triggered password reset email failed", { message: error.message });
+    redirect("/admin/users?error=" + encodeURIComponent("Could not send the reset email. Please wait before retrying and check Supabase Auth URL settings."));
+  }
+  redirect("/admin/users?success=" + encodeURIComponent("If this email belongs to a TradeBridge account, a secure password-reset email has been requested."));
+}
