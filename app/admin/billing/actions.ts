@@ -15,7 +15,7 @@ export async function reviewRegistrationPayment(formData: FormData) {
     redirect("/admin/billing?error=" + encodeURIComponent("Invalid payment review request."));
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("seller_fee_payments")
     .update({ status, admin_note: note || null })
