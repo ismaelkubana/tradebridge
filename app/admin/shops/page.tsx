@@ -21,7 +21,7 @@ export default async function AdminShopsPage({ searchParams }: { searchParams: {
     ? searchParams.status
     : undefined;
 
-  const supabase = createClient();
+  const supabase = await createClient();
   let query = supabase
     .from("shops")
     .select("*, profiles(full_name, phone)")
