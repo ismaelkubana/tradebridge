@@ -50,6 +50,10 @@ export async function saveListing(formData: FormData) {
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
   const supabase = createClient();
+  const { data: billing } = await supabase.from("profiles").select("seller_trial_started_at,seller_registration_paid_at").eq("id", profile.id).maybeSingle();
+  if (!billing || (!billing.seller_registration_paid_at && (!billing.seller_trial_started_at || new Date(billing.seller_trial_started_at).getTime() + 14 * 24 * 60 * 60 * 1000 <= Date.now()))) {
+    redirect("/seller/billing?error=" + encodeURIComponent("Your free trial has ended. Pay the RWF 5,000 registration fee to add or update listings."));
+  }
 
   const id = text(formData, "id");
   const title = text(formData, "title");
@@ -88,7 +92,14 @@ export async function toggleListing(formData: FormData) {
   const supabase = createClient();
   const id = text(formData, "id");
   const active = text(formData, "active") === "true";
-  await supabase.from("listings").update({ active: !active }).eq("id", id).eq("shop_id", shop.id);
+  if (!active) {
+    const { data: billing } = await supabase.from("profiles").select("seller_trial_started_at,seller_registration_paid_at").eq("id", profile.id).maybeSingle();
+    if (!billing || (!billing.seller_registration_paid_at && (!billing.seller_trial_started_at || new Date(billing.seller_trial_started_at).getTime() + 14 * 24 * 60 * 60 * 1000 <= Date.now()))) {
+      redirect("/seller/billing?error=" + encodeURIComponent("Your free trial has ended. Pay the RWF 5,000 registration fee before reactivating listings."));
+    }
+  }
+  const { error } = await supabase.from("listings").update({ active: !active }).eq("id", id).eq("shop_id", shop.id);
+  if (error) redirect("/seller/billing?error=" + encodeURIComponent("This listing action is not available while your seller registration is unpaid."));
   revalidatePath("/seller/listings");
 }
 
@@ -111,4 +122,38 @@ export async function updateOrderStatus(formData: FormData) {
   await supabase.from("orders").update({ status }).eq("id", text(formData, "id")).eq("shop_id", shop.id);
   revalidatePath("/seller/orders");
   revalidatePath("/seller");
+}
+
+export async function submitRegistrationPayment(formData: FormData) {
+  const profile = await requireRole(["seller"]);
+  const supabase = createClient();
+  const method = text(formData, "method");
+  const reference = text(formData, "transaction_reference");
+
+  if (!["mtn_momo", "equity_bank"].includes(method) || !reference) {
+    redirect("/seller/billing?error=" + encodeURIComponent("Choose a payment method and enter the transaction reference."));
+  }
+
+  const { data: billing } = await supabase
+    .from("profiles")
+    .select("seller_registration_paid_at")
+    .eq("id", profile.id)
+    .maybeSingle();
+
+  if (billing?.seller_registration_paid_at) {
+    redirect("/seller/billing?success=" + encodeURIComponent("Your registration fee is already verified."));
+  }
+
+  const { error } = await supabase.from("seller_registration_payments").insert({
+    seller_id: profile.id,
+    amount_rwf: 5000,
+    payment_method: method,
+    transaction_reference: reference,
+    status: "pending",
+  });
+
+  if (error) redirect("/seller/billing?error=" + encodeURIComponent("Could not submit payment for review. Check whether this transaction reference was already submitted."));
+  revalidatePath("/seller/billing");
+  revalidatePath("/admin/billing");
+  redirect("/seller/billing?success=" + encodeURIComponent("Payment submitted. Selling access will unlock after an administrator verifies it."));
 }

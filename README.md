@@ -63,6 +63,14 @@ where id = (select id from auth.users where email = 'you@example.com');
 
 Free plans have usage limits and are for demos. Check each provider's current limits and move to a paid plan before a real public launch.
 
+## Seller trial, registration fee, and commission
+
+A new seller gets a 14-day free trial. After the trial expires, sellers cannot add/reactivate listings or receive new orders until an administrator verifies the RWF 5,000 registration payment. Existing accounts, listings, and order history are preserved. The seller portal includes `/seller/billing`; administrators review submitted payment references at `/admin/billing`. Supported recorded methods are MTN Rwanda MoMo and Equity Bank transfer. Payment references are manually verified in this version; this does not initiate a real payment or confirm money received automatically.
+
+TradeBridge records a 5% commission when an order is marked completed. Because buyers pay sellers directly in the current design, this is tracked as commission owed rather than automatically deducted from the buyer payment. Seller commission settlement and automated MTN/bank integrations require a separately approved provider arrangement.
+
+**Migration:** apply `supabase/migrations/20261028_seller_trial_registration_commission.sql` once in Supabase SQL Editor after reviewing it. It is additive; do not rerun the original `supabase/schema.sql` against an existing database.
+
 ## How it is secured
 
 - All data access goes through Supabase **Row Level Security** (see `supabase/schema.sql`): sellers can only touch their own business, listings and orders; buyers only their own orders; admins everything.
@@ -71,7 +79,7 @@ Free plans have usage limits and are for demos. Check each provider's current li
 
 ## What is intentionally not built yet
 
-- Online payments (customers pay the seller directly; add a Rwanda mobile-money gateway next)
+- Automated payment initiation and provider webhook verification for MTN MoMo / Equity Bank (registration payment references are manually reviewed for now)
 - Automatic stock reduction when an order is placed (sellers update stock manually)
 - Product photos, reviews and ratings
 - SMS/email notifications and rider/delivery tracking

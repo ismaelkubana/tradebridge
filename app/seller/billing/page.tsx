@@ -1,0 +1,142 @@
+import Link from "next/link";
+import { requireRole } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
+import { formatDate, formatRWF } from "@/lib/format";
+import { submitRegistrationPayment } from "../actions";
+
+export const dynamic = "force-dynamic";
+
+export default async function SellerBillingPage({
+  searchParams,
+}: {
+  searchParams: { error?: string; success?: string };
+}) {
+  const profile = await requireRole(["seller"]);
+  const supabase = createClient();
+
+  const [{ data: billing }, { data: payments }, { data: commissions }] = await Promise.all([
+    supabase.from("profiles").select("seller_trial_started_at,seller_registration_paid_at,seller_registration_status").eq("id", profile.id).maybeSingle(),
+    supabase.from("seller_registration_payments").select("*").eq("seller_id", profile.id).order("submitted_at", { ascending: false }),
+    supabase.from("seller_commission_payments").select("commission_rwf,status").eq("seller_id", profile.id),
+  ]);
+
+  const paid = Boolean(billing?.seller_registration_paid_at);
+  const trialEnd = billing?.seller_trial_started_at ? new Date(new Date(billing.seller_trial_started_at).getTime() + 14 * 24 * 60 * 60 * 1000) : null;
+  const trialActive = Boolean(trialEnd && trialEnd.getTime() > Date.now());
+  const pending = (payments ?? []).some((p) => p.status === "pending");
+  const outstandingCommission = (commissions ?? [])
+    .filter((c) => c.status === "due")
+    .reduce((sum, c) => sum + c.commission_rwf, 0);
+
+  return (
+    <div className="mx-auto max-w-3xl space-y-5">
+      <div>
+        <h1 className="text-2xl font-bold">Seller billing</h1>
+        <p className="mt-1 text-sm text-gray-600">Your registration trial, fee status, and sales commission.</p>
+      </div>
+
+      {searchParams.error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>}
+      {searchParams.success && <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{searchParams.success}</p>}
+
+      <div className="card">
+        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Registration fee</p>
+        <p className="mt-2 text-3xl font-bold">{formatRWF(5000)}</p>
+        <p className="mt-2 text-sm text-gray-600">
+          {paid
+            ? "Your registration fee has been verified. Your selling access is unlocked."
+            : trialActive
+              ? `Your 14-day free trial is active until ${trialEnd ? formatDate(trialEnd.toISOString()) : "the trial end date"}.`
+              : pending
+                ? "Your trial has ended or is ending, and your payment is awaiting administrator verification."
+                : "Your free trial has ended. Submit your registration payment reference to request verification."}
+        </p>
+        {!paid && !trialActive && (
+          <div className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+            New listings and new customer orders are blocked until the RWF 5,000 payment is verified. Your account and existing records remain available.
+          </div>
+        )}
+        {!paid && (
+          <div className="mt-4 rounded-lg bg-gray-50 p-4 text-sm text-gray-700">
+            <strong>Before paying:</strong> use only the official payment instructions provided by TradeBridge. Do not send your PIN or banking password. The transaction reference you submit will be reviewed by an administrator.
+          </div>
+        )}
+      </div>
+
+      <div className="card">
+        <h2 className="text-lg font-semibold">Official payment destinations</h2>
+        <p className="mt-1 text-sm text-gray-600">Pay only to the destination shown here. If a destination is not configured, contact TradeBridge support and do not transfer money yet.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold">MTN Rwanda MoMo</h3>
+            {process.env.TRADEBRIDGE_MTN_MOMO_NUMBER ? (
+              <dl className="mt-2 space-y-1 text-sm">
+                {process.env.TRADEBRIDGE_MTN_MOMO_ACCOUNT_NAME && <div><dt className="inline text-gray-500">Account name: </dt><dd className="inline">{process.env.TRADEBRIDGE_MTN_MOMO_ACCOUNT_NAME}</dd></div>}
+                <div><dt className="inline text-gray-500">Receiving number: </dt><dd className="inline font-semibold">{process.env.TRADEBRIDGE_MTN_MOMO_NUMBER}</dd></div>
+                {process.env.TRADEBRIDGE_MTN_MOMO_INSTRUCTIONS && <p className="pt-2 text-gray-600">{process.env.TRADEBRIDGE_MTN_MOMO_INSTRUCTIONS}</p>}
+              </dl>
+            ) : <p className="mt-2 text-sm text-amber-800">Not configured yet. Do not send payment until TradeBridge publishes its verified receiving details.</p>}
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold">Equity Bank transfer</h3>
+            {process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NUMBER ? (
+              <dl className="mt-2 space-y-1 text-sm">
+                {process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NAME && <div><dt className="inline text-gray-500">Account name: </dt><dd className="inline">{process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NAME}</dd></div>}
+                <div><dt className="inline text-gray-500">Account number: </dt><dd className="inline font-semibold">{process.env.TRADEBRIDGE_EQUITY_ACCOUNT_NUMBER}</dd></div>
+                {process.env.TRADEBRIDGE_EQUITY_BRANCH && <div><dt className="inline text-gray-500">Branch: </dt><dd className="inline">{process.env.TRADEBRIDGE_EQUITY_BRANCH}</dd></div>}
+                {process.env.TRADEBRIDGE_EQUITY_INSTRUCTIONS && <p className="pt-2 text-gray-600">{process.env.TRADEBRIDGE_EQUITY_INSTRUCTIONS}</p>}
+              </dl>
+            ) : <p className="mt-2 text-sm text-amber-800">Not configured yet. Do not transfer money until TradeBridge publishes its verified account details.</p>}
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-gray-500">Administrators must verify every transfer against the actual MTN or bank transaction before unlocking seller access.</p>
+      </div>
+
+      {!paid && (
+        <div className="card">
+          <h2 className="text-lg font-semibold">Submit registration payment</h2>
+          <p className="mt-1 text-sm text-gray-600">Enter the reference from a payment you have already made. This form does not itself charge your account.</p>
+          <form action={submitRegistrationPayment} className="mt-4 space-y-4">
+            <div>
+              <label className="label" htmlFor="method">Payment method</label>
+              <select id="method" name="method" className="input" required defaultValue="mtn_momo">
+                <option value="mtn_momo">MTN Rwanda MoMo</option>
+                <option value="equity_bank">Equity Bank transfer</option>
+              </select>
+            </div>
+            <div>
+              <label className="label" htmlFor="transaction_reference">Transaction reference</label>
+              <input id="transaction_reference" name="transaction_reference" className="input" required maxLength={120} autoComplete="off" />
+            </div>
+            <button className="btn" type="submit" disabled={pending}>
+              {pending ? "Payment awaiting review" : "Submit for verification"}
+            </button>
+          </form>
+          <p className="mt-3 text-xs text-gray-500">If you have not received official destination details yet, contact TradeBridge support before making a transfer.</p>
+        </div>
+      )}
+
+      <div className="card">
+        <h2 className="text-lg font-semibold">Sales commission</h2>
+        <p className="mt-1 text-sm text-gray-600">TradeBridge tracks a 5% commission on completed orders. Because customers pay sellers directly, this is recorded as commission owed; it is not automatically deducted from the buyer's payment.</p>
+        <p className="mt-3 text-xl font-bold">{formatRWF(outstandingCommission)} <span className="text-sm font-normal text-gray-500">outstanding</span></p>
+      </div>
+
+      <div className="card">
+        <h2 className="text-lg font-semibold">Registration payment history</h2>
+        {(payments ?? []).length === 0 ? (
+          <p className="mt-2 text-sm text-gray-500">No registration payments submitted yet.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-gray-100">
+            {(payments ?? []).map((p) => (
+              <li key={p.id} className="flex flex-wrap justify-between gap-2 py-3 text-sm">
+                <span>{p.payment_method === "mtn_momo" ? "MTN MoMo" : "Equity Bank"} · {p.transaction_reference}</span>
+                <span className="font-medium capitalize">{p.status} · {formatRWF(p.amount_rwf)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <Link href="/seller" className="btn-outline inline-block">Back to seller dashboard</Link>
+    </div>
+  );
+}

@@ -18,6 +18,8 @@ export default async function ListingsPage({
   if (!shop) redirect("/seller/shop");
 
   const supabase = createClient();
+  const { data: billing } = await supabase.from("seller_billing").select("trial_ends_at, registration_paid_at").eq("seller_id", profile.id).maybeSingle();
+  const sellingLocked = !billing || (!billing.registration_paid_at && new Date(billing.trial_ends_at).getTime() <= Date.now());
   const { data } = await supabase
     .from("listings")
     .select("*")
@@ -32,7 +34,14 @@ export default async function ListingsPage({
     <div className="space-y-6">
       <h1 className="text-2xl font-bold capitalize">{noun}s</h1>
 
-      <div className="card">
+      {sellingLocked && (
+        <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          <strong>Your 14-day free trial has ended.</strong> You cannot add or reactivate listings or receive new orders until your RWF 5,000 registration fee is verified.
+          <Link href="/seller/billing" className="ml-2 font-semibold underline">Go to billing</Link>
+        </div>
+      )}
+
+      {!sellingLocked && <div className="card">
         <h2 className="mb-3 font-semibold">{editing ? `Edit ${noun}` : `Add a ${noun}`}</h2>
         {searchParams.error && (
           <p className="mb-3 rounded-lg bg-red-50 p-3 text-sm text-red-700">{searchParams.error}</p>
@@ -68,7 +77,7 @@ export default async function ListingsPage({
             {editing && <Link href="/seller/listings" className="btn-outline">Cancel</Link>}
           </div>
         </form>
-      </div>
+      </div>}
 
       <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
         <table className="min-w-full divide-y divide-gray-200">
