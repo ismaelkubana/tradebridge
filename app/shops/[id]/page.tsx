@@ -6,9 +6,10 @@ import { SHOP_TYPE_LABEL, type Listing, type Shop } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-export default async function ShopPage({ params }: { params: { id: string } }) {
+export default async function ShopPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const supabase = await createClient();
-  const { data: shopData } = await supabase.from("shops").select("*").eq("id", params.id).maybeSingle();
+  const { data: shopData } = await supabase.from("shops").select("*").eq("id", id).maybeSingle();
   const shop = shopData as Shop | null;
   if (!shop || shop.status !== "approved") notFound();
 
