@@ -50,6 +50,10 @@ export async function saveListing(formData: FormData) {
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
   const supabase = createClient();
+  const { data: billing } = await supabase.from("seller_billing").select("trial_ends_at, registration_paid_at").eq("seller_id", profile.id).maybeSingle();
+  if (!billing || (!billing.registration_paid_at && new Date(billing.trial_ends_at).getTime() <= Date.now())) {
+    redirect("/seller/billing?error=" + encodeURIComponent("Your free trial has ended. Pay the RWF 5,000 registration fee to add or update listings."));
+  }
 
   const id = text(formData, "id");
   const title = text(formData, "title");
@@ -88,7 +92,14 @@ export async function toggleListing(formData: FormData) {
   const supabase = createClient();
   const id = text(formData, "id");
   const active = text(formData, "active") === "true";
-  await supabase.from("listings").update({ active: !active }).eq("id", id).eq("shop_id", shop.id);
+  if (!active) {
+    const { data: billing } = await supabase.from("seller_billing").select("trial_ends_at, registration_paid_at").eq("seller_id", profile.id).maybeSingle();
+    if (!billing || (!billing.registration_paid_at && new Date(billing.trial_ends_at).getTime() <= Date.now())) {
+      redirect("/seller/billing?error=" + encodeURIComponent("Your free trial has ended. Pay the RWF 5,000 registration fee before reactivating listings."));
+    }
+  }
+  const { error } = await supabase.from("listings").update({ active: !active }).eq("id", id).eq("shop_id", shop.id);
+  if (error) redirect("/seller/billing?error=" + encodeURIComponent("This listing action is not available while your seller registration is unpaid."));
   revalidatePath("/seller/listings");
 }
 
