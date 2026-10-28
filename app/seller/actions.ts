@@ -50,8 +50,8 @@ export async function saveListing(formData: FormData) {
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
   const supabase = createClient();
-  const { data: billing } = await supabase.from("seller_billing").select("trial_ends_at, registration_paid_at").eq("seller_id", profile.id).maybeSingle();
-  if (!billing || (!billing.registration_paid_at && new Date(billing.trial_ends_at).getTime() <= Date.now())) {
+  const { data: billing } = await supabase.from("profiles").select("seller_trial_started_at,seller_registration_paid_at").eq("id", profile.id).maybeSingle();
+  if (!billing || (!billing.seller_registration_paid_at && (!billing.seller_trial_started_at || new Date(billing.seller_trial_started_at).getTime() + 14 * 24 * 60 * 60 * 1000 <= Date.now()))) {
     redirect("/seller/billing?error=" + encodeURIComponent("Your free trial has ended. Pay the RWF 5,000 registration fee to add or update listings."));
   }
 
@@ -140,7 +140,7 @@ export async function submitRegistrationPayment(formData: FormData) {
     .eq("seller_id", profile.id)
     .maybeSingle();
 
-  if (billing?.registration_paid_at) {
+  if (billing?.seller_registration_paid_at) {
     redirect("/seller/billing?success=" + encodeURIComponent("Your registration fee is already verified."));
   }
 
