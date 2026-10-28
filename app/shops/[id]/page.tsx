@@ -7,7 +7,7 @@ import { SHOP_TYPE_LABEL, type Listing, type Shop } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 export default async function ShopPage({ params }: { params: { id: string } }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: shopData } = await supabase.from("shops").select("*").eq("id", params.id).maybeSingle();
   const shop = shopData as Shop | null;
   if (!shop || shop.status !== "approved") notFound();
