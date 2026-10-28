@@ -53,21 +53,16 @@ export async function saveListing(formData: FormData) {
 
   const stockRaw = text(formData, "stock");
   const durationRaw = text(formData, "duration_min");
-  const fields: Record<string, string | number | null | boolean> = {
-    title,
-    description: text(formData, "description"),
-    price_rwf: price,
-    stock: shop.type === "shop" && stockRaw !== "" ? Math.max(0, Math.round(Number(stockRaw))) : null,
-    duration_min: shop.type === "salon" && durationRaw !== "" ? Math.max(1, Math.round(Number(durationRaw))) : null,
-  };
-
-  const file = formData.get("image");
   let imageUrl = text(formData, "existing_image_url") || null;
+  let generatedListingId: string | null = null;
+  const file = formData.get("image");
+
   if (file instanceof File && file.size > 0) {
     if (!IMAGE_TYPES.has(file.type) || file.size > MAX_IMAGE_BYTES) {
       redirect("/seller/listings?error=" + encodeURIComponent("Choose a JPG, PNG or WebP image no larger than 3 MB."));
     }
     const listingId = id || crypto.randomUUID();
+    if (!id) generatedListingId = listingId;
     const extension = file.type === "image/jpeg" ? "jpg" : file.type === "image/png" ? "png" : "webp";
     const path = `${shop.id}/${listingId}/${crypto.randomUUID()}.${extension}`;
     const { error: uploadError } = await supabase.storage.from("listing-images").upload(path, file, {
@@ -77,15 +72,22 @@ export async function saveListing(formData: FormData) {
     });
     if (uploadError) redirect("/seller/listings?error=" + encodeURIComponent("Photo upload failed. Please try again or contact support."));
     imageUrl = supabase.storage.from("listing-images").getPublicUrl(path).data.publicUrl;
-    if (!id) fields.id = listingId;
   }
-  fields.image_url = imageUrl;
+
+  const fields = {
+    title,
+    description: text(formData, "description"),
+    price_rwf: price,
+    stock: shop.type === "shop" && stockRaw !== "" ? Math.max(0, Math.round(Number(stockRaw))) : null,
+    duration_min: shop.type === "salon" && durationRaw !== "" ? Math.max(1, Math.round(Number(durationRaw))) : null,
+    image_url: imageUrl,
+  };
 
   if (id) {
     const { error } = await supabase.from("listings").update(fields).eq("id", id).eq("shop_id", shop.id);
     if (error) redirect("/seller/listings?error=" + encodeURIComponent("Could not save this listing. Please check the details and try again."));
   } else {
-    const { error } = await supabase.from("listings").insert({ ...fields, shop_id: shop.id });
+    const { error } = await supabase.from("listings").insert({ ...fields, ...(generatedListingId ? { id: generatedListingId } : {}), shop_id: shop.id });
     if (error) redirect("/seller/listings?error=" + encodeURIComponent("Could not publish this listing. Please check the details and try again."));
   }
 
