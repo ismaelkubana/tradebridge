@@ -14,7 +14,7 @@ export default async function BrowsePage({
   const type = (["shop", "restaurant", "salon"] as string[]).includes(params.type ?? "") ? params.type as ShopType : undefined;
   const district = KIGALI_DISTRICTS.includes(params.district ?? "") ? params.district : undefined;
   const q = (params.q ?? "").replace(/[%,()]/g, " ").trim().slice(0, 100);
-  const sort = ["name", "newest"].includes(params.sort ?? "") ? params.sort : "name";
+  const sort: "name" | "newest" = params.sort === "newest" ? "newest" : "name";
 
   const supabase = await createClient();
   let query = supabase.from("shops").select("*").eq("status", "approved");
