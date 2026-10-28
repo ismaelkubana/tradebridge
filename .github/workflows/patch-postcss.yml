@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Update PostCSS to a patched release
-        run: npm install --save-exact postcss@8.5.23
+      - name: Upgrade to patched Next.js 16 and PostCSS
+        run: npm install --save-exact next@16.4.3 react@19.3.1 react-dom@19.3.1 postcss@8.5.23
       - name: Verify lockfile
         run: npm ci
       - name: Fail on high or critical dependency advisories
@@ -42,10 +42,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package.json package-lock.json
-          git commit -m "Patch PostCSS dependency vulnerability"
+          git commit -m "Upgrade to patched Next.js 16 and PostCSS"
           git push origin chore/next-security-upgrade
       - name: Remove temporary patch workflow
         run: |
           git rm .github/workflows/patch-postcss.yml
-          git commit -m "Remove temporary PostCSS patch workflow"
+          git commit -m "Remove temporary Next.js 16 patch workflow"
           git push origin chore/next-security-upgrade
