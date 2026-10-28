@@ -12,12 +12,13 @@ const STATUSES: OrderStatus[] = ["new", "confirmed", "preparing", "out_for_deliv
 
 type OrderRow = Order & { profiles: { full_name: string } | null; order_items: OrderItem[] };
 
-export default async function SellerOrdersPage({ searchParams }: { searchParams: { status?: string } }) {
+export default async function SellerOrdersPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
+  const resolvedSearchParams = await searchParams;
   const profile = await requireRole(["seller"]);
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
 
-  const filter = STATUSES.includes(searchParams.status as OrderStatus) ? searchParams.status : undefined;
+  const filter = STATUSES.includes(resolvedSearchParams.status as OrderStatus) ? resolvedSearchParams.status : undefined;
 
   const supabase = await createClient();
   let query = supabase
