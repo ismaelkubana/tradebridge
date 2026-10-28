@@ -27,6 +27,7 @@ export default async function Navbar() {
           <Link href="/browse?type=shop" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-brand-700">Shops</Link>
           <Link href="/browse?type=restaurant" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-brand-700">Restaurants</Link>
           <Link href="/browse?type=salon" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-brand-700">Beauty & salons</Link>
+          <Link href="/wishlist" className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-rose-50 hover:text-rose-700">♡ Wishlist</Link>
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -51,6 +52,7 @@ export default async function Navbar() {
         <Link href="/browse?type=shop" className="shrink-0 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-semibold text-slate-700">Shops</Link>
         <Link href="/browse?type=restaurant" className="shrink-0 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-semibold text-slate-700">Restaurants</Link>
         <Link href="/browse?type=salon" className="shrink-0 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-semibold text-slate-700">Beauty & salons</Link>
+        <Link href="/wishlist" className="shrink-0 rounded-full bg-rose-50 px-3.5 py-1.5 text-xs font-semibold text-rose-700">♡ Wishlist</Link>
         {profile?.role === "seller" && <Link href="/seller" className="shrink-0 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-800">Seller studio</Link>}
         {profile?.role === "buyer" && <Link href="/orders" className="shrink-0 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-800">My orders</Link>}
         {profile?.role === "admin" && <Link href="/admin" className="shrink-0 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-800">Admin</Link>}
