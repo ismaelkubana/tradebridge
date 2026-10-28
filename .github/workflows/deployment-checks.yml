@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - feat/seller-trial-registration-commission
+      - feat/pro-marketplace-interface
       - chore/vercel-deployment-hardening
 
 permissions:
