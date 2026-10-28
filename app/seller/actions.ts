@@ -112,3 +112,37 @@ export async function updateOrderStatus(formData: FormData) {
   revalidatePath("/seller/orders");
   revalidatePath("/seller");
 }
+
+export async function submitRegistrationPayment(formData: FormData) {
+  const profile = await requireRole(["seller"]);
+  const supabase = createClient();
+  const method = text(formData, "method");
+  const reference = text(formData, "transaction_reference");
+
+  if (!["mtn_momo", "equity_bank"].includes(method) || !reference) {
+    redirect("/seller/billing?error=" + encodeURIComponent("Choose a payment method and enter the transaction reference."));
+  }
+
+  const { data: billing } = await supabase
+    .from("seller_billing")
+    .select("registration_paid_at")
+    .eq("seller_id", profile.id)
+    .maybeSingle();
+
+  if (billing?.registration_paid_at) {
+    redirect("/seller/billing?success=" + encodeURIComponent("Your registration fee is already verified."));
+  }
+
+  const { error } = await supabase.from("seller_fee_payments").insert({
+    seller_id: profile.id,
+    amount_rwf: 5000,
+    method,
+    transaction_reference: reference,
+    status: "pending",
+  });
+
+  if (error) redirect("/seller/billing?error=" + encodeURIComponent("Could not submit payment for review. Check whether this transaction reference was already submitted."));
+  revalidatePath("/seller/billing");
+  revalidatePath("/admin/billing");
+  redirect("/seller/billing?success=" + encodeURIComponent("Payment submitted. Selling access will unlock after an administrator verifies it."));
+}
