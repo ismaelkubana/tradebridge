@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 const STATUSES: OrderStatus[] = ["new", "confirmed", "preparing", "out_for_delivery", "ready", "completed", "cancelled"];
 
-type OrderRow = Order & { profiles: { full_name: string } | null; order_items: OrderItem[] };
+type OrderRow = Order & { profiles: { full_name: string } | null; order_items: OrderItem[]; order_payments: { id: string; method: string; status: string; transaction_reference: string | null }[] };
 
 export default async function SellerOrdersPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
   const resolvedSearchParams = await searchParams;
@@ -23,7 +23,7 @@ export default async function SellerOrdersPage({ searchParams }: { searchParams:
   const supabase = await createClient();
   let query = supabase
     .from("orders")
-    .select("*, profiles(full_name), order_items(*)")
+    .select("*, profiles(full_name), order_items(*), order_payments(id,method,status,transaction_reference)")
     .eq("shop_id", shop.id)
     .order("created_at", { ascending: false });
   if (filter) query = query.eq("status", filter);
@@ -61,6 +61,8 @@ export default async function SellerOrdersPage({ searchParams }: { searchParams:
                 <div className="text-right">
                   <StatusBadge value={o.status} />
                   <p className="mt-1 font-bold">{formatRWF(o.total_rwf)}</p>
+                  {o.order_payments?.length > 0 && <p className="mt-1 text-xs text-gray-600">Payment: {o.order_payments.map((p) => `${p.method === "mtn_momo" ? "MoMo" : p.method === "bank_transfer" ? "Bank" : "Online"} — ${p.status}`).join(", ")}</p>}
+                  {o.order_payments?.some((p) => p.status === "paid") && <p className="mt-1 text-xs font-semibold text-green-700">Payment verified</p>}
                 </div>
               </div>
 
