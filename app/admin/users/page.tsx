@@ -20,7 +20,7 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: {
   const filter = ["buyer", "seller", "admin"].includes(searchParams.role ?? "") ? searchParams.role : undefined;
   const q = (searchParams.q ?? "").replace(/[%,()]/g, " ").trim();
 
-  const supabase = createClient();
+  const supabase = await createClient();
   let query = supabase.from("profiles").select("*").order("created_at", { ascending: false });
   if (filter) query = query.eq("role", filter);
   if (q) query = query.or(`full_name.ilike.%${q}%,phone.ilike.%${q}%`);
