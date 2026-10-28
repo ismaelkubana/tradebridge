@@ -15,7 +15,7 @@ function text(formData: FormData, key: string): string {
 
 export async function saveShop(formData: FormData) {
   const profile = await requireRole(["seller"]);
-  const supabase = createClient();
+  const supabase = await createClient();
   const existing = await getMyShop(profile.id);
 
   const name = text(formData, "name");
@@ -49,7 +49,7 @@ export async function saveListing(formData: FormData) {
   const profile = await requireRole(["seller"]);
   const shop = await getMyShop(profile.id);
   if (!shop) redirect("/seller/shop");
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: billing } = await supabase.from("seller_billing").select("trial_started_at,trial_ends_at,registration_paid_at").eq("seller_id", profile.id).maybeSingle();
   if (!billing || (!billing.registration_paid_at && (!billing.trial_ends_at || new Date(billing.trial_ends_at).getTime() <= Date.now()))) {
     redirect("/seller/billing?error=" + encodeURIComponent("Your free trial has ended. Pay the RWF 5,000 registration fee to add or update listings."));
@@ -89,7 +89,7 @@ export async function toggleListing(formData: FormData) {
   const profile = await requireRole(["seller"]);
   const shop = await getMyShop(profile.id);
   if (!shop) return;
-  const supabase = createClient();
+  const supabase = await createClient();
   const id = text(formData, "id");
   const active = text(formData, "active") === "true";
   if (!active) {
@@ -107,7 +107,7 @@ export async function deleteListing(formData: FormData) {
   const profile = await requireRole(["seller"]);
   const shop = await getMyShop(profile.id);
   if (!shop) return;
-  const supabase = createClient();
+  const supabase = await createClient();
   await supabase.from("listings").delete().eq("id", text(formData, "id")).eq("shop_id", shop.id);
   revalidatePath("/seller/listings");
 }
@@ -118,7 +118,7 @@ export async function updateOrderStatus(formData: FormData) {
   if (!shop) return;
   const status = text(formData, "status");
   if (!ORDER_STATUSES.includes(status)) return;
-  const supabase = createClient();
+  const supabase = await createClient();
   await supabase.from("orders").update({ status }).eq("id", text(formData, "id")).eq("shop_id", shop.id);
   revalidatePath("/seller/orders");
   revalidatePath("/seller");
@@ -126,7 +126,7 @@ export async function updateOrderStatus(formData: FormData) {
 
 export async function submitRegistrationPayment(formData: FormData) {
   const profile = await requireRole(["seller"]);
-  const supabase = createClient();
+  const supabase = await createClient();
   const method = text(formData, "method");
   const reference = text(formData, "transaction_reference");
 
