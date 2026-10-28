@@ -15,18 +15,18 @@ export default async function SellerBillingPage({
   const supabase = createClient();
 
   const [{ data: billing }, { data: payments }, { data: commissions }] = await Promise.all([
-    supabase.from("seller_billing").select("*").eq("seller_id", profile.id).maybeSingle(),
-    supabase.from("seller_fee_payments").select("*").eq("seller_id", profile.id).order("submitted_at", { ascending: false }),
-    supabase.from("seller_commissions").select("commission_amount_rwf,status").eq("seller_id", profile.id),
+    supabase.from("profiles").select("seller_trial_started_at,seller_registration_paid_at,seller_registration_status").eq("id", profile.id).maybeSingle(),
+    supabase.from("seller_registration_payments").select("*").eq("seller_id", profile.id).order("submitted_at", { ascending: false }),
+    supabase.from("seller_commission_payments").select("commission_rwf,status").eq("seller_id", profile.id),
   ]);
 
-  const paid = Boolean(billing?.registration_paid_at);
-  const trialEnd = billing?.trial_ends_at ? new Date(billing.trial_ends_at) : null;
+  const paid = Boolean(billing?.seller_registration_paid_at);
+  const trialEnd = billing?.seller_trial_started_at ? new Date(new Date(billing.seller_trial_started_at).getTime() + 14 * 24 * 60 * 60 * 1000) : null;
   const trialActive = Boolean(trialEnd && trialEnd.getTime() > Date.now());
   const pending = (payments ?? []).some((p) => p.status === "pending");
   const outstandingCommission = (commissions ?? [])
     .filter((c) => c.status === "due")
-    .reduce((sum, c) => sum + c.commission_amount_rwf, 0);
+    .reduce((sum, c) => sum + c.commission_rwf, 0);
 
   return (
     <div className="mx-auto max-w-3xl space-y-5">
@@ -129,7 +129,7 @@ export default async function SellerBillingPage({
           <ul className="mt-3 divide-y divide-gray-100">
             {(payments ?? []).map((p) => (
               <li key={p.id} className="flex flex-wrap justify-between gap-2 py-3 text-sm">
-                <span>{p.method === "mtn_momo" ? "MTN MoMo" : "Equity Bank"} · {p.transaction_reference}</span>
+                <span>{p.payment_method === "mtn_momo" ? "MTN MoMo" : "Equity Bank"} · {p.transaction_reference}</span>
                 <span className="font-medium capitalize">{p.status} · {formatRWF(p.amount_rwf)}</span>
               </li>
             ))}
