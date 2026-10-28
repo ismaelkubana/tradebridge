@@ -1,0 +1,56 @@
+name: Upgrade Next.js safely
+
+on:
+  push:
+    branches:
+      - chore/next-security-upgrade
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
+    steps:
+      - name: Check out upgrade branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Upgrade to patched Next.js and React 19
+        run: |
+          npm install --save-exact next@15.5.28 react@19 react-dom@19
+          npm install --save-dev @types/react@19 @types/react-dom@19
+
+      - name: Verify the generated lockfile
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Production build
+        run: npm run build
+
+      - name: Commit verified dependency files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Upgrade Next.js to patched 15.5.28"
+          git push origin chore/next-security-upgrade
+
+      - name: Remove temporary upgrade workflow
+        run: |
+          git rm .github/workflows/upgrade-next.yml
+          git commit -m "Remove temporary Next.js upgrade workflow"
+          git push origin chore/next-security-upgrade
