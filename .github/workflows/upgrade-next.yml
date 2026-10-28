@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: next-security-upgrade-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   upgrade-and-validate:
     runs-on: ubuntu-latest
