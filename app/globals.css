@@ -38,3 +38,22 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+
+/* Fast, subtle transitions shared across buyer, seller, and admin screens. */
+@keyframes tb-page-enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes tb-skeleton-pulse {
+  0%, 100% { opacity: .55; }
+  50% { opacity: 1; }
+}
+.tb-page-enter { animation: tb-page-enter 160ms ease-out both; }
+.tb-skeleton { background: linear-gradient(90deg, #e8edf1 25%, #f5f7f9 50%, #e8edf1 75%); background-size: 200% 100%; animation: tb-skeleton-pulse 1.15s ease-in-out infinite; }
+.tb-nav-link { transition: color 120ms ease, background-color 120ms ease, transform 120ms ease; }
+.tb-nav-link:active { transform: scale(.98); }
+@media (prefers-reduced-motion: reduce) {
+  .tb-page-enter, .tb-skeleton { animation: none !important; }
+  .tb-nav-link { transition: none !important; }
+}
