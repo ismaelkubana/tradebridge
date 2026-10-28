@@ -15,10 +15,11 @@ const TABS = [
   { label: "Admins", value: "admin" },
 ];
 
-export default async function AdminUsersPage({ searchParams }: { searchParams: { role?: string; q?: string } }) {
+export default async function AdminUsersPage({ searchParams }: { searchParams: Promise<{ role?: string; q?: string }> }) {
+  const resolvedSearchParams = await searchParams;
   const me = await requireRole(["admin"]);
-  const filter = ["buyer", "seller", "admin"].includes(searchParams.role ?? "") ? searchParams.role : undefined;
-  const q = (searchParams.q ?? "").replace(/[%,()]/g, " ").trim();
+  const filter = ["buyer", "seller", "admin"].includes(resolvedSearchParams.role ?? "") ? resolvedSearchParams.role : undefined;
+  const q = (resolvedSearchParams.q ?? "").replace(/[%,()]/g, " ").trim();
 
   const supabase = await createClient();
   let query = supabase.from("profiles").select("*").order("created_at", { ascending: false });
