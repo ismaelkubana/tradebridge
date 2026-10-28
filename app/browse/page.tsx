@@ -8,14 +8,15 @@ export const dynamic = "force-dynamic";
 export default async function BrowsePage({
   searchParams,
 }: {
-  searchParams: { type?: string; district?: string; q?: string };
+  searchParams: Promise<{ type?: string; district?: string; q?: string }>;
 }) {
-  const type = (["shop", "restaurant", "salon"] as string[]).includes(searchParams.type ?? "")
-    ? (searchParams.type as ShopType)
+  const resolvedSearchParams = await searchParams;
+  const type = (["shop", "restaurant", "salon"] as string[]).includes(resolvedSearchParams.type ?? "")
+    ? (resolvedSearchParams.type as ShopType)
     : undefined;
-  const district = KIGALI_DISTRICTS.includes(searchParams.district ?? "") ? searchParams.district : undefined;
+  const district = KIGALI_DISTRICTS.includes(resolvedSearchParams.district ?? "") ? resolvedSearchParams.district : undefined;
   // Strip characters that have special meaning in the search filter syntax.
-  const q = (searchParams.q ?? "").replace(/[%,()]/g, " ").trim();
+  const q = (resolvedSearchParams.q ?? "").replace(/[%,()]/g, " ").trim();
 
   const supabase = await createClient();
   let query = supabase.from("shops").select("*").eq("status", "approved").order("name");
