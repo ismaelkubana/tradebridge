@@ -24,7 +24,7 @@ export default async function AdminBillingPage({
   const supabase = createClient();
   const { data } = await supabase
     .from("seller_fee_payments")
-    .select("*, profiles:seller_id(full_name,phone)")
+    .select("*, profiles!seller_fee_payments_seller_id_fkey(full_name,phone)")
     .order("submitted_at", { ascending: false });
 
   const payments = (data as RegistrationPayment[] | null) ?? [];
