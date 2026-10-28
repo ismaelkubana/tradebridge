@@ -4,14 +4,14 @@ A marketplace for **shops, restaurants and salons** in Kigali, Rwanda, with thre
 
 | Portal | URL | Who | What they do |
 |---|---|---|---|
-| Buyer | `/`, `/browse`, `/cart`, `/orders` | Customers | Browse, order, book appointments, track status |
-| Seller | `/seller` | Shop, restaurant and salon owners | Business profile, products/menu/services, stock, orders and bookings |
-| Admin | `/admin` | You | Approve/suspend businesses, manage users and roles, see all orders |
+| Buyer | `/`, `/browse`, `/cart`, `/orders` | Customers | Browse, order, book appointments, track order and payment status, submit payment references or use configured online checkout |
+| Seller | `/seller` | Shop, restaurant and salon owners | Business profile, products/menu/services, stock, orders/bookings, customer list, billing and commission |
+| Admin | `/admin` | You | Approve/suspend businesses, manage users and roles, see all orders, review seller fees and customer payments |
 
 Built with **Next.js 14 + Tailwind CSS** (website) and **Supabase** (database, login, security rules).
 The brand name is set in one place: `lib/brand.ts`.
 
-> Status: the code was written but **not yet run through `npm run build`** (the build environment had no access to npm). Expect to fix small typing issues on the first run.
+> Payment migration: `supabase/migrations/202610280001_order_payments.sql` adds customer order payment tracking and RLS policies. It has been applied to the connected Supabase project. Automated online checkout requires Paypack environment variables and webhook registration before it is active.
 
 ## 1. Set up the database (free)
 
@@ -71,6 +71,19 @@ TradeBridge records a 5% commission when an order is marked completed. Because b
 
 **Migration:** apply `supabase/migrations/20261028_seller_trial_registration_commission.sql` once in Supabase SQL Editor after reviewing it. It is additive; do not rerun the original `supabase/schema.sql` against an existing database.
 
+## Customer payments and online checkout
+
+Customers can submit MTN MoMo or bank-transfer transaction references from an order detail page. An administrator must compare the reference with the real provider/bank record before marking it paid. Sellers can see payment status only for their own shop's orders. Never ask customers for a MoMo PIN or banking password.
+
+Hosted online checkout uses Paypack. To activate it:
+
+1. Create/configure a Paypack application and hosted checkout in the Paypack dashboard.
+2. In Vercel Project Settings -> Environment Variables, add `PAYPACK_CHECKOUT_APP_ID`, `PAYPACK_WEBHOOK_SIGN_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`. Keep all three server-only; never use the `NEXT_PUBLIC_` prefix.
+3. Register the HTTPS webhook URL `https://YOUR-TRADEBRIDGE-DOMAIN/api/webhooks/paypack` in Paypack and enable it for the correct mode.
+4. Redeploy after setting variables, then test in Paypack development mode before production. The webhook checks Paypack's HMAC signature, session reference, status and amount before updating a pending payment.
+
+Paypack checkout reference: https://docs.paypack.rw/products/checkout. Webhook signature guidance: https://docs.paypack.rw/quickstart/webhooks. Do not mark a payment paid based only on a browser redirect.
+
 ## How it is secured
 
 - All data access goes through Supabase **Row Level Security** (see `supabase/schema.sql`): sellers can only touch their own business, listings and orders; buyers only their own orders; admins everything.
@@ -79,7 +92,7 @@ TradeBridge records a 5% commission when an order is marked completed. Because b
 
 ## What is intentionally not built yet
 
-- Automated payment initiation and provider webhook verification for MTN MoMo / Equity Bank (registration payment references are manually reviewed for now)
+- Automated MTN/bank transfer reconciliation and seller commission settlement (manual transfer references are reviewed by admins; hosted Paypack checkout is optional and must be configured)
 - Automatic stock reduction when an order is placed (sellers update stock manually)
 - Product photos, reviews and ratings
 - SMS/email notifications and rider/delivery tracking
