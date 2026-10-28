@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { BRAND } from "@/lib/brand";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: `${BRAND.name} | ${BRAND.tagline}`,
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen">
         <Navbar />
         <main className="mx-auto min-h-[70vh] max-w-7xl px-4 py-7 sm:px-5 sm:py-10">{children}</main>
+        <Analytics />
         <footer className="mt-12 border-t border-slate-200 bg-white">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 py-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
             <div>
