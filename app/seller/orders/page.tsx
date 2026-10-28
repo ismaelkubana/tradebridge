@@ -19,7 +19,7 @@ export default async function SellerOrdersPage({ searchParams }: { searchParams:
 
   const filter = STATUSES.includes(searchParams.status as OrderStatus) ? searchParams.status : undefined;
 
-  const supabase = createClient();
+  const supabase = await createClient();
   let query = supabase
     .from("orders")
     .select("*, profiles(full_name), order_items(*)")
