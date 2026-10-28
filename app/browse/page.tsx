@@ -17,7 +17,7 @@ export default async function BrowsePage({
   // Strip characters that have special meaning in the search filter syntax.
   const q = (searchParams.q ?? "").replace(/[%,()]/g, " ").trim();
 
-  const supabase = createClient();
+  const supabase = await createClient();
   let query = supabase.from("shops").select("*").eq("status", "approved").order("name");
   if (type) query = query.eq("type", type);
   if (district) query = query.eq("district", district);
