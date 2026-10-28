@@ -14,16 +14,17 @@ export default async function OrderDetailPage({
   params,
   searchParams,
 }: {
-  params: { id: string };
-  searchParams: { placed?: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ placed?: string }>;
 }) {
+  const [routeParams, resolvedSearchParams] = await Promise.all([params, searchParams]);
   const profile = await requireRole(["buyer", "seller", "admin"]);
   const supabase = await createClient();
 
   const { data } = await supabase
     .from("orders")
     .select("*, shops(name, phone)")
-    .eq("id", params.id)
+    .eq("id", routeParams.id)
     .eq("buyer_id", profile.id)
     .maybeSingle();
   const order = data as (Order & { shops: { name: string; phone: string } | null }) | null;
@@ -34,7 +35,7 @@ export default async function OrderDetailPage({
 
   return (
     <div className="mx-auto max-w-2xl space-y-4">
-      {searchParams.placed && (
+      {resolvedSearchParams.placed && (
         <>
           <ClearCart />
           <div className="rounded-xl bg-green-50 p-4 text-sm text-green-800">
