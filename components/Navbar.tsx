@@ -3,6 +3,7 @@ import { getCurrentProfile } from "@/lib/auth";
 import { logout } from "@/app/(auth)/actions";
 import { BRAND } from "@/lib/brand";
 import CartLink from "@/components/CartLink";
+import MenuTab from "@/components/MenuTab";
 
 export default async function Navbar() {
   const configured = !!process.env.NEXT_PUBLIC_SUPABASE_URL && !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -31,6 +32,7 @@ export default async function Navbar() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <MenuTab role={profile?.role ?? null} />
           <CartLink />
           {profile ? (
             <>
