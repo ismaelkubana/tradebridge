@@ -54,4 +54,4 @@ Then open `http://localhost:8000`. A browser needs internet access to load Supab
 - **Windows/Linux:** in Chrome or Edge, choose the install icon in the address bar or select **Install TradeBridge** in the browser menu.
 - **Mac:** use Chrome/Edge's install control, or **File → Add to Dock** in a recent Safari release.
 
-This project uses JavaScript for browser interactions; Java and JavaScript are different languages. The frontend is plain HTML, CSS, and JavaScript with no build step.
+This project uses JavaScript for browser interactions; Java and JavaScript are different languages. The frontend is plain HTML, CSS, and JavaScript with no build step. Vercel publishes the root files as a static site; the old Next.js source in the repository is not part of this site's build.
