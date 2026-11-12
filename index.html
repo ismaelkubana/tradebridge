@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="supabase-config.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -42,14 +43,14 @@
         </nav>
         <div class="sidebar-bottom">
           <div class="help-card"><span class="help-icon">✳</span><strong>Need a hand?</strong><p>We’re here to help you get started.</p><button data-action="help">Visit help center <span>↗</span></button></div>
-          <button class="profile" data-action="profile"><span class="avatar">TB</span><span><strong>Preview account</strong><small>Demo workspace</small></span><span class="dots">···</span></button>
+          <button class="profile" data-action="profile"><span class="avatar">TB</span><span><strong id="sidebar-account-label">Sign in</strong><small id="sidebar-account-subtitle">Save your account</small></span><span class="dots">···</span></button>
         </div>
       </aside>
 
       <main id="home" class="main-column">
         <header class="topbar">
           <div class="breadcrumb">TradeBridge <span>/</span> <strong id="breadcrumb-role">Buyer portal</strong></div>
-          <div class="top-actions"><button id="install-button" class="install-button" type="button" aria-label="Install TradeBridge app"><span class="install-glyph">↓</span><span class="install-label">Install app</span></button><button class="icon-button" aria-label="Notifications" data-action="notifications">♧<b></b></button><span class="top-divider"></span><button class="mini-profile" data-action="profile"><span class="avatar small-avatar">TB</span><span>Preview account</span><span class="chevron">⌄</span></button></div>
+          <div class="top-actions"><button id="install-button" class="install-button" type="button" aria-label="Install TradeBridge app"><span class="install-glyph">↓</span><span class="install-label">Install app</span></button><button class="icon-button" aria-label="Notifications" data-action="notifications">♧<b></b></button><span class="top-divider"></span><button class="mini-profile" data-action="profile"><span class="avatar small-avatar">TB</span><span id="account-label">Sign in</span><span class="chevron">⌄</span></button></div>
         </header>
 
         <div id="buyer-view" class="page-content">
@@ -77,6 +78,67 @@
       </main>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <dialog id="auth-dialog" class="install-dialog" aria-labelledby="auth-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close sign in">×</button></form>
+      <p class="install-kicker">TRADEBRIDGE ACCOUNT</p><h2 id="auth-title">Welcome back</h2>
+      <p class="install-description" id="auth-description">Sign in to save places and manage your orders.</p>
+      <form id="auth-form" class="backend-form">
+        <label id="auth-name-wrap" hidden>Your name<input name="full_name" autocomplete="name" placeholder="Full name"></label>
+        <label id="auth-role-wrap" hidden>Account type<select name="role"><option value="buyer">I want to shop</option><option value="seller">I want to sell</option></select></label>
+        <label id="auth-phone-wrap" hidden>Phone number<input name="phone" autocomplete="tel" placeholder="+250 …"></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <button class="text-link forgot-password" id="forgot-password" type="button">Forgot password?</button>
+        <button class="primary-button" id="auth-submit" type="submit">Sign in</button>
+      </form>
+      <p class="auth-switch"><span id="auth-switch-prompt">New to TradeBridge?</span> <button type="button" id="auth-switch">Create an account</button></p>
+    </dialog>
+    <dialog id="business-dialog" class="install-dialog" aria-labelledby="business-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close business form">×</button></form>
+      <p class="install-kicker">SELLER STUDIO</p><h2 id="business-title">Add your business</h2><p class="install-description">Your business will be reviewed before it appears to customers.</p>
+      <form id="business-form" class="backend-form">
+        <label>Business name<input name="name" required maxlength="100"></label>
+        <label>Type<select name="type" required><option value="shop">Shop</option><option value="restaurant">Restaurant</option><option value="salon">Salon</option></select></label>
+        <label>Description<textarea name="description" rows="3" maxlength="500"></textarea></label>
+        <label>District or area<input name="district" required maxlength="80" placeholder="e.g. Gasabo"></label>
+        <label>Street address<input name="address" required maxlength="160" placeholder="e.g. Kimironko, Kigali"></label>
+        <label>Business phone<input name="phone" required maxlength="30" placeholder="+250 …"></label>
+        <button class="primary-button" type="submit">Submit for review</button>
+      </form>
+    </dialog>
+    <dialog id="listing-dialog" class="install-dialog" aria-labelledby="listing-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close listing form">×</button></form>
+      <p class="install-kicker">SELLER STUDIO</p><h2 id="listing-title">Add a listing</h2><p class="install-description">Add a product, menu item, or service to your business.</p>
+      <form id="listing-form" class="backend-form">
+        <label>Business<select name="shop_id" required></select></label>
+        <label>Name<input name="title" required maxlength="120"></label>
+        <label>Description<textarea name="description" rows="3" maxlength="500"></textarea></label>
+        <label>Price (RWF)<input name="price_rwf" type="number" min="0" step="1" required></label>
+        <label>Stock quantity (optional)<input name="stock" type="number" min="0" step="1"></label>
+        <label>Service duration in minutes (optional)<input name="duration_min" type="number" min="1" step="1"></label>
+        <button class="primary-button" type="submit">Save listing</button>
+      </form>
+    </dialog>
+    <dialog id="checkout-dialog" class="install-dialog" aria-labelledby="checkout-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close checkout">×</button></form>
+      <p class="install-kicker">PLACE AN ORDER</p><h2 id="checkout-title">Checkout</h2><p id="checkout-item" class="install-description"></p>
+      <form id="checkout-form" class="backend-form">
+        <label>Fulfilment<select name="fulfillment"><option value="pickup">Pick up</option><option value="delivery">Delivery</option><option value="booking">Book a time</option></select></label>
+        <label id="delivery-address-wrap" hidden>Delivery address<input name="delivery_address" maxlength="240"></label>
+        <label>Contact phone<input name="contact_phone" autocomplete="tel" required maxlength="30" placeholder="+250 …"></label>
+        <label id="booking-time-wrap" hidden>Booking date and time<input name="scheduled_at" type="datetime-local"></label>
+        <label>Payment method<select name="payment_method"><option value="mtn_momo">MTN Mobile Money</option><option value="bank_transfer">Bank transfer</option></select></label>
+        <p id="payment-instructions" class="checkout-note"></p>
+        <label>Payment transaction reference (if already paid)<input name="transaction_reference" maxlength="120" placeholder="e.g. MoMo transaction ID"></label>
+        <label>Order note<textarea name="note" rows="2" maxlength="500"></textarea></label>
+        <p class="checkout-note">Payment is arranged directly with the seller for now. Online payment will be connected after a payment provider is chosen.</p>
+        <button class="primary-button" type="submit">Place order</button>
+      </form>
+    </dialog>
+    <dialog id="buyer-orders-dialog" class="install-dialog orders-dialog" aria-labelledby="buyer-orders-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close orders">×</button></form>
+      <p class="install-kicker">BUYER PORTAL</p><h2 id="buyer-orders-title">Your orders</h2><div id="buyer-order-list" class="backend-list"></div>
+    </dialog>
     <dialog id="install-dialog" class="install-dialog" aria-labelledby="install-title">
       <form method="dialog"><button class="dialog-close" aria-label="Close installation instructions">×</button></form>
       <div class="install-dialog-icon"><img src="assets/tradebridge-192.png" alt=""></div>
