@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f1">
+    <meta name="description" content="Discover Kigali shops, restaurants and salons in one place with TradeBridge.">
+    <meta name="application-name" content="TradeBridge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="TradeBridge">
+    <title>TradeBridge — Kigali, connected</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/tradebridge-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#home" aria-label="TradeBridge home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><path d="M7 27.5h26M10 26c1-8.1 4.5-12.2 10-12.2S29 17.9 30 26M14 25.5v-4m6 4v-7m6 7v-4"/></svg></span>
+          <span class="brand-name">TradeBridge<small>KIGALI, CONNECTED</small></span>
+        </a>
+        <button class="location-card" data-action="location">
+          <span class="location-pin">⌖</span><span class="location-text"><small>DELIVERING TO</small><strong>Kigali, Rwanda</strong></span><span class="chevron">⌄</span>
+        </button>
+        <p class="side-label">DISCOVER</p>
+        <nav class="side-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-role="buyer"><span>⌂</span>Explore</button>
+          <button class="nav-item" data-action="saved"><span>♡</span>Saved <i id="saved-count"></i></button>
+          <button class="nav-item" data-action="orders"><span>▤</span>My orders</button>
+          <button class="nav-item" data-action="messages"><span>◌</span>Messages</button>
+        </nav>
+        <p class="side-label role-label">WORKSPACE</p>
+        <nav class="side-nav" aria-label="Business workspaces">
+          <button class="nav-item" data-role="seller"><span>▦</span>Seller studio</button>
+          <button class="nav-item" data-role="admin"><span>⚙</span>Admin console</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="help-card"><span class="help-icon">✳</span><strong>Need a hand?</strong><p>We’re here to help you get started.</p><button data-action="help">Visit help center <span>↗</span></button></div>
+          <button class="profile" data-action="profile"><span class="avatar">TB</span><span><strong>Preview account</strong><small>Demo workspace</small></span><span class="dots">···</span></button>
+        </div>
+      </aside>
+
+      <main id="home" class="main-column">
+        <header class="topbar">
+          <div class="breadcrumb">TradeBridge <span>/</span> <strong id="breadcrumb-role">Buyer portal</strong></div>
+          <div class="top-actions"><button id="install-button" class="install-button" type="button" aria-label="Install TradeBridge app"><span class="install-glyph">↓</span><span class="install-label">Install app</span></button><button class="icon-button" aria-label="Notifications" data-action="notifications">♧<b></b></button><span class="top-divider"></span><button class="mini-profile" data-action="profile"><span class="avatar small-avatar">TB</span><span>Preview account</span><span class="chevron">⌄</span></button></div>
+        </header>
+
+        <div id="buyer-view" class="page-content">
+          <section class="welcome-row">
+            <div><div class="eyebrow"><span class="live-dot"></span> YOUR NEIGHBORHOOD, IN ONE PLACE</div><h1>Find a little good in Kigali <span class="wave">✳</span></h1><p class="intro">Discover local shops, good food, and people who help you feel your best.</p></div>
+            <button class="location-pill" data-action="location"><span>⌖</span>Kigali, Rwanda<span class="chevron">⌄</span></button>
+          </section>
+          <section class="hero">
+            <div class="hero-copy"><div class="hero-kicker">MADE FOR KIGALI</div><h2>Your city has<br>good things in store.</h2><p>Meet local businesses, find your next favorite, and keep more of your day close to home.</p><button class="hero-button" data-action="explore">Browse Kigali businesses <span>→</span></button></div>
+            <div class="hero-art" aria-hidden="true"><div class="sun-disc"></div><div class="hero-blob blob-one"></div><div class="hero-blob blob-two"></div><div class="hero-card hero-card-top"><span>✦</span>A little closer to home</div><div class="hero-card hero-card-bottom"><span>⌖</span><div><small>MADE FOR YOUR NEIGHBORHOOD</small><strong>Discover something good.</strong></div></div><div class="hero-stamp">LOCAL<br><b>LOVE</b><span>✳</span></div></div>
+          </section>
+          <div class="preview-notice"><span>✳</span><span><strong>Website preview</strong> — Sample businesses, ratings, and prices are shown while we build TradeBridge.</span></div>
+          <section class="stats-strip" aria-label="TradeBridge categories"><div class="stat"><span class="stat-icon mint">⌖</span><div><strong>Explore nearby</strong><small>Find businesses in Kigali</small></div></div><span class="stat-divider"></span><div class="stat"><span class="stat-icon peach">✦</span><div><strong>Support local</strong><small>Meet independent businesses</small></div></div><span class="stat-divider"></span><div class="stat"><span class="stat-icon lavender">♡</span><div><strong>One easy place</strong><small>Shop, eat, and book</small></div></div></section>
+          <section class="discover-section" id="discover">
+            <div class="section-heading"><div><div class="eyebrow muted-eyebrow">KIGALI FAVORITES</div><h2>What are you looking for?</h2></div><button class="text-link" data-action="all-listings">See all places <span>→</span></button></div>
+            <div class="filter-row"><div class="category-tabs" role="group" aria-label="Filter by category"><button class="category-tab selected" data-category="All"><span>✳</span>All</button><button class="category-tab" data-category="Shops"><span>▧</span>Shops</button><button class="category-tab" data-category="Restaurants"><span>♨</span>Restaurants</button><button class="category-tab" data-category="Salons"><span>✂</span>Salons</button></div><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search places, services..." autocomplete="off"><kbd>⌘ K</kbd></label></div>
+            <div id="listing-grid" class="listing-grid" aria-live="polite"></div>
+          </section>
+          <section class="seller-callout"><div class="callout-icon">↗</div><div><strong>Bring your business to TradeBridge</strong><p>Help Kigali customers discover your shop, restaurant, or salon.</p></div><button data-role="seller">Explore the seller portal <span>→</span></button></section>
+          <footer class="footer"><span>© 2026 TradeBridge</span><span>Made with care in Kigali <b>♥</b></span><div><a href="#about" data-action="about">About</a><a href="#help" data-action="help">Help</a><a href="#privacy" data-action="privacy">Privacy</a></div></footer>
+        </div>
+
+        <div id="seller-view" class="page-content portal-content" hidden></div>
+        <div id="admin-view" class="page-content portal-content" hidden></div>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <dialog id="install-dialog" class="install-dialog" aria-labelledby="install-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close installation instructions">×</button></form>
+      <div class="install-dialog-icon"><img src="assets/tradebridge-192.png" alt=""></div>
+      <p class="install-kicker">TRADEBRIDGE APP</p>
+      <h2 id="install-title">Keep TradeBridge close</h2>
+      <p class="install-description">Add an icon to your device and open TradeBridge in its own app window.</p>
+      <div id="install-steps" class="install-steps"></div>
+      <button class="primary-button dialog-done" type="button" id="install-done">Got it</button>
+    </dialog>
+  </body>
+</html>
