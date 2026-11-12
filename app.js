@@ -7,7 +7,7 @@ const places = [
   { name: "The Curl Corner", type: "Salons", tag: "Natural hair · Nails", rating: "4.8", distance: "3.0 km", time: "Book a slot", price: "Services from RWF 5,000", tone: "curl", icon: "💇🏽‍♀️", badge: "Top rated" },
 ];
 
-const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, businesses: [], selectedListing: null, authMode: "signin" };
+const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, businesses: [], selectedListing: null, selectedQuantity: 1, authMode: "signin" };
 let editingListingId = null;
 let editingListingImageUrl = null;
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -88,7 +88,7 @@ async function refreshListings() {
     rating: "New", distance: listing.shops.district || "Kigali", time: listing.shops.type === "salon" ? "Book a slot" : "Pickup",
     price: `RWF ${Number(listing.price_rwf).toLocaleString()}`,
     priceValue: Number(listing.price_rwf), tone: ["market", "kitchen", "salon", "home", "coffee", "curl"][index % 6], icon: icons[listing.shops.type] || "🛍️", badge: listing.stock === 0 ? "Out of stock" : "Local",
-    description: listing.description, imageUrl: listing.image_url, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
+    description: listing.description, imageUrl: listing.image_url, stock: listing.stock, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
   }));
   renderPlaces();
   const notice = $(".preview-notice", $("#buyer-view"));
@@ -376,7 +376,12 @@ document.addEventListener("click", (event) => {
     if (!requireAccount()) return;
     state.selectedListing = state.liveListings.find((listing) => listing.id === button.dataset.listingId);
     if (!state.selectedListing) { toast("This listing is no longer available."); return; }
+    if (state.selectedListing.stock === 0) { toast("This item is out of stock."); return; }
+    state.selectedQuantity = 1;
     $("#checkout-item").textContent = `${state.selectedListing.name} · RWF ${state.selectedListing.priceValue.toLocaleString()} from ${state.selectedListing.shop.name}`;
+    $("#checkout-quantity").textContent = "1";
+    $("#quantity-availability").textContent = Number.isInteger(state.selectedListing.stock) ? `${state.selectedListing.stock} available` : "Choose quantity";
+    updateCheckoutTotal();
     const fulfillment = $("#checkout-form").elements.fulfillment;
     fulfillment.value = state.selectedListing.fulfillment;
     $("#delivery-address-wrap").hidden = fulfillment.value !== "delivery";
@@ -463,6 +468,29 @@ document.addEventListener("click", (event) => {
   if (action === "add-business") { if (requireAccount() && state.profile?.role === "seller") $("#business-dialog").showModal(); else if (state.profile?.role !== "seller") toast("Choose a seller account when creating your account."); return; }
   if (action === "add-listing") { openListingForm(); return; }
   if (action) toast(messages[action] || "This feature will be added in a later step.");
+});
+
+function updateCheckoutTotal() {
+  if (!state.selectedListing) return;
+  $("#checkout-quantity").textContent = String(state.selectedQuantity);
+  $("#checkout-total").textContent = `Total · RWF ${(state.selectedListing.priceValue * state.selectedQuantity).toLocaleString()}`;
+}
+
+$("#quantity-decrease").addEventListener("click", () => {
+  if (state.selectedQuantity <= 1) return;
+  state.selectedQuantity -= 1;
+  updateCheckoutTotal();
+});
+
+$("#quantity-increase").addEventListener("click", () => {
+  const available = state.selectedListing?.stock;
+  const maximum = Number.isInteger(available) ? available : 99;
+  if (state.selectedQuantity >= maximum) {
+    if (Number.isInteger(available)) toast(`Only ${available} available.`);
+    return;
+  }
+  state.selectedQuantity += 1;
+  updateCheckoutTotal();
 });
 
 $("#auth-switch").addEventListener("click", () => openAuth(state.authMode === "signup" ? "signin" : "signup"));
@@ -603,6 +631,7 @@ $("#checkout-form").addEventListener("submit", async (event) => {
   if (!requireAccount() || !state.selectedListing) return;
   const form = event.currentTarget;
   const values = Object.fromEntries(new FormData(form));
+  const quantity = state.selectedQuantity;
   try {
     const client = await getSupabase();
     const { data: orderId, error } = await client.rpc("place_marketplace_order", {
@@ -612,14 +641,14 @@ $("#checkout-form").addEventListener("submit", async (event) => {
       p_contact_phone: values.contact_phone,
       p_note: values.note || "",
       p_scheduled_at: values.scheduled_at ? new Date(values.scheduled_at).toISOString() : null,
-      p_items: [{ listingId: state.selectedListing.id, qty: 1 }]
+      p_items: [{ listingId: state.selectedListing.id, qty: quantity }]
     });
     if (error) throw error;
     let paymentError = null;
     if (state.selectedListing.priceValue > 0) {
       const result = await client.from("order_payments").insert({
         order_id: orderId, buyer_id: state.session.user.id, shop_id: state.selectedListing.shopId,
-        amount_rwf: state.selectedListing.priceValue, method: values.payment_method,
+        amount_rwf: state.selectedListing.priceValue * quantity, method: values.payment_method,
         transaction_reference: values.transaction_reference || null
       });
       paymentError = result.error;
