@@ -1,15 +1,20 @@
 const places = [
-  { name: "Kigali Fresh Market", type: "Shops", tag: "Groceries · Fresh daily", rating: "4.9", distance: "0.8 km", time: "15–25 min", price: "From RWF 2,500", tone: "market", icon: "🥑", badge: "Popular" },
-  { name: "Umurava Kitchen", type: "Restaurants", tag: "Rwandan · Grill", rating: "4.8", distance: "1.2 km", time: "25–35 min", price: "From RWF 4,000", tone: "kitchen", icon: "🍲", badge: "Free delivery" },
-  { name: "Atelier Hair Studio", type: "Salons", tag: "Hair · Beauty", rating: "5.0", distance: "2.1 km", time: "Book a slot", price: "Services from RWF 8,000", tone: "salon", icon: "✂️", badge: "Open today" },
-  { name: "Makuza Home & Living", type: "Shops", tag: "Home · Lifestyle", rating: "4.7", distance: "1.6 km", time: "Same-day delivery", price: "From RWF 6,000", tone: "home", icon: "🪴", badge: "Verified" },
-  { name: "Inzora Coffee House", type: "Restaurants", tag: "Coffee · Bakery", rating: "4.9", distance: "0.5 km", time: "10–20 min", price: "From RWF 1,500", tone: "coffee", icon: "☕", badge: "Nearby" },
-  { name: "The Curl Corner", type: "Salons", tag: "Natural hair · Nails", rating: "4.8", distance: "3.0 km", time: "Book a slot", price: "Services from RWF 5,000", tone: "curl", icon: "💇🏽‍♀️", badge: "Top rated" },
+  { name: "Fresh bananas · 1 kg", type: "Shops", category: "Groceries", tag: "Kigali Fresh Market · Fruits & vegetables", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 2,000", priceValue: 2000, tone: "market", icon: "🍌", badge: "Sample listing", shopName: "Kigali Fresh Market", description: "Fresh, locally sourced bananas for your home.", details: "A sample product to show how Kigali businesses can list prices and product information." },
+  { name: "Pilau plate", type: "Restaurants", category: "Food & drink", tag: "Umucyo Hotel · Rwandan kitchen", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 5,000", priceValue: 5000, tone: "kitchen", icon: "🍲", badge: "Sample listing", shopName: "Umucyo Hotel", description: "A generous plate of seasoned pilau, prepared fresh.", details: "Sample menu item. Sellers can add ingredients, portion sizes, and collection or delivery details." },
+  { name: "Coffee beans · 250 g", type: "Shops", category: "Groceries", tag: "Inzora Coffee House · Fresh roast", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 7,500", priceValue: 7500, tone: "coffee", icon: "☕", badge: "Sample listing", shopName: "Inzora Coffee House", description: "Locally roasted coffee with a smooth, rich finish.", details: "Sample product. Add roast level, origin, weight, and preparation information in the full details." },
+  { name: "Everyday tote bag", type: "Shops", category: "Clothing", tag: "Makuza Home & Living · Accessories", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 8,000", priceValue: 8000, tone: "home", icon: "👜", badge: "Sample listing", shopName: "Makuza Home & Living", description: "A practical reusable carry bag for everyday errands.", details: "Sample product. Sellers can include dimensions, materials, and care instructions." },
+  { name: "Silk press appointment", type: "Salons", category: "Beauty", tag: "Atelier Hair Studio · Hair care", rating: "Sample", distance: "Kigali", time: "Book a time", price: "RWF 15,000", priceValue: 15000, tone: "salon", icon: "✂️", badge: "Sample listing", shopName: "Atelier Hair Studio", description: "A salon appointment tailored to your hair and preferred finish.", details: "Sample service. Sellers can explain what is included, how long it takes, and what customers should prepare." },
+  { name: "Fresh juice · 500 ml", type: "Restaurants", category: "Food & drink", tag: "Umurava Kitchen · Made fresh", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 3,000", priceValue: 3000, tone: "market", icon: "🥭", badge: "Sample listing", shopName: "Umurava Kitchen", description: "Fresh seasonal fruit blended to order.", details: "Sample menu item. Add ingredients, size options, and allergy information to the product details." },
 ];
 
-const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, businesses: [], selectedListing: null, selectedQuantity: 1, authMode: "signin" };
+const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, banners: [], bannerIndex: 0, adminListings: [], adminBanners: [], businesses: [], selectedListing: null, selectedQuantity: 1, authMode: "signin" };
 let editingListingId = null;
-let editingListingImageUrl = null;
+let listingGallery = [];
+let listingOriginalUrls = [];
+let editingBannerId = null;
+let bannerObjectUrl = null;
+let bannerImageUrl = null;
+let heroTimer = null;
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 let toastTimer;
@@ -79,7 +84,7 @@ async function loadProfile() {
 async function refreshListings() {
   const client = await getSupabase();
   const { data, error } = await client.from("listings")
-    .select("id,shop_id,title,description,image_url,price_rwf,stock,duration_min,active,shops!inner(name,type,district,address,phone,status,payment_methods,payment_instructions)")
+    .select("id,shop_id,title,description,details,category,image_url,image_urls,price_rwf,stock,duration_min,active,shops!inner(name,type,district,address,phone,status,payment_methods,payment_instructions)")
     .eq("active", true).eq("shops.status", "approved").order("created_at", { ascending: false });
   if (error) throw error;
   const categoryNames = { shop: "Shops", restaurant: "Restaurants", salon: "Salons" };
@@ -87,17 +92,66 @@ async function refreshListings() {
   state.liveListings = data.map((listing, index) => ({
     id: listing.id, shopId: listing.shop_id, name: listing.title,
     type: categoryNames[listing.shops.type] || "Shops",
-    tag: `${listing.shops.name} · ${listing.duration_min ? `${listing.duration_min} min service` : "Local listing"}`,
-    rating: "New", distance: listing.shops.district || "Kigali", time: listing.shops.type === "salon" ? "Book a slot" : "Pickup",
+    category: listing.category || categoryNames[listing.shops.type] || "Shops",
+    tag: `${listing.shops.name} · ${listing.category || "Local listing"}`,
+    shopName: listing.shops.name, rating: "New", distance: listing.shops.district || "Kigali", time: listing.shops.type === "salon" ? "Book a time" : "Pickup",
     price: `RWF ${Number(listing.price_rwf).toLocaleString()}`,
     priceValue: Number(listing.price_rwf), tone: ["market", "kitchen", "salon", "home", "coffee", "curl"][index % 6], icon: icons[listing.shops.type] || "🛍️", badge: listing.stock === 0 ? "Out of stock" : "Local",
-    description: listing.description, imageUrl: listing.image_url, stock: listing.stock, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
+    description: listing.description, details: listing.details, imageUrl: listing.image_url, imageUrls: listing.image_urls?.length ? listing.image_urls : listing.image_url ? [listing.image_url] : [], stock: listing.stock, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
   }));
   renderPlaces();
   const notice = $(".preview-notice", $("#buyer-view"));
   if (notice) notice.innerHTML = state.liveListings.length
     ? '<span>✳</span><span><strong>Live marketplace</strong> — These listings are published by TradeBridge businesses.</span>'
-    : '<span>✳</span><span><strong>No verified listings yet</strong> — Sample places are shown while sellers add their businesses.</span>';
+    : '<span>✳</span><span><strong>Getting started</strong> — Preview products show how local listings will look. Sample items can’t be ordered.</span>';
+}
+
+async function loadSiteBanners() {
+  const client = await getSupabase();
+  const { data, error } = await client.from("site_banners").select("id,slug,title,subtitle,cta_label,cta_category,image_url,theme,sort_order,active").eq("active", true).order("sort_order", { ascending: true });
+  if (error) throw error;
+  state.banners = data || [];
+  state.bannerIndex = 0;
+  renderHeroBanner();
+}
+
+function renderHeroBanner() {
+  const host = $("#hero-banner-content");
+  if (!host) return;
+  const banners = state.banners || [];
+  if (!banners.length) {
+    host.innerHTML = '<div class="promo-slide theme-market"><div class="promo-slide-copy"><span class="promo-kicker">TRADEBRIDGE · KIGALI</span><h2>Good finds, close to home</h2><p>Discover shops, food, and services around your neighborhood.</p><button class="hero-button" data-category="All">Explore TradeBridge <span>→</span></button></div><div class="promo-slide-art" aria-hidden="true">🧺</div></div>';
+    $("#hero-banner-dots").innerHTML = "";
+    return;
+  }
+  state.bannerIndex = (state.bannerIndex + banners.length) % banners.length;
+  const banner = banners[state.bannerIndex];
+  host.innerHTML = `<div class="promo-slide theme-${escapeHtml(banner.theme || "market")}">${banner.image_url ? `<img class="promo-slide-photo" src="${escapeHtml(banner.image_url)}" alt="" loading="eager">` : `<div class="promo-slide-art" aria-hidden="true">${banner.theme === "food" ? "🥘" : banner.theme === "salon" ? "✂️" : banner.theme === "home" ? "🪴" : "🧺"}</div>`}<div class="promo-slide-shade"></div><div class="promo-slide-copy"><span class="promo-kicker">MADE FOR KIGALI</span><h2>${escapeHtml(banner.title)}</h2><p>${escapeHtml(banner.subtitle)}</p><button class="hero-button" data-category="${escapeHtml(banner.cta_category)}">${escapeHtml(banner.cta_label)} <span>→</span></button></div><span class="promo-slide-index">${String(state.bannerIndex + 1).padStart(2, "0")} <i>/ ${String(banners.length).padStart(2, "0")}</i></span></div>`;
+  $("#hero-banner-dots").innerHTML = banners.map((_, index) => `<button class="banner-dot ${index === state.bannerIndex ? "active" : ""}" data-banner-slide="${index}" aria-label="Show promotion ${index + 1}"></button>`).join("");
+  clearInterval(heroTimer);
+  if (banners.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) heroTimer = setInterval(() => { state.bannerIndex = (state.bannerIndex + 1) % banners.length; renderHeroBanner(); }, 6500);
+}
+
+function openProductDetail(listing) {
+  if (!listing) return;
+  state.selectedListing = listing;
+  const images = listing.imageUrls?.length ? listing.imageUrls : listing.imageUrl ? [listing.imageUrl] : [];
+  const isDemo = Boolean(listing.demo || !listing.id);
+  $("#product-category").textContent = `${listing.category || listing.type || "Local find"} · ${isDemo ? "Sample listing" : "Kigali listing"}`;
+  $("#product-name").textContent = listing.name || listing.title;
+  $("#product-price").textContent = `RWF ${Number(listing.priceValue ?? listing.price_rwf ?? 0).toLocaleString()}`;
+  $("#product-shop").textContent = `Sold by ${listing.shop?.name || listing.shopName || "Local business"}`;
+  $("#product-short-description").textContent = listing.description || "Ask the seller for more information about this item.";
+  $("#product-details-text").textContent = listing.details || "The seller has not added more product information yet.";
+  $("#product-stock-note").textContent = Number.isInteger(listing.stock) ? `${listing.stock} available` : listing.duration_min ? `${listing.duration_min} minute service` : "Contact the seller for availability and delivery options.";
+  $("#product-gallery-main").innerHTML = images.length ? `<img src="${escapeHtml(images[0])}" alt="${escapeHtml(listing.name || listing.title)}">` : `<div class="product-gallery-placeholder ${escapeHtml(listing.tone || "market")}"><span>${escapeHtml(listing.icon || "▦")}</span><small>${escapeHtml(listing.shop?.name || listing.shopName || "Kigali business")}</small></div>`;
+  $("#product-gallery-thumbs").innerHTML = images.slice(0, 5).map((url, index) => `<button class="product-thumb ${index === 0 ? "active" : ""}" data-product-thumb="${index}" aria-label="Show product photo ${index + 1}"><img src="${escapeHtml(url)}" alt=""></button>`).join("");
+  const orderButton = $("#product-order-button");
+  orderButton.disabled = Boolean(isDemo || listing.stock === 0);
+  orderButton.textContent = isDemo ? "Preview item" : listing.stock === 0 ? "Out of stock" : "Order this item";
+  orderButton.dataset.view = listing.name || listing.title;
+  if (listing.id) orderButton.dataset.listingId = listing.id; else delete orderButton.dataset.listingId;
+  $("#product-dialog").showModal();
 }
 
 async function initializeBackend() {
@@ -116,7 +170,7 @@ async function initializeBackend() {
         results.filter((result) => result.status === "rejected").forEach((result) => { console.error(result.reason); toast(result.reason?.message || "Could not refresh TradeBridge data."); });
       });
     });
-    const initialResults = await Promise.allSettled([loadProfile(), refreshListings()]);
+    const initialResults = await Promise.allSettled([loadProfile(), refreshListings(), loadSiteBanners()]);
     initialResults.filter((result) => result.status === "rejected").forEach((result) => { console.error(result.reason); });
   } catch (error) {
     console.error("TradeBridge backend is not available:", error);
@@ -161,7 +215,7 @@ async function loadSellerWorkspace() {
     state.sellerCustomers = [];
     if (ids.length) {
       const [listings, orders] = await Promise.all([
-        client.from("listings").select("id,shop_id,title,description,image_url,price_rwf,stock,duration_min,active,created_at").in("shop_id", ids).order("created_at", { ascending: false }),
+        client.from("listings").select("id,shop_id,title,category,description,details,image_url,image_urls,price_rwf,stock,duration_min,active,created_at").in("shop_id", ids).order("created_at", { ascending: false }),
         client.from("orders").select("id,shop_id,buyer_id,status,fulfillment,total_rwf,created_at,shops(name),order_items(title,qty),order_payments(status,method,transaction_reference)").in("shop_id", ids).order("created_at", { ascending: false }).limit(40)
       ]);
       if (listings.error) throw listings.error;
@@ -188,34 +242,90 @@ async function loadAdminWorkspace() {
     const { data, error } = await client.from("shops").select("id,name,type,district,address,phone,status,created_at,profiles!shops_owner_id_fkey(full_name)").order("created_at", { ascending: false }).limit(100);
     if (error) throw error;
     state.adminBusinesses = data;
-    const [{ data: orders, error: orderError }, { data: customers, error: customerError }, { data: payments, error: paymentError }] = await Promise.all([
+    const [{ data: orders, error: orderError }, { data: customers, error: customerError }, { data: payments, error: paymentError }, { data: listings, error: listingsError }, { data: banners, error: bannersError }] = await Promise.all([
       client.from("orders").select("id,status,total_rwf,created_at,shops(name)").order("created_at", { ascending: false }).limit(100),
       client.from("profiles").select("id,full_name,phone,role,created_at").order("created_at", { ascending: false }).limit(100),
-      client.from("order_payments").select("id,order_id,amount_rwf,method,status,transaction_reference,created_at,shops(name)").order("created_at", { ascending: false }).limit(100)
+      client.from("order_payments").select("id,order_id,amount_rwf,method,status,transaction_reference,created_at,shops(name)").order("created_at", { ascending: false }).limit(100),
+      client.from("listings").select("id,shop_id,title,category,description,details,image_url,image_urls,price_rwf,stock,duration_min,active,created_at,shops(name,status)").order("created_at", { ascending: false }).limit(200),
+      client.from("site_banners").select("id,slug,title,subtitle,cta_label,cta_category,image_url,theme,sort_order,active").order("sort_order", { ascending: true })
     ]);
     if (orderError) throw orderError;
     if (customerError) throw customerError;
     if (paymentError) throw paymentError;
+    if (listingsError) throw listingsError;
+    if (bannersError) throw bannersError;
     state.adminOrders = orders;
     state.adminCustomers = customers;
     state.adminPayments = payments;
+    state.adminListings = listings;
+    state.adminBanners = banners;
     setRole("admin");
   } catch (error) { toast(error.message || "Could not load the admin portal."); }
 }
 
-async function openListingForm() {
+async function openListingForm(item = null) {
   if (!requireAccount()) return;
-  if (state.profile?.role !== "seller") { toast("A seller account is required to add a listing."); return; }
+  const isAdmin = state.profile?.role === "admin";
+  if (state.profile?.role !== "seller" && !isAdmin) { toast("A seller account is required to add a listing."); return; }
+  if (isAdmin && !item) { toast("Admins can edit existing marketplace listings from the Products tab."); return; }
   try {
     const client = await getSupabase();
-    const { data, error } = await client.from("shops").select("id,name,status").eq("owner_id", state.session.user.id).order("created_at", { ascending: false });
+    let query = client.from("shops").select("id,name,status").order("created_at", { ascending: false });
+    if (!isAdmin) query = query.eq("owner_id", state.session.user.id);
+    const { data, error } = await query;
     if (error) throw error;
+    const form = $("#listing-form");
+    form.reset();
+    editingListingId = item?.id || null;
+    listingOriginalUrls = item ? (item.image_urls?.length ? [...item.image_urls] : item.image_url ? [item.image_url] : []) : [];
+    listingGallery = item ? listingOriginalUrls.map((url) => ({ url, file: null, isCover: url === item.image_url })) : [];
+    if (listingGallery.length && !listingGallery.some((image) => image.isCover)) listingGallery[0].isCover = true;
     const select = $("#listing-form").elements.shop_id;
     select.innerHTML = data.map((shop) => `<option value="${escapeHtml(shop.id)}">${escapeHtml(shop.name)}${shop.status !== "approved" ? " (pending approval)" : ""}</option>`).join("");
     if (!data.length) { toast("Add your business first."); $("#business-dialog").showModal(); return; }
-    if (!editingListingId) { $("#listing-form").reset(); editingListingImageUrl = null; $("#listing-image-preview").hidden = true; $("#listing-title").textContent = "Add a listing"; $("#listing-form").querySelector("button[type=submit]").textContent = "Publish listing"; }
+    if (item) {
+      form.elements.shop_id.value = item.shop_id;
+      form.elements.title.value = item.title;
+      form.elements.category.value = item.category || "Other";
+      form.elements.description.value = item.description || "";
+      form.elements.details.value = item.details || "";
+      form.elements.price_rwf.value = item.price_rwf;
+      form.elements.stock.value = item.stock ?? "";
+      form.elements.duration_min.value = item.duration_min ?? "";
+    }
+    renderListingGallery();
+    $("#listing-title").textContent = item ? "Edit product listing" : "Add a listing";
+    form.querySelector("button[type=submit]").textContent = item ? "Save product changes" : "Publish listing";
     $("#listing-dialog").showModal();
   } catch (error) { toast(error.message || "Could not load your businesses."); }
+}
+
+function renderListingGallery() {
+  const host = $("#listing-image-gallery");
+  if (!host) return;
+  host.innerHTML = listingGallery.map((image, index) => `<article class="gallery-edit-card"><img src="${escapeHtml(image.url)}" alt="Product photo ${index + 1}"><div><strong>${image.isCover ? "Cover photo" : `Photo ${index + 1}`}</strong><button type="button" class="row-action" data-gallery-cover="${index}">${image.isCover ? "Selected cover" : "Use as cover"}</button><button type="button" class="row-action remove-photo" data-gallery-remove="${index}">Remove</button></div></article>`).join("");
+}
+
+function openBannerForm(banner = null) {
+  if (!requireAccount() || state.profile?.role !== "admin") { toast("Only administrators can edit homepage promotions."); return; }
+  if (bannerObjectUrl) URL.revokeObjectURL(bannerObjectUrl);
+  bannerObjectUrl = null;
+  const form = $("#banner-form");
+  form.reset();
+  editingBannerId = banner?.id || null;
+  bannerImageUrl = banner?.image_url || null;
+  $("#banner-editor-title").textContent = banner ? "Edit promotion" : "Add a promotion";
+  form.elements.title.value = banner?.title || "";
+  form.elements.subtitle.value = banner?.subtitle || "";
+  form.elements.cta_label.value = banner?.cta_label || "Explore now";
+  form.elements.cta_category.value = banner?.cta_category || "All";
+  form.elements.theme.value = banner?.theme || "market";
+  form.elements.sort_order.value = banner?.sort_order || (state.adminBanners.length + 1);
+  form.elements.active.checked = banner?.active ?? true;
+  const preview = $("#banner-image-preview");
+  if (bannerImageUrl) { preview.querySelector("img").src = bannerImageUrl; preview.querySelector("span").textContent = "Current banner image"; preview.hidden = false; }
+  else preview.hidden = true;
+  $("#banner-dialog").showModal();
 }
 
 function setRole(role) {
@@ -243,7 +353,7 @@ function renderPlaces() {
   const source = state.liveListings?.length ? state.liveListings : places;
   const filtered = source.filter((place) => {
     const matchesCategory = state.category === "All" || place.type === state.category;
-    const matchesQuery = `${place.name} ${place.type} ${place.tag}`.toLowerCase().includes(state.query.toLowerCase());
+    const matchesQuery = `${place.name} ${place.category || ""} ${place.type} ${place.tag}`.toLowerCase().includes(state.query.toLowerCase());
     return matchesCategory && matchesQuery;
   });
   if (!filtered.length) {
@@ -253,9 +363,10 @@ function renderPlaces() {
   grid.innerHTML = filtered.map((place) => {
     const savedKey = place.id || place.name;
     const saved = state.saved.has(savedKey);
-    return `<article class="listing-card">
-      <div class="listing-visual ${escapeHtml(place.tone)}">${place.imageUrl ? `<img class="listing-photo" src="${escapeHtml(place.imageUrl)}" alt="${escapeHtml(place.name)}" loading="lazy">` : `<span class="listing-emoji">${escapeHtml(place.icon)}</span>`}<span class="listing-badge"><span>✦</span> ${escapeHtml(place.badge)}</span><button aria-label="${saved ? "Remove" : "Save"} ${escapeHtml(place.name)}" class="save-button ${saved ? "saved" : ""}" data-save="${escapeHtml(savedKey)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${saved ? "♥" : "♡"}</button><span class="visual-deco">✳</span></div>
-      <div class="listing-info"><div class="listing-title-row"><h3>${escapeHtml(place.name)}</h3><span class="rating">${place.id ? "New" : `★ ${escapeHtml(place.rating)}`}</span></div><p>${escapeHtml(place.tag)}</p><div class="listing-meta"><span>⌖ ${escapeHtml(place.distance)}</span><span>·</span><span>${escapeHtml(place.time)}</span></div><div class="listing-bottom"><span>${escapeHtml(place.price)}</span><button aria-label="${place.id ? "Order" : "View"} ${escapeHtml(place.name)}" data-view="${escapeHtml(place.name)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${place.id ? "Order" : "↗"}</button></div></div>
+    const cardKey = place.id || place.name;
+    return `<article class="listing-card" data-product-card="${escapeHtml(cardKey)}">
+      <div class="listing-visual ${escapeHtml(place.tone || "market")}" data-product-open><span class="listing-category-pill">${escapeHtml(place.category || place.type)}</span>${place.imageUrl ? `<img class="listing-photo" src="${escapeHtml(place.imageUrl)}" alt="${escapeHtml(place.name)}" loading="lazy">` : `<span class="listing-emoji">${escapeHtml(place.icon || "🛍️")}</span>`}<span class="listing-badge"><span>✦</span> ${escapeHtml(place.badge || "Local")}</span><button aria-label="${saved ? "Remove" : "Save"} ${escapeHtml(place.name)}" class="save-button ${saved ? "saved" : ""}" data-save="${escapeHtml(savedKey)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${saved ? "♥" : "♡"}</button><span class="visual-deco">✳</span></div>
+      <div class="listing-info"><button class="listing-title-button" data-product-open><h3>${escapeHtml(place.name)}</h3></button><p>${escapeHtml(place.shop?.name || place.shopName || place.tag)}</p><div class="listing-meta"><span>⌖ ${escapeHtml(place.distance || "Kigali")}</span><span>·</span><span>${escapeHtml(place.time || "Ask seller")}</span></div><div class="listing-bottom"><strong>RWF ${Number(place.priceValue || 0).toLocaleString()}</strong><button class="quick-view-button" aria-label="View details for ${escapeHtml(place.name)}" data-product-detail="${escapeHtml(cardKey)}">Details</button></div>${place.id ? `<button class="listing-order-button" data-view="${escapeHtml(place.name)}" data-listing-id="${escapeHtml(place.id)}">${place.fulfillment === "booking" ? "Book this service" : "Order now"}</button>` : `<button class="listing-order-button preview-order" disabled>Sample item</button>`}</div>
     </article>`;
   }).join("");
 }
@@ -296,12 +407,14 @@ function renderAdminOverview() {
 }
 
 function renderAdmin() {
-  const tabs = ["Overview", "Businesses", "Orders", "Payments", "Customers", "Reports"];
+  const tabs = ["Overview", "Businesses", "Products", "Website", "Orders", "Payments", "Customers", "Reports"];
   const view = $("#admin-view");
   const tabButtons = tabs.map((tab) => `<button class="portal-tab ${state.adminTab === tab ? "active" : ""}" data-admin-tab="${tab}">${tab}${tab === "Businesses" ? `<span class="count-pill alert-count">${(state.adminBusinesses || []).filter((shop) => shop.status === "pending").length}</span>` : ""}</button>`).join("");
   const businesses = state.adminBusinesses || [];
   const body = state.adminTab === "Businesses"
     ? `<div class="admin-metrics">${metric("Businesses", businesses.length, "Live", "registered marketplace vendors", "▦")}${metric("Pending approval", businesses.filter((shop) => shop.status === "pending").length, "Review", "business applications", "◷")}${metric("Orders", (state.adminOrders || []).length, "Recent", "latest 100 recorded", "▤")}${metric("Marketplace volume", `RWF ${(state.adminOrders || []).reduce((total, order) => total + Number(order.total_rwf || 0), 0).toLocaleString()}`, "Recent", "latest 100 orders", "↗")}</div><section class="panel admin-business-panel"><div class="panel-heading"><div><h3>${state.adminTab === "Businesses" ? "All businesses" : "Business applications"}</h3><p>Approve or suspend marketplace vendors.</p></div></div><div class="backend-list">${businesses.length ? businesses.map((shop) => `<article class="backend-list-item"><div><strong>${escapeHtml(shop.name)}</strong><small>${escapeHtml(shop.type)} · ${escapeHtml(shop.district)} · ${escapeHtml(shop.profiles?.full_name || "Seller")}</small></div><span class="order-pill">${escapeHtml(shop.status)}</span><span>${shop.status === "pending" ? `<button class="review-button" data-shop-review="${escapeHtml(shop.id)}" data-next-status="approved">Approve</button>` : shop.status === "approved" ? `<button class="row-action" data-shop-review="${escapeHtml(shop.id)}" data-next-status="suspended">Suspend</button>` : `<button class="review-button" data-shop-review="${escapeHtml(shop.id)}" data-next-status="approved">Reinstate</button>`}</span></article>`).join("") : '<p class="empty-backend">No business applications yet.</p>'}</div></section>`
+    : state.adminTab === "Products" ? `<div class="admin-tab-intro"><div><h2>Marketplace products</h2><p>Edit seller listings, prices, descriptions, product details, and photo galleries.</p></div><span>${(state.adminListings || []).length} listings</span></div><section class="backend-list admin-products-list">${(state.adminListings || []).map((item) => `<article class="backend-list-item admin-product-row">${item.image_url ? `<img class="seller-listing-thumb" src="${escapeHtml(item.image_url)}" alt="">` : '<span class="seller-listing-thumb seller-listing-placeholder">▦</span>'}<div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.category || "General")} · ${escapeHtml(item.shops?.name || "Business")} · RWF ${Number(item.price_rwf).toLocaleString()}</small><small>${item.image_urls?.length || (item.image_url ? 1 : 0)} photos · ${item.stock === null ? "Stock untracked" : `${item.stock} available`}</small></div><span class="order-pill">${item.active ? "Published" : "Hidden"}</span><button class="review-button" data-admin-edit-listing="${escapeHtml(item.id)}">Edit product</button><button class="row-action" data-admin-listing-toggle="${escapeHtml(item.id)}">${item.active ? "Hide" : "Publish"}</button></article>`).join("") || '<p class="empty-backend">Products published by approved businesses will appear here.</p>'}</section>`
+    : state.adminTab === "Website" ? `<section class="panel website-manager"><div class="panel-heading"><div><h3>Homepage promotions</h3><p>These banners rotate on the buyer homepage. Add artwork or use the built-in illustrated themes.</p></div><button class="primary-button" data-action="add-banner">＋ Add promotion</button></div><div class="backend-list">${(state.adminBanners || []).map((banner) => `<article class="backend-list-item banner-admin-row">${banner.image_url ? `<img class="banner-admin-thumb" src="${escapeHtml(banner.image_url)}" alt="">` : `<span class="banner-admin-thumb theme-${escapeHtml(banner.theme)}">✦</span>`}<div><strong>${escapeHtml(banner.title)}</strong><small>${escapeHtml(banner.cta_category)} · ${escapeHtml(banner.theme)} artwork · Order ${banner.sort_order}</small></div><span class="order-pill">${banner.active ? "Showing" : "Hidden"}</span><button class="review-button" data-banner-edit="${escapeHtml(banner.id)}">Edit</button><button class="row-action" data-banner-toggle="${escapeHtml(banner.id)}">${banner.active ? "Hide" : "Show"}</button></article>`).join("") || '<p class="empty-backend">Add a promotion to feature it on the homepage.</p>'}</div></section><p class="website-manager-note">Promotions transition automatically. Visitors who prefer reduced motion will see the first slide without auto-rotation.</p>`
     : state.adminTab === "Overview" ? renderAdminOverview()
     : state.adminTab === "Orders" ? `<section class="backend-list">${(state.adminOrders || []).map((order) => `<article class="backend-list-item"><div><strong>${escapeHtml(order.shops?.name || "Business")} · ${escapeHtml(order.id.slice(0, 8))}</strong><small>${escapeHtml(order.status.replaceAll("_", " "))} · ${new Date(order.created_at).toLocaleString()}</small></div><b>RWF ${Number(order.total_rwf).toLocaleString()}</b><label class="order-status-control"><span>Update order</span><select aria-label="Update order status" data-admin-order-status="${escapeHtml(order.id)}" data-current-status="${escapeHtml(order.status)}">${["new", "confirmed", "preparing", "ready", "out_for_delivery", "completed", "cancelled"].map((status) => `<option value="${status}" ${status === order.status ? "selected" : ""}>${status.replaceAll("_", " ")}</option>`).join("")}</select></label></article>`).join("") || '<p class="empty-backend">No orders yet.</p>'}</section>`
     : state.adminTab === "Payments" ? `<section class="backend-list">${(state.adminPayments || []).map((payment) => `<article class="backend-list-item"><div><strong>${escapeHtml(payment.shops?.name || "Seller")} · RWF ${Number(payment.amount_rwf).toLocaleString()}</strong><small>${escapeHtml(payment.method.replaceAll("_", " "))} · Order ${escapeHtml(payment.order_id.slice(0, 8))}</small><small>Reference: ${escapeHtml(payment.transaction_reference || "Not supplied")}</small></div><span class="order-pill">${escapeHtml(payment.status)}</span>${payment.status === "pending" ? `<button class="review-button" data-payment-id="${escapeHtml(payment.id)}" data-payment-review="paid">Confirm</button><button class="row-action" data-payment-id="${escapeHtml(payment.id)}" data-payment-review="rejected">Reject</button>` : ""}</article>`).join("") || '<p class="empty-backend">No payment records yet.</p>'}</section>`
@@ -343,8 +456,35 @@ async function showBuyerMessages() {
 }
 
 document.addEventListener("click", (event) => {
+  const productCard = event.target.closest("[data-product-card]");
+  if (productCard && !event.target.closest("button, a")) {
+    const key = productCard.dataset.productCard;
+    const product = (state.liveListings?.length ? state.liveListings : places).find((item) => (item.id || item.name) === key);
+    if (product) { openProductDetail(product); return; }
+  }
   const button = event.target.closest("button, a");
   if (!button) return;
+  if (button.hasAttribute("data-product-open") || button.dataset.productDetail) {
+    const key = button.dataset.productDetail || button.closest("[data-product-card]")?.dataset.productCard;
+    const product = (state.liveListings?.length ? state.liveListings : places).find((item) => (item.id || item.name) === key);
+    if (product) openProductDetail(product);
+    return;
+  }
+  if (button.hasAttribute("data-banner-prev") || button.hasAttribute("data-banner-next")) {
+    const count = state.banners.length;
+    if (count > 1) { state.bannerIndex = (state.bannerIndex + (button.hasAttribute("data-banner-prev") ? count - 1 : 1)) % count; renderHeroBanner(); }
+    return;
+  }
+  if (button.dataset.bannerSlide !== undefined) { state.bannerIndex = Number(button.dataset.bannerSlide); renderHeroBanner(); return; }
+  if (button.dataset.productThumb !== undefined) {
+    const index = Number(button.dataset.productThumb);
+    const images = state.selectedListing?.imageUrls || [];
+    if (images[index]) {
+      $("#product-gallery-main").innerHTML = `<img src="${escapeHtml(images[index])}" alt="${escapeHtml(state.selectedListing.name || state.selectedListing.title)}">`;
+      $$(".product-thumb").forEach((thumb, i) => thumb.classList.toggle("active", i === index));
+    }
+    return;
+  }
   if (button.dataset.role) {
     if (button.dataset.role === "buyer") setRole("buyer");
     if (button.dataset.role === "seller") loadSellerWorkspace();
@@ -443,7 +583,37 @@ document.addEventListener("click", (event) => {
   if (button.dataset.editListing) {
     const item = state.sellerListings.find((listing) => listing.id === button.dataset.editListing);
     if (!item) return;
-    (async () => { editingListingId = item.id; await openListingForm(); const form = $("#listing-form"); form.elements.shop_id.value = item.shop_id; form.elements.title.value = item.title; form.elements.description.value = item.description || ""; form.elements.price_rwf.value = item.price_rwf; form.elements.stock.value = item.stock ?? ""; form.elements.duration_min.value = item.duration_min ?? ""; editingListingImageUrl = item.image_url || null; if (editingListingImageUrl) { const preview = $("#listing-image-preview"); preview.querySelector("img").src = editingListingImageUrl; preview.querySelector("span").textContent = "Current product photo"; preview.hidden = false; } $("#listing-title").textContent = "Edit listing"; form.querySelector("button[type=submit]").textContent = "Save changes"; })();
+    openListingForm(item);
+    return;
+  }
+  if (button.dataset.adminEditListing) {
+    const item = state.adminListings.find((listing) => listing.id === button.dataset.adminEditListing);
+    if (item) openListingForm(item);
+    return;
+  }
+  if (button.dataset.adminListingToggle) {
+    const item = state.adminListings.find((listing) => listing.id === button.dataset.adminListingToggle);
+    if (!item) return;
+    (async () => {
+      try {
+        const { error } = await (await getSupabase()).from("listings").update({ active: !item.active }).eq("id", item.id);
+        if (error) throw error;
+        await loadAdminWorkspace(); await refreshListings(); toast(item.active ? "Product hidden from the storefront." : "Product published.");
+      } catch (error) { toast(error.message || "Could not update this product."); }
+    })();
+    return;
+  }
+  if (button.dataset.bannerEdit) { const banner = state.adminBanners.find((item) => item.id === button.dataset.bannerEdit); if (banner) openBannerForm(banner); return; }
+  if (button.dataset.bannerToggle) {
+    const banner = state.adminBanners.find((item) => item.id === button.dataset.bannerToggle);
+    if (!banner) return;
+    (async () => {
+      try {
+        const { error } = await (await getSupabase()).from("site_banners").update({ active: !banner.active }).eq("id", banner.id);
+        if (error) throw error;
+        await loadAdminWorkspace(); await loadSiteBanners(); toast(banner.active ? "Promotion hidden from the homepage." : "Promotion shown on the homepage.");
+      } catch (error) { toast(error.message || "Could not update this promotion."); }
+    })();
     return;
   }
   if (button.dataset.sellerTab) { state.sellerTab = button.dataset.sellerTab; renderSeller(); return; }
@@ -458,6 +628,7 @@ document.addEventListener("click", (event) => {
     about: "TradeBridge connects customers with trusted local businesses.", privacy: "Privacy information will be added before launch.", terms: "Terms will be added before launch.", security: "Security tools coming soon.", "all-listings": "You’re seeing all available demo places."
   };
   if (action === "explore") { $("#discover").scrollIntoView({ behavior: "smooth" }); return; }
+  if (action === "all-listings") { state.category = "All"; $$(".category-tab").forEach((tab) => tab.classList.toggle("selected", tab.dataset.category === "All")); renderPlaces(); $("#discover").scrollIntoView({ behavior: "smooth" }); return; }
   if (action === "orders") { showBuyerOrders(); return; }
   if (action === "saved") { showSavedPlaces(); return; }
   if (action === "messages") { showBuyerMessages(); return; }
@@ -471,8 +642,10 @@ document.addEventListener("click", (event) => {
     else (async () => { const { error } = await (await getSupabase()).auth.signOut(); if (error) toast(error.message); else { state.session = null; state.profile = null; updateAccountLabel(); setRole("buyer"); toast("You have signed out."); } })();
     return;
   }
+  if (action === "register") { openAuth("signup"); return; }
   if (action === "add-business") { if (requireAccount() && state.profile?.role === "seller") $("#business-dialog").showModal(); else if (state.profile?.role !== "seller") toast("Choose a seller account when creating your account."); return; }
   if (action === "add-listing") { openListingForm(); return; }
+  if (action === "add-banner") { openBannerForm(); return; }
   if (action) toast(messages[action] || "This feature will be added in a later step.");
 });
 
@@ -556,31 +729,51 @@ $("#business-form").addEventListener("submit", async (event) => {
   } catch (error) { toast(error.message || "Could not submit your business."); }
 });
 
-$("#listing-form").elements.image.addEventListener("change", (event) => {
-  const file = event.target.files?.[0];
-  const preview = $("#listing-image-preview");
-  if (!file) { if (!editingListingImageUrl) preview.hidden = true; return; }
-  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 3 * 1024 * 1024) {
-    event.target.value = "";
-    toast("Choose a JPG, PNG or WebP image under 3 MB.");
-    return;
+$("#listing-form").elements.images.addEventListener("change", (event) => {
+  const files = [...(event.target.files || [])];
+  const remaining = 5 - listingGallery.length;
+  if (files.length > remaining) toast("A listing can have up to 5 photos.");
+  for (const file of files.slice(0, remaining)) {
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 3 * 1024 * 1024) {
+      toast("Choose JPG, PNG or WebP photos under 3 MB each.");
+      continue;
+    }
+    const url = URL.createObjectURL(file);
+    listingGallery.push({ url, file, isCover: listingGallery.length === 0 });
   }
-  preview.querySelector("img").src = URL.createObjectURL(file);
-  preview.querySelector("span").textContent = file.name;
-  preview.hidden = false;
+  event.target.value = "";
+  renderListingGallery();
 });
 
 $("#listing-dialog").addEventListener("click", (event) => {
-  if (!event.target.closest("[data-clear-listing-image]")) return;
-  $("#listing-form").elements.image.value = "";
-  editingListingImageUrl = null;
-  $("#listing-image-preview").hidden = true;
+  const coverButton = event.target.closest("[data-gallery-cover]");
+  if (coverButton) {
+    const selected = Number(coverButton.dataset.galleryCover);
+    listingGallery = listingGallery.map((image, index) => ({ ...image, isCover: index === selected }));
+    renderListingGallery();
+    return;
+  }
+  const removeButton = event.target.closest("[data-gallery-remove]");
+  if (removeButton) {
+    const [removed] = listingGallery.splice(Number(removeButton.dataset.galleryRemove), 1);
+    if (removed?.file) URL.revokeObjectURL(removed.url);
+    if (listingGallery.length && !listingGallery.some((image) => image.isCover)) listingGallery[0].isCover = true;
+    renderListingGallery();
+  }
 });
 
 $("#listing-dialog").addEventListener("close", () => {
   editingListingId = null;
-  editingListingImageUrl = null;
+  listingOriginalUrls = [];
+  listingGallery.forEach((image) => { if (image.file) URL.revokeObjectURL(image.url); });
+  listingGallery = [];
 });
+
+function listingStoragePath(url) {
+  const marker = "/storage/v1/object/public/listing-images/";
+  const index = (url || "").indexOf(marker);
+  return index >= 0 ? decodeURIComponent(url.slice(index + marker.length)) : null;
+}
 
 $("#listing-form").addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -588,40 +781,104 @@ $("#listing-form").addEventListener("submit", async (event) => {
   const form = event.currentTarget;
   const values = Object.fromEntries(new FormData(form));
   let client = null;
-  let uploadedPath = null;
-  const previousImageUrl = editingListingImageUrl;
+  const uploadedPaths = [];
+  const wasEditing = Boolean(editingListingId);
+  const previousUrls = [...listingOriginalUrls];
   try {
     client = await getSupabase();
-    const image = form.elements.image.files?.[0];
-    let imageUrl = editingListingImageUrl;
-    if (image) {
-      const extension = image.type === "image/jpeg" ? "jpg" : image.type.split("/")[1];
-      uploadedPath = values.shop_id + "/" + crypto.randomUUID() + "." + extension;
-      const { data: upload, error: uploadError } = await client.storage.from("listing-images").upload(uploadedPath, image, { cacheControl: "3600", contentType: image.type, upsert: false });
+    const imageUrls = [];
+    for (const image of listingGallery) {
+      if (!image.file) { imageUrls.push(image.url); continue; }
+      const extension = image.file.type === "image/jpeg" ? "jpg" : image.file.type.split("/")[1];
+      const path = values.shop_id + "/" + crypto.randomUUID() + "." + extension;
+      const { data: upload, error: uploadError } = await client.storage.from("listing-images").upload(path, image.file, { cacheControl: "3600", contentType: image.file.type, upsert: false });
       if (uploadError) throw uploadError;
-      imageUrl = client.storage.from("listing-images").getPublicUrl(upload.path).data.publicUrl;
+      uploadedPaths.push(path);
+      imageUrls.push(client.storage.from("listing-images").getPublicUrl(upload.path).data.publicUrl);
     }
+    const coverIndex = listingGallery.findIndex((image) => image.isCover);
+    const imageUrl = coverIndex >= 0 ? imageUrls[coverIndex] : imageUrls[0] || null;
     const listingValues = {
-      shop_id: values.shop_id, title: values.title.trim(), description: (values.description || "").trim(),
+      shop_id: values.shop_id, title: values.title.trim(), category: values.category, description: (values.description || "").trim(), details: (values.details || "").trim(), image_urls: imageUrls, image_url: imageUrl,
       price_rwf: Number(values.price_rwf), stock: values.stock === "" ? null : Number(values.stock),
-      duration_min: values.duration_min === "" ? null : Number(values.duration_min), image_url: imageUrl
+      duration_min: values.duration_min === "" ? null : Number(values.duration_min)
     };
     const result = editingListingId
       ? await client.from("listings").update(listingValues).eq("id", editingListingId)
       : await client.from("listings").insert(listingValues);
     const { error } = result;
     if (error) throw error;
-    $("#listing-dialog").close(); form.reset(); $("#listing-image-preview").hidden = true;
-    const wasEditing = Boolean(editingListingId); editingListingId = null; editingListingImageUrl = null;
-    if (wasEditing && previousImageUrl && previousImageUrl !== imageUrl) {
-      const marker = "/storage/v1/object/public/listing-images/";
-      const index = previousImageUrl.indexOf(marker);
-      if (index >= 0) await client.storage.from("listing-images").remove([decodeURIComponent(previousImageUrl.slice(index + marker.length))]);
+    $("#listing-dialog").close(); form.reset();
+    const removedPaths = previousUrls.filter((url) => !imageUrls.includes(url)).map(listingStoragePath).filter(Boolean);
+    if (removedPaths.length) await client.storage.from("listing-images").remove(removedPaths);
+    toast(wasEditing ? "Product changes saved." : "Listing saved. It will be visible after its business is approved.");
+    if (state.profile?.role === "admin") await loadAdminWorkspace(); else await loadSellerWorkspace();
+    await refreshListings();
+  } catch (error) {
+    if (uploadedPaths.length && client) await client.storage.from("listing-images").remove(uploadedPaths);
+    toast(error.message || "Could not save the listing.");
+  }
+});
+
+$("#banner-form").elements.image.addEventListener("change", (event) => {
+  const file = event.target.files?.[0];
+  const preview = $("#banner-image-preview");
+  if (!file) return;
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 3 * 1024 * 1024) {
+    event.target.value = "";
+    toast("Choose a JPG, PNG or WebP banner under 3 MB.");
+    return;
+  }
+  if (bannerObjectUrl) URL.revokeObjectURL(bannerObjectUrl);
+  bannerObjectUrl = URL.createObjectURL(file);
+  preview.querySelector("img").src = bannerObjectUrl;
+  preview.querySelector("span").textContent = file.name;
+  preview.hidden = false;
+});
+
+$("#banner-dialog").addEventListener("close", () => {
+  if (bannerObjectUrl) URL.revokeObjectURL(bannerObjectUrl);
+  bannerObjectUrl = null;
+  editingBannerId = null;
+  bannerImageUrl = null;
+});
+
+$("#banner-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!requireAccount() || state.profile?.role !== "admin") { toast("Only administrators can publish homepage promotions."); return; }
+  const form = event.currentTarget;
+  const values = Object.fromEntries(new FormData(form));
+  const editingId = editingBannerId;
+  const oldImageUrl = bannerImageUrl;
+  let client = null;
+  let uploadedPath = null;
+  try {
+    client = await getSupabase();
+    let imageUrl = oldImageUrl;
+    const image = form.elements.image.files?.[0];
+    if (image) {
+      const extension = image.type === "image/jpeg" ? "jpg" : image.type.split("/")[1];
+      uploadedPath = `site/${crypto.randomUUID()}.${extension}`;
+      const { data: upload, error: uploadError } = await client.storage.from("listing-images").upload(uploadedPath, image, { cacheControl: "3600", contentType: image.type, upsert: false });
+      if (uploadError) throw uploadError;
+      imageUrl = client.storage.from("listing-images").getPublicUrl(upload.path).data.publicUrl;
     }
-    toast(wasEditing ? "Listing changes saved." : "Listing saved. It will be visible after its business is approved."); await loadSellerWorkspace(); await refreshListings();
+    const banner = {
+      title: values.title.trim(), subtitle: (values.subtitle || "").trim(), cta_label: values.cta_label.trim(),
+      cta_category: values.cta_category, theme: values.theme, sort_order: Number(values.sort_order) || 1,
+      image_url: imageUrl, active: form.elements.active.checked
+    };
+    const result = editingId
+      ? await client.from("site_banners").update(banner).eq("id", editingId)
+      : await client.from("site_banners").insert({ ...banner, slug: values.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + "-" + crypto.randomUUID().slice(0, 6), created_by: state.session.user.id });
+    if (result.error) throw result.error;
+    $("#banner-dialog").close(); form.reset(); $("#banner-image-preview").hidden = true;
+    if (image && oldImageUrl) { const oldPath = listingStoragePath(oldImageUrl); if (oldPath) await client.storage.from("listing-images").remove([oldPath]); }
+    await loadAdminWorkspace(); await loadSiteBanners();
+    toast(editingId ? "Homepage promotion updated." : "Homepage promotion added.");
   } catch (error) {
     if (uploadedPath && client) await client.storage.from("listing-images").remove([uploadedPath]);
-    toast(error.message || "Could not save the listing.");
+    toast(error.message || "Could not save the homepage promotion.");
   }
 });
 
@@ -760,5 +1017,6 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
 }
 
 renderPlaces();
+renderHeroBanner();
 updateAccountLabel();
 initializeBackend();
