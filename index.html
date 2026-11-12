@@ -125,6 +125,8 @@
       <form method="dialog"><button class="dialog-close" aria-label="Close checkout">×</button></form>
       <p class="install-kicker">PLACE AN ORDER</p><h2 id="checkout-title">Checkout</h2><p id="checkout-item" class="install-description"></p>
       <form id="checkout-form" class="backend-form">
+        <label>Quantity<div class="quantity-picker"><button id="quantity-decrease" type="button" aria-label="Decrease quantity">−</button><output id="checkout-quantity" aria-live="polite">1</output><button id="quantity-increase" type="button" aria-label="Increase quantity">＋</button><span id="quantity-availability"></span></div></label>
+        <p id="checkout-total" class="checkout-total" aria-live="polite"></p>
         <label>Fulfilment<select name="fulfillment"><option value="pickup">Pick up</option><option value="delivery">Delivery</option><option value="booking">Book a time</option></select></label>
         <label id="delivery-address-wrap" hidden>Delivery address<input name="delivery_address" maxlength="240"></label>
         <label>Contact phone<input name="contact_phone" autocomplete="tel" required maxlength="30" placeholder="+250 …"></label>
