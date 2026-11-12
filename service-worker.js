@@ -1,4 +1,4 @@
-const CACHE_NAME = "tradebridge-shell-v6";
+const CACHE_NAME = "tradebridge-shell-v7";
 const APP_SHELL = [
   "./",
   "./index.html",
