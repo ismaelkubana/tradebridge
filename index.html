@@ -114,6 +114,8 @@
         <label>Name<input name="title" required maxlength="120"></label>
         <label>Description<textarea name="description" rows="3" maxlength="500"></textarea></label>
         <label>Price (RWF)<input name="price_rwf" type="number" min="0" step="1" required></label>
+        <label>Product photo<input name="image" type="file" accept="image/jpeg,image/png,image/webp"><span class="field-hint">JPG, PNG or WebP · up to 3 MB</span></label>
+        <div id="listing-image-preview" class="image-upload-preview" hidden><img alt="Selected product photo"><span></span><button type="button" class="row-action" data-clear-listing-image>Remove photo</button></div>
         <label>Stock quantity (optional)<input name="stock" type="number" min="0" step="1"></label>
         <label>Service duration in minutes (optional)<input name="duration_min" type="number" min="1" step="1"></label>
         <button class="primary-button" type="submit">Save listing</button>
