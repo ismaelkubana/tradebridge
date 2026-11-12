@@ -58,6 +58,9 @@ function updateAccountLabel() {
   $("#account-label").textContent = name.length > 22 ? `${name.slice(0, 19)}…` : name;
   $("#sidebar-account-label").textContent = name;
   $("#sidebar-account-subtitle").textContent = user ? (state.profile?.role === "admin" ? "Administrator" : "TradeBridge member") : "Save your account";
+  $("#login-action").hidden = Boolean(user);
+  $("#logout-action").hidden = !user;
+  $("#admin-nav-button").hidden = !user || state.profile?.role !== "admin";
 }
 
 async function loadProfile() {
@@ -103,8 +106,11 @@ async function initializeBackend() {
     const { data: { session }, error } = await client.auth.getSession();
     if (error) throw error;
     state.session = session;
+    updateAccountLabel();
     client.auth.onAuthStateChange((_event, nextSession) => {
       state.session = nextSession;
+      state.profile = null;
+      updateAccountLabel();
       queueMicrotask(async () => {
         const results = await Promise.allSettled([loadProfile(), refreshListings()]);
         results.filter((result) => result.status === "rejected").forEach((result) => { console.error(result.reason); toast(result.reason?.message || "Could not refresh TradeBridge data."); });
