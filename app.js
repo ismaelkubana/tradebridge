@@ -1,5 +1,361 @@
-Y™Áäx-ÆÈ‹j◊ù¢Îi∫⁄+äßj[hëÈ‹¢ÈÌ◊u·:-jZ.∂õ≠ñ)ﬁ≥V6ˆÁ7B∆6W2“∞¢≤Ê÷S¢$∂ñv∆íg&W6Ç÷&∂WB"¬GóS¢%6Ü˜2"¬Fs¢$w&ˆ6W&ñW2+rg&W6ÇFñ«í"¬&FñÊs¢#B„í"¬Fó7FÊ6S¢#„Ç∂“"¬Fñ÷S¢#^(	3#R÷ñ‚"¬&ñ6S¢$g&ˆ“%tb"√S"¬FˆÊS¢&÷&∂WB"¬ñ6ˆ„¢/	˙Y"¬&FvS¢%˜V∆""“¿¢≤Ê÷S¢%V◊W&f∂óF6ÜV‚"¬GóS¢%&W7FW&ÁG2"¬Fs¢%'vÊF‚+rw&ñ∆¬"¬&FñÊs¢#B„Ç"¬Fó7FÊ6S¢#„"∂“"¬Fñ÷S¢##^(	33R÷ñ‚"¬&ñ6S¢$g&ˆ“%tbB√"¬FˆÊS¢&∂óF6ÜV‚"¬ñ6ˆ„¢/	¯€""¬&FvS¢$g&VRFV∆ófW'í"“¿¢≤Ê÷S¢$FV∆ñW"Üó"7GVFñÚ"¬GóS¢%6∆ˆÁ2"¬Fs¢$Üó"+r&VWGí"¬&FñÊs¢#R„"¬Fó7FÊ6S¢#"„∂“"¬Fñ÷S¢$&ˆˆ≤6∆˜B"¬&ñ6S¢%6W'fñ6W2g&ˆ“%tbÇ√"¬FˆÊS¢'6∆ˆ‚"¬ñ6ˆ„¢.)».˚àÚ"¬&FvS¢$˜V‚FˆFí"“¿¢≤Ê÷S¢$÷∑W¶Üˆ÷Rb∆ófñÊr"¬GóS¢%6Ü˜2"¬Fs¢$Üˆ÷R+r∆ñfW7Gñ∆R"¬&FñÊs¢#B„r"¬Fó7FÊ6S¢#„b∂“"¬Fñ÷S¢%6÷R÷FíFV∆ófW'í"¬&ñ6S¢$g&ˆ“%tbb√"¬FˆÊS¢&Üˆ÷R"¬ñ6ˆ„¢/	˙´B"¬&FvS¢%fW&ñfñVB"“¿¢≤Ê÷S¢$ñÁ¶˜&6ˆffVRÜ˜W6R"¬GóS¢%&W7FW&ÁG2"¬Fs¢$6ˆffVR+r&∂W'í"¬&FñÊs¢#B„í"¬Fó7FÊ6S¢#„R∂“"¬Fñ÷S¢#(	3#÷ñ‚"¬&ñ6S¢$g&ˆ“%tb√S"¬FˆÊS¢&6ˆffVR"¬ñ6ˆ„¢.)âR"¬&FvS¢$ÊV&'í"“¿¢≤Ê÷S¢%FÜR7W&¬6˜&ÊW""¬GóS¢%6∆ˆÁ2"¬Fs¢$ÊGW&¬Üó"+rÊñ«2"¬&FñÊs¢#B„Ç"¬Fó7FÊ6S¢#2„∂“"¬Fñ÷S¢$&ˆˆ≤6∆˜B"¬&ñ6S¢%6W'fñ6W2g&ˆ“%tbR√"¬FˆÊS¢&7W&¬"¬ñ6ˆ„¢/	˘(	¯˚ﬁ(ﬁ)ò˚àÚ"¬&FvS¢%F˜&FVB"“¿•”∞†¶6ˆÁ7B7FFR“≤&ˆ∆S¢&'WñW""¬6FVv˜'ì¢$∆¬"¬VW'ì¢""¬6fVC¢ÊWr6WBÇí¬6V∆∆W%F#¢$˜fW'fñWr"¬F÷ñÂF#¢$˜fW'fñWr"¬6W76ñˆ„¢ÁV∆¬¬&ˆfñ∆S¢ÁV∆¬¬∆ófT∆ó7FñÊw3¢ÁV∆¬¬'W6ñÊW76W3¢µ“¬6V∆V7FVD∆ó7FñÊs¢ÁV∆¬¬WFÑ÷ˆFS¢'6ñvÊñ‚"”∞¶6ˆÁ7BB“á6V∆V7F˜"¬&ˆ˜B“Fˆ7V÷VÁBí”‚&ˆ˜BÁVW'ï6V∆V7F˜"á6V∆V7F˜"ì∞¶6ˆÁ7BBB“á6V∆V7F˜"¬&ˆ˜B“Fˆ7V÷VÁBí”‚≤‚‚Á&ˆ˜BÁVW'ï6V∆V7F˜$∆¬á6V∆V7F˜"ï”∞¶∆WBFˆ7EFñ÷W#∞¶∆WB7W&6T6∆ñVÁB“ÁV∆√∞¶∆WB7W&6T∆ˆB“ÁV∆√∞¶6ˆÁ7B5U$4UÙ•5ıU$¬“&áGG3¢Úˆ6F‚Êß6FV∆óg"ÊÊWBˆÁ“Ù7W&6R˜7W&6R÷ß4"„í„Ú∂W6“#∞†¶7ñÊ2gVÊ7Fñˆ‚vWE7W&6RÇí∞¢6ˆÁ7B6ˆÊfñr“vñÊF˜rÂE$DT%$îDtUı5U$4S∞¢ñbÇ6ˆÊfñsÚÁW&¬«¬6ˆÊfñsÚÁV&∆ó6Ü&∆T∂WííFá&˜rÊWrW'&˜"Ç%G&FT'&ñFvRFF&6R6WGFñÊw2&R÷ó76ñÊr‚"ì∞¢ñbÇ7W&6T∆ˆBí7W&6T∆ˆB“ñ◊˜'BÖ5U$4UÙ•5ıU$¬íÁFÜV‚Çá≤7&VFT6∆ñVÁB“í”‚∞¢7W&6T6∆ñVÁB“7&VFT6∆ñVÁBÜ6ˆÊfñrÁW&¬¬6ˆÊfñrÁV&∆ó6Ü&∆T∂Wíì∞¢&WGW&‚7W&6T6∆ñVÁC∞¢“ì∞¢&WGW&‚7W&6T∆ˆC∞ß–†¶gVÊ7Fñˆ‚W66TáF÷¬áf«VR“""í∞¢&WGW&‚7G&ñÊráf«VRíÁ&W∆6RÇı≤c√‚"u“ˆr¬Ü6Ü&7FW"í”‚á≤"b#¢"f◊≤"¬#¬#¢"f«C≤"¬#‚#¢"fwC≤"¬r"s¢"gV˜C≤"¬"r#¢"b33ì≤"“ï∂6Ü&7FW%“ì∞ß–†¶gVÊ7Fñˆ‚&WVó&T66˜VÁBÇí∞¢ñbá7FFRÁ6W76ñˆ„ÚÁW6W"í&WGW&‚G'VS∞¢˜V‰WFÇÇì∞¢Fˆ7BÇ%6ñv‚ñ‚FÚ6ˆÁFñÁVR‚"ì∞¢&WGW&‚f«6S∞ß–†¶gVÊ7Fñˆ‚˜V‰WFÇÜ÷ˆFR“'6ñvÊñ‚"í∞¢7FFRÊWFÑ÷ˆFR“÷ˆFS∞¢BÇ"6WFÇ◊FóF∆R"íÁFWáD6ˆÁFVÁB“÷ˆFR””“'6ñvÁW"Ú$7&VFRñ˜W"66˜VÁB"¢%vV∆6ˆ÷R&6≤#∞¢BÇ"6WFÇ÷FW67&óFñˆ‚"íÁFWáD6ˆÁFVÁB“÷ˆFR””“'6ñvÁW"Ú$¶ˆñ‚G&FT'&ñFvRFÚ6fR∆6W2ÊB∆6R˜&FW'2‚"¢%6ñv‚ñ‚FÚ6fR∆6W2ÊB÷ÊvRñ˜W"˜&FW'2‚#∞¢BÇ"6WFÇ÷Ê÷R◊w&"íÊÜñFFV‚“÷ˆFR”“'6ñvÁW#∞¢BÇ"6WFÇ÷f˜&“"íÊV∆V÷VÁG2ÊgV∆≈ˆÊ÷RÁ&WVó&VB“÷ˆFR””“'6ñvÁW#∞¢BÇ"6WFÇ◊&ˆ∆R◊w&"íÊÜñFFV‚“÷ˆFR”“'6ñvÁW#∞¢BÇ"6WFÇ◊ÜˆÊR◊w&"íÊÜñFFV‚“÷ˆFR”“'6ñvÁW#∞¢BÇ"6WFÇ◊7V&÷óB"íÁFWáD6ˆÁFVÁB“÷ˆFR””“'6ñvÁW"Ú$7&VFR66˜VÁB"¢%6ñv‚ñ‚#∞¢BÇ"6WFÇ◊7vóF6Ç◊&ˆ◊B"íÁFWáD6ˆÁFVÁB“÷ˆFR””“'6ñvÁW"Ú$«&VGíÜfR‚66˜VÁCÚ"¢$ÊWrFÚG&FT'&ñFvSÚ#∞¢BÇ"6WFÇ◊7vóF6Ç"íÁFWáD6ˆÁFVÁB“÷ˆFR””“'6ñvÁW"Ú%6ñv‚ñ‚"¢$7&VFR‚66˜VÁB#∞¢BÇ"6WFÇ÷Fñ∆ˆr"íÁ6Ü˜t÷ˆF¬Çì∞ß–†¶gVÊ7Fñˆ‚WFFT66˜VÁD∆&V¬Çí∞¢6ˆÁ7BW6W"“7FFRÁ6W76ñˆ„ÚÁW6W#∞¢6ˆÁ7BÊ÷R“W6W"Úá7FFRÁ&ˆfñ∆SÚÊgV∆≈ˆÊ÷R«¬W6W"ÊV÷ñ¬«¬$66˜VÁB"í¢%6ñv‚ñ‚#∞¢BÇ"666˜VÁB÷∆&V¬"íÁFWáD6ˆÁFVÁB“Ê÷RÊ∆VÊwFÇ‚#"ÚG∂Ê÷RÁ6∆ñ6RÉ¬íóﬁ(
-f¢Ê÷S∞¢BÇ"76ñFV&"÷66˜VÁB÷∆&V¬"íÁFWáD6ˆÁFVÁB“Ê÷S∞¢BÇ"76ñFV&"÷66˜VÁB◊7V'FóF∆R"íÁFWáD6ˆÁFVÁB“W6W"Úá7FFRÁ&ˆfñ∆SÚÁ&ˆ∆R””“&F÷ñ‚"Ú$F÷ñÊó7G&F˜""¢%G&FT'&ñFvR÷V÷&W""í¢%6fRñ˜W"66˜VÁB#∞ß–†¶7ñÊ2gVÊ7Fñˆ‚∆ˆE&ˆfñ∆RÇí∞¢ñbÇ7FFRÁ6W76ñˆ„ÚÁW6W"í≤7FFRÁ&ˆfñ∆R“ÁV∆√≤7FFRÁ6fVB“ÊWr6WBÇì≤BÇ"76fVB÷6˜VÁB"íÁFWáD6ˆÁFVÁB“"#≤WFFT66˜VÁD∆&V¬Çì≤&WGW&„≤–¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¬W'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç'&ˆfñ∆W2"íÁ6V∆V7BÇ&ñB¬gV∆≈ˆÊ÷R¬ÜˆÊR¬&ˆ∆R"íÊWÇ&ñB"¬7FFRÁ6W76ñˆ‚ÁW6W"ÊñBíÊ÷ñ&U6ñÊv∆RÇì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢7FFRÁ&ˆfñ∆R“FF∞¢WFFT66˜VÁD∆&V¬Çì∞¢6ˆÁ7B≤FF¢6fVB¬W'&˜#¢6fVDW'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç&∆ó7FñÊuˆfVVF&6≤"íÁ6V∆V7BÇ&∆ó7FñÊuˆñB"íÊWÇ&'WñW%ˆñB"¬7FFRÁ6W76ñˆ‚ÁW6W"ÊñBíÊWÇ&∆ñ∂VB"¬G'VRì∞¢ñbá6fVDW'&˜"íFá&˜r6fVDW'&˜#∞¢7FFRÁ6fVB“ÊWr6WBá6fVBÊ÷Çá&˜rí”‚&˜rÊ∆ó7FñÊuˆñBíì∞¢BÇ"76fVB÷6˜VÁB"íÁFWáD6ˆÁFVÁB“7FFRÁ6fVBÁ6ó¶R«¬"#∞ß–†¶7ñÊ2gVÊ7Fñˆ‚&Vg&W6Ñ∆ó7FñÊw2Çí∞¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¬W'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç&∆ó7FñÊw2"ê¢Á6V∆V7BÇ&ñB«6Ü˜ˆñB«FóF∆R∆FW67&óFñˆ‚«&ñ6U˜'vb«7Fˆ6≤∆GW&FñˆÂˆ÷ñ‚∆7FófR«6Ü˜2ñÊÊW"ÜÊ÷R«GóR∆Fó7G&ñ7B∆FG&W72«7FGW2«ñ÷VÁEˆ÷WFÜˆG2«ñ÷VÁEˆñÁ7G'V7FñˆÁ2í"ê¢ÊWÇ&7FófR"¬G'VRíÊWÇ'6Ü˜2Á7FGW2"¬&&˜fVB"íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“ì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢6ˆÁ7B6FVv˜'îÊ÷W2“≤6Ü˜¢%6Ü˜2"¬&W7FW&ÁC¢%&W7FW&ÁG2"¬6∆ˆ„¢%6∆ˆÁ2"”∞¢6ˆÁ7Bñ6ˆÁ2“≤6Ü˜¢/	˘∏ﬁ˚àÚ"¬&W7FW&ÁC¢/	¯€""¬6∆ˆ„¢.)».˚àÚ"”∞¢7FFRÊ∆ófT∆ó7FñÊw2“FFÊ÷ÇÜ∆ó7FñÊr¬ñÊFWÇí”‚á∞¢ñC¢∆ó7FñÊrÊñB¬6Ü˜ñC¢∆ó7FñÊrÁ6Ü˜ˆñB¬Ê÷S¢∆ó7FñÊrÁFóF∆R¿¢GóS¢6FVv˜'îÊ÷W5∂∆ó7FñÊrÁ6Ü˜2ÁGóU“«¬%6Ü˜2"¿¢Fs¢G∂∆ó7FñÊrÁ6Ü˜2ÊÊ÷W“+rG∂∆ó7FñÊrÊGW&FñˆÂˆ÷ñ‚ÚG∂∆ó7FñÊrÊGW&FñˆÂˆ÷ñÁ“÷ñ‚6W'fñ6V¢$∆ˆ6¬∆ó7FñÊr'÷¿¢&FñÊs¢$ÊWr"¬Fó7FÊ6S¢∆ó7FñÊrÁ6Ü˜2ÊFó7G&ñ7B«¬$∂ñv∆í"¬Fñ÷S¢∆ó7FñÊrÁ6Ü˜2ÁGóR””“'6∆ˆ‚"Ú$&ˆˆ≤6∆˜B"¢%ñ6∑W"¿¢&ñ6S¢%tbG¥ÁV÷&W"Ü∆ó7FñÊrÁ&ñ6U˜'vbíÁFÙ∆ˆ6∆U7G&ñÊrÇó÷¿¢&ñ6Uf«VS¢ÁV÷&W"Ü∆ó7FñÊrÁ&ñ6U˜'vbí¬FˆÊS¢≤&÷&∂WB"¬&∂óF6ÜV‚"¬'6∆ˆ‚"¬&Üˆ÷R"¬&6ˆffVR"¬&7W&¬%’∂ñÊFWÇRe“¬ñ6ˆ„¢ñ6ˆÁ5∂∆ó7FñÊrÁ6Ü˜2ÁGóU“«¬/	˘∏ﬁ˚àÚ"¬&FvS¢∆ó7FñÊrÁ7Fˆ6≤””“Ú$˜WBˆb7Fˆ6≤"¢$∆ˆ6¬"¿¢FW67&óFñˆ„¢∆ó7FñÊrÊFW67&óFñˆ‚¬6Ü˜¢∆ó7FñÊrÁ6Ü˜2¬gV∆fñ∆∆÷VÁC¢∆ó7FñÊrÁ6Ü˜2ÁGóR””“'6∆ˆ‚"Ú&&ˆˆ∂ñÊr"¢'ñ6∑W ¢“íì∞¢&VÊFW%∆6W2Çì∞¢6ˆÁ7BÊ˜Fñ6R“BÇ"Á&WfñWr÷Ê˜Fñ6R"¬BÇ"6'WñW"◊fñWr"íì∞¢ñbÜÊ˜Fñ6RíÊ˜Fñ6RÊñÊÊW$ÖD‘¬“7FFRÊ∆ófT∆ó7FñÊw2Ê∆VÊwFÄ¢Ús«7„Ó)À3¬˜7„„«7„„«7G&ˆÊs‰∆ófR÷&∂WG∆6S¬˜7G&ˆÊs‚(	BFÜW6R∆ó7FñÊw2&RV&∆ó6ÜVB'íG&FT'&ñFvR'W6ñÊW76W2„¬˜7„‚p¢¢s«7„Ó)À3¬˜7„„«7„„«7G&ˆÊs‰ÊÚfW&ñfñVB∆ó7FñÊw2ñWC¬˜7G&ˆÊs‚(	B6◊∆R∆6W2&R6Ü˜v‚vÜñ∆R6V∆∆W'2FBFÜVó"'W6ñÊW76W2„¬˜7„‚s∞ß–†¶7ñÊ2gVÊ7Fñˆ‚ñÊóFñ∆ó¶T&6∂VÊBÇí∞¢G'í∞¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¢≤6W76ñˆ‚“¬W'&˜"““vóB6∆ñVÁBÊWFÇÊvWE6W76ñˆ‚Çì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢7FFRÁ6W76ñˆ‚“6W76ñˆ„∞¢6∆ñVÁBÊWFÇÊˆ‰WFÖ7FFT6ÜÊvRÇÖˆWfVÁB¬ÊWáE6W76ñˆ‚í”‚∞¢7FFRÁ6W76ñˆ‚“ÊWáE6W76ñˆ„∞¢VWVT÷ñ7&˜F6≤Ü7ñÊ2Çí”‚∞¢6ˆÁ7B&W7V«G2“vóB&ˆ÷ó6RÊ∆≈6WGF∆VBÖ∂∆ˆE&ˆfñ∆RÇí¬&Vg&W6Ñ∆ó7FñÊw2Çï“ì∞¢&W7V«G2Êfñ«FW"Çá&W7V«Bí”‚&W7V«BÁ7FGW2””“'&V¶V7FVB"íÊf˜$V6ÇÇá&W7V«Bí”‚≤6ˆÁ6ˆ∆RÊW'&˜"á&W7V«BÁ&V6ˆ‚ì≤Fˆ7Bá&W7V«BÁ&V6ˆ„ÚÊ÷W76vR«¬$6˜V∆BÊ˜B&Vg&W6ÇG&FT'&ñFvRFF‚"ì≤“ì∞¢“ì∞¢“ì∞¢6ˆÁ7BñÊóFñ≈&W7V«G2“vóB&ˆ÷ó6RÊ∆≈6WGF∆VBÖ∂∆ˆE&ˆfñ∆RÇí¬&Vg&W6Ñ∆ó7FñÊw2Çï“ì∞¢ñÊóFñ≈&W7V«G2Êfñ«FW"Çá&W7V«Bí”‚&W7V«BÁ7FGW2””“'&V¶V7FVB"íÊf˜$V6ÇÇá&W7V«Bí”‚≤6ˆÁ6ˆ∆RÊW'&˜"á&W7V«BÁ&V6ˆ‚ì≤“ì∞¢“6F6ÇÜW'&˜"í∞¢6ˆÁ6ˆ∆RÊW'&˜"Ç%G&FT'&ñFvR&6∂VÊBó2Ê˜Bfñ∆&∆S¢"¬W'&˜"ì∞¢6ˆÁ7BÊ˜Fñ6R“BÇ"Á&WfñWr÷Ê˜Fñ6R"¬BÇ"6'WñW"◊fñWr"íì∞¢ñbÜÊ˜Fñ6RíÊ˜Fñ6RÊñÊÊW$ÖD‘¬“s«7„Ó)À3¬˜7„„«7„„«7G&ˆÊsÂ&WfñWr÷ˆFS¬˜7G&ˆÊs‚(	B6ˆÊÊV7BFÚFÜRñÁFW&ÊWBFÚ∆ˆBfW&ñfñVB'W6ñÊW76W2ÊB66˜VÁBfVGW&W2„¬˜7„‚s∞¢–ß–†¶7ñÊ2gVÊ7Fñˆ‚6Ü˜t'WñW$˜&FW'2Çí∞¢ñbÇ&WVó&T66˜VÁBÇíí&WGW&„∞¢G'í∞¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¬W'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç&˜&FW'2"ê¢Á6V∆V7BÇ&ñB«7FGW2∆gV∆fñ∆∆÷VÁB∆FG&W72«F˜F≈˜'vb∆7&VFVEˆB«6Ü˜2ÜÊ÷Rí∆˜&FW%ˆóFV◊2áFóF∆R«Gí«&ñ6U˜'vbí∆˜&FW%˜ñ÷VÁG2Ü÷WFÜˆB«7FGW2«G&Á67FñˆÂ˜&VfW&VÊ6Rí"ê¢ÊWÇ&'WñW%ˆñB"¬7FFRÁ6W76ñˆ‚ÁW6W"ÊñBíÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“íÊ∆ñ÷óBÉ3ì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢6ˆÁ7B∆ó7B“BÇ"6'WñW"÷˜&FW"÷∆ó7B"ì∞¢∆ó7BÊñÊÊW$ÖD‘¬“FFÊ∆VÊwFÇÚFFÊ÷ÇÜ˜&FW"í”‚∞¢6ˆÁ7Bñ÷VÁB“˜&FW"Ê˜&FW%˜ñ÷VÁG3ÚÂ≥”∞¢&WGW&‚∆'Fñ6∆R6∆73“&&6∂VÊB÷∆ó7B÷óFV“#„∆Fóc„«7G&ˆÊs‚G∂W66TáF÷¬Ü˜&FW"Á6Ü˜3ÚÊÊ÷R«¬%G&FT'&ñFvR˜&FW""ó”¬˜7G&ˆÊs„«6÷∆√‚G∂ÊWrFFRÜ˜&FW"Ê7&VFVEˆBíÁFÙ∆ˆ6∆U7G&ñÊrÇó“+rG∂W66TáF÷¬Ü˜&FW"ÊgV∆fñ∆∆÷VÁBó”¬˜6÷∆√„«6÷∆√‚G≤Ü˜&FW"Ê˜&FW%ˆóFV◊2«¬µ“íÊ÷ÇÜóFV“í”‚G∂W66TáF÷¬ÜóFV“ÁFóF∆Ró“9rG∂óFV“ÁGó÷íÊ¶ˆñ‚Ç"¬"ó”¬˜6÷∆√„«6÷∆√Âñ÷VÁC¢G∂W66TáF÷¬áñ÷VÁCÚÁ7FGW2«¬$Ê˜B&V6˜&FVB"ó“G∑ñ÷VÁCÚÁG&Á67FñˆÂ˜&VfW&VÊ6RÚ+rG∂W66TáF÷¬áñ÷VÁBÁG&Á67FñˆÂ˜&VfW&VÊ6Ró÷¢"'”¬˜6÷∆√„¬ˆFóc„«7‚6∆73“&˜&FW"◊ñ∆¬#‚G∂W66TáF÷¬Ü˜&FW"Á7FGW2Á&W∆6T∆¬Ç%Ú"¬""íó”¬˜7„„∆#Â%tbG¥ÁV÷&W"Ü˜&FW"ÁF˜F≈˜'vbíÁFÙ∆ˆ6∆U7G&ñÊrÇó”¬ˆ#„¬ˆ'Fñ6∆SÊ∞¢“íÊ¶ˆñ‚Ç""í¢s«6∆73“&V◊Gí÷&6∂VÊB#Âñ˜W"∆6VB˜&FW'2vñ∆¬V"ÜW&R„¬˜‚s∞¢BÇ"6'WñW"÷˜&FW'2÷Fñ∆ˆr"íÁ6Ü˜t÷ˆF¬Çì∞¢“6F6ÇÜW'&˜"í≤Fˆ7BÜW'&˜"Ê÷W76vR«¬$6˜V∆BÊ˜B∆ˆBñ˜W"˜&FW'2‚"ì≤–ß–†¶7ñÊ2gVÊ7Fñˆ‚∆ˆE6V∆∆W%v˜&∑76RÇí∞¢ñbÇ&WVó&T66˜VÁBÇíí&WGW&„∞¢ñbá7FFRÁ&ˆfñ∆SÚÁ&ˆ∆R”“'6V∆∆W""í∞¢Fˆ7BÇ$6Üˆ˜6R6V∆∆W"66˜VÁBvÜV‚7&VFñÊrñ˜W"66˜VÁBFÚ˜V‚6V∆∆W"7GVFñÚ‚"ì∞¢˜V‰WFÇÇ'6ñvÁW"ì∞¢BÇ"6WFÇ÷f˜&“"íÊV∆V÷VÁG2Á&ˆ∆RÁf«VR“'6V∆∆W"#∞¢&WGW&„∞¢–¢G'í∞¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¬W'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç'6Ü˜2"íÁ6V∆V7BÇ&ñB∆Ê÷R«GóR∆Fó7G&ñ7B∆FG&W72«ÜˆÊR«7FGW2∆7&VFVEˆB"íÊWÇ&˜vÊW%ˆñB"¬7FFRÁ6W76ñˆ‚ÁW6W"ÊñBíÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“ì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢7FFRÊ'W6ñÊW76W2“FF∞¢6ˆÁ7BñG2“FFÊ÷Çá6Ü˜í”‚6Ü˜ÊñBì∞¢7FFRÁ6V∆∆W$∆ó7FñÊw2“µ”∞¢7FFRÁ6V∆∆W$˜&FW'2“µ”∞¢ñbÜñG2Ê∆VÊwFÇí∞¢6ˆÁ7B∂∆ó7FñÊw2¬˜&FW'5““vóB&ˆ÷ó6RÊ∆¬Ö∞¢6∆ñVÁBÊg&ˆ“Ç&∆ó7FñÊw2"íÁ6V∆V7BÇ&ñB«6Ü˜ˆñB«FóF∆R«&ñ6U˜'vb«7Fˆ6≤∆7FófR∆7&VFVEˆB"íÊñ‚Ç'6Ü˜ˆñB"¬ñG2íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“í¿¢6∆ñVÁBÊg&ˆ“Ç&˜&FW'2"íÁ6V∆V7BÇ&ñB«6Ü˜ˆñB«7FGW2∆gV∆fñ∆∆÷VÁB«F˜F≈˜'vb∆7&VFVEˆB«6Ü˜2ÜÊ÷Rí∆˜&FW%ˆóFV◊2áFóF∆R«Gíí∆˜&FW%˜ñ÷VÁG2á7FGW2∆÷WFÜˆB«G&Á67FñˆÂ˜&VfW&VÊ6Rí"íÊñ‚Ç'6Ü˜ˆñB"¬ñG2íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“íÊ∆ñ÷óBÉCê¢“ì∞¢ñbÜ∆ó7FñÊw2ÊW'&˜"íFá&˜r∆ó7FñÊw2ÊW'&˜#∞¢ñbÜ˜&FW'2ÊW'&˜"íFá&˜r˜&FW'2ÊW'&˜#∞¢7FFRÁ6V∆∆W$∆ó7FñÊw2“∆ó7FñÊw2ÊFF∞¢7FFRÁ6V∆∆W$˜&FW'2“˜&FW'2ÊFF∞¢–¢6WE&ˆ∆RÇ'6V∆∆W""ì∞¢“6F6ÇÜW'&˜"í≤Fˆ7BÜW'&˜"Ê÷W76vR«¬$6˜V∆BÊ˜B∆ˆB6V∆∆W"7GVFñÚ‚"ì≤–ß–†¶7ñÊ2gVÊ7Fñˆ‚∆ˆDF÷ñÂv˜&∑76RÇí∞¢ñbÇ&WVó&T66˜VÁBÇíí&WGW&„∞¢G'í∞¢vóB∆ˆE&ˆfñ∆RÇì∞¢ñbá7FFRÁ&ˆfñ∆SÚÁ&ˆ∆R”“&F÷ñ‚"í≤Fˆ7BÇ%FÜRF÷ñ‚˜'F¬ó2&W7G&ñ7FVBFÚWFÜ˜&ó¶VBF÷ñÊó7G&F˜'2‚"ì≤&WGW&„≤–¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¬W'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç'6Ü˜2"íÁ6V∆V7BÇ&ñB∆Ê÷R«GóR∆Fó7G&ñ7B∆FG&W72«ÜˆÊR«7FGW2∆7&VFVEˆB«&ˆfñ∆W26Ü˜5ˆ˜vÊW%ˆñEˆf∂WíÜgV∆≈ˆÊ÷Rí"íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“íÊ∆ñ÷óBÉì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢7FFRÊF÷ñ‰'W6ñÊW76W2“FF∞¢6ˆÁ7B∑≤FF¢˜&FW'2¬W'&˜#¢˜&FW$W'&˜"“¬≤FF¢7W7Fˆ÷W'2¬W'&˜#¢7W7Fˆ÷W$W'&˜"“¬≤FF¢ñ÷VÁG2¬W'&˜#¢ñ÷VÁDW'&˜"’““vóB&ˆ÷ó6RÊ∆¬Ö∞¢6∆ñVÁBÊg&ˆ“Ç&˜&FW'2"íÁ6V∆V7BÇ&ñB«7FGW2«F˜F≈˜'vb∆7&VFVEˆB«6Ü˜2ÜÊ÷Rí"íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“íÊ∆ñ÷óBÉí¿¢6∆ñVÁBÊg&ˆ“Ç'&ˆfñ∆W2"íÁ6V∆V7BÇ&ñB∆gV∆≈ˆÊ÷R«ÜˆÊR«&ˆ∆R∆7&VFVEˆB"íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“íÊ∆ñ÷óBÉí¿¢6∆ñVÁBÊg&ˆ“Ç&˜&FW%˜ñ÷VÁG2"íÁ6V∆V7BÇ&ñB∆˜&FW%ˆñB∆÷˜VÁE˜'vb∆÷WFÜˆB«7FGW2«G&Á67FñˆÂ˜&VfW&VÊ6R∆7&VFVEˆB«6Ü˜2ÜÊ÷Rí"íÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“íÊ∆ñ÷óBÉê¢“ì∞¢ñbÜ˜&FW$W'&˜"íFá&˜r˜&FW$W'&˜#∞¢ñbÜ7W7Fˆ÷W$W'&˜"íFá&˜r7W7Fˆ÷W$W'&˜#∞¢ñbáñ÷VÁDW'&˜"íFá&˜rñ÷VÁDW'&˜#∞¢7FFRÊF÷ñ‰˜&FW'2“˜&FW'3∞¢7FFRÊF÷ñ‰7W7Fˆ÷W'2“7W7Fˆ÷W'3∞¢7FFRÊF÷ñÂñ÷VÁG2“ñ÷VÁG3∞¢6WE&ˆ∆RÇ&F÷ñ‚"ì∞¢“6F6ÇÜW'&˜"í≤Fˆ7BÜW'&˜"Ê÷W76vR«¬$6˜V∆BÊ˜B∆ˆBFÜRF÷ñ‚˜'F¬‚"ì≤–ß–†¶7ñÊ2gVÊ7Fñˆ‚˜V‰∆ó7FñÊtf˜&“Çí∞¢ñbÇ&WVó&T66˜VÁBÇíí&WGW&„∞¢ñbá7FFRÁ&ˆfñ∆SÚÁ&ˆ∆R”“'6V∆∆W""í≤Fˆ7BÇ$6V∆∆W"66˜VÁBó2&WVó&VBFÚFB∆ó7FñÊr‚"ì≤&WGW&„≤–¢G'í∞¢6ˆÁ7B6∆ñVÁB“vóBvWE7W&6RÇì∞¢6ˆÁ7B≤FF¬W'&˜"““vóB6∆ñVÁBÊg&ˆ“Ç'6Ü˜2"íÁ6V∆V7BÇ&ñB∆Ê÷R«7FGW2"íÊWÇ&˜vÊW%ˆñB"¬7FFRÁ6W76ñˆ‚ÁW6W"ÊñBíÊ˜&FW"Ç&7&VFVEˆB"¬≤66VÊFñÊs¢f«6R“ì∞¢ñbÜW'&˜"íFá&˜rW'&˜#∞¢6ˆÁ7B6V∆V7B“BÇ"6∆ó7FñÊr÷f˜&“"íÊV∆V÷VÁG2Á6Ü˜ˆñC∞¢6V∆V7BÊñÊÊW$ÖD‘¬“FFÊ÷Çá6Ü˜í”‚∆˜Fñˆ‚f«VS“"G∂W66TáF÷¬á6Ü˜ÊñBó“#‚G∂W66TáF÷¬á6Ü˜ÊÊ÷Ró“G∑6Ü˜Á7FGW2”“&&˜fVB"Ú"áVÊFñÊr&˜f¬í"¢"'”¬ˆ˜Fñˆ„ÊíÊ¶ˆñ‚Ç""ì∞¢ñbÇFFÊ∆VÊwFÇí≤Fˆ7BÇ$FBñ˜W"'W6ñÊW72fó'7B‚"ì≤BÇ"6'W6ñÊW72÷Fñ∆ˆr"íÁ6Ü˜t÷ˆF¬Çì≤&WGW&„≤–¢BÇ"6∆ó7FñÊr÷Fñ∆ˆr"íÁ6Ü˜t÷ˆF¬Çì∞¢“6F6ÇÜW'&˜"í≤Fˆ7BÜW'&˜"Ê÷W76vR«¬$6˜V∆BÊ˜B∆ˆBñ˜W"'W6ñÊW76W2‚"ì≤–ß–†¶gVÊ7Fñˆ‚6WE&ˆ∆Rá&ˆ∆Rí∞¢7FFRÁ&ˆ∆R“&ˆ∆S∞¢BÇ"6'&VF7'V÷"◊&ˆ∆R"íÁFWáD6ˆÁFVÁB“G∑&ˆ∆U≥“ÁFıWW$66RÇó“G∑&ˆ∆RÁ6∆ñ6RÉó“˜'F∆∞¢BÇ"6'WñW"◊fñWr"íÊÜñFFV‚“&ˆ∆R”“&'WñW"#∞¢BÇ"76V∆∆W"◊fñWr"íÊÜñFFV‚“&ˆ∆R”“'6V∆∆W"#∞¢BÇ"6F÷ñ‚◊fñWr"íÊÜñFFV‚“&ˆ∆R”“&F÷ñ‚#∞¢BBÇ%∂FF◊&ˆ∆U“"íÊf˜$V6ÇÇÜ'WGFˆ‚í”‚'WGFˆ‚Ê6∆74∆ó7BÁFˆvv∆RÇ&7FófR"¬'WGFˆ‚ÊFF6WBÁ&ˆ∆R””“&ˆ∆Ríì∞¢ñbá&ˆ∆R””“'6V∆∆W""í&VÊFW%6V∆∆W"Çì∞¢ñbá&ˆ∆R””“&F÷ñ‚"í&VÊFW$F÷ñ‚Çì∞¢vñÊF˜rÁ67&ˆ∆≈FÚá≤F˜¢¬&VÜfñ˜#¢'6÷ˆ˜FÇ"“ì∞ß–†¶gVÊ7Fñˆ‚Fˆ7BÜ÷W76vRí∞¢6ˆÁ7BV∆V÷VÁB“BÇ"7Fˆ7B"ì∞¢V∆V÷VÁBÁFWáD6ˆÁFVÁB“÷W76vS∞¢V∆V÷VÁBÊÜñFFV‚“f«6S∞¢vñÊF˜rÊ6∆V%Fñ÷V˜WBáFˆ7EFñ÷W"ì∞¢Fˆ7EFñ÷W"“vñÊF˜rÁ6WEFñ÷V˜WBÇÇí”‚≤V∆V÷VÁBÊÜñFFV‚“G'VS≤“¬#cì∞ß–†¶gVÊ7Fñˆ‚&VÊFW%∆6W2Çí∞¢6ˆÁ7Bw&ñB“BÇ"6∆ó7FñÊr÷w&ñB"ì∞¢6ˆÁ7B6˜W&6R“7FFRÊ∆ófT∆ó7FñÊw3ÚÊ∆VÊwFÇÚ7FFRÊ∆ófT∆ó7FñÊw2¢∆6W3∞¢6ˆÁ7Bfñ«FW&VB“6˜W&6RÊfñ«FW"Çá∆6Rí”‚∞¢6ˆÁ7B÷F6ÜW46FVv˜'í“7FFRÊ6FVv˜'í””“$∆¬"«¬∆6RÁGóR””“7FFRÊ6FVv˜'ì∞¢6ˆÁ7B÷F6ÜW5VW'í“G∑∆6RÊÊ÷W“G∑∆6RÁGóW“G∑∆6RÁFw÷ÁFÙ∆˜vW$66RÇíÊñÊ6«VFW2á7FFRÁVW'íÁFÙ∆˜vW$66RÇíì∞¢&WGW&‚÷F6ÜW46FVv˜'íbb÷F6ÜW5VW'ì∞¢“ì∞¢ñbÇfñ«FW&VBÊ∆VÊwFÇí∞¢w&ñBÊñÊÊW$ÖD‘¬“s∆Fób6∆73“&V◊Gí◊7FFR#„«7„Ó(…S¬˜7„„«7G&ˆÊs‰ÊÚ∆6W2f˜VÊC¬˜7G&ˆÊs„«ÂG'íFñffW&VÁB6V&6Ç˜"6FVv˜'í„¬˜„¬ˆFóc‚s∞¢&WGW&„∞¢–¢w&ñBÊñÊÊW$ÖD‘¬“fñ«FW&VBÊ÷Çá∆6Rí”‚∞¢6ˆÁ7B6fVD∂Wí“∆6RÊñB«¬∆6RÊÊ÷S∞¢6ˆÁ7B6fVB“7FFRÁ6fVBÊÜ2á6fVD∂Wíì∞¢&WGW&‚∆'Fñ6∆R6∆73“&∆ó7FñÊr÷6&B#‡¢∆Fób6∆73“&∆ó7FñÊr◊fó7V¬G∂W66TáF÷¬á∆6RÁFˆÊRó“#„«7‚6∆73“&∆ó7FñÊr÷V÷ˆ¶í#‚G∂W66TáF÷¬á∆6RÊñ6ˆ‚ó”¬˜7„„«7‚6∆73“&∆ó7FñÊr÷&FvR#„«7„Ó) c¬˜7„‚G∂W66TáF÷¬á∆6RÊ&FvRó”¬˜7„„∆'WGFˆ‚&ñ÷∆&V√“"G∑6fVBÚ%&V÷˜fR"¢%6fR'“G∂W66TáF÷¬á∆6RÊÊ÷Ró“"6∆73“'6fR÷'WGFˆ‚G∑6fVBÚ'6fVB"¢"'“"FF◊6fS“"G∂W66TáF÷¬á6fVD∂Wíó“"G∑∆6RÊñBÚFF÷∆ó7FñÊr÷ñC“"G∂W66TáF÷¬á∆6RÊñBó“&¢"'”‚G∑6fVBÚ.)öR"¢.)ö'”¬ˆ'WGFˆ„„«7‚6∆73“'fó7V¬÷FV6Ú#Ó)À3¬˜7„Ì˝◊ãhëÈÏ∂ªßq´^ustingId);
+const places = [
+  { name: "Kigali Fresh Market", type: "Shops", tag: "Groceries ¬∑ Fresh daily", rating: "4.9", distance: "0.8 km", time: "15‚Äì25 min", price: "From RWF 2,500", tone: "market", icon: "ü•ë", badge: "Popular" },
+  { name: "Umurava Kitchen", type: "Restaurants", tag: "Rwandan ¬∑ Grill", rating: "4.8", distance: "1.2 km", time: "25‚Äì35 min", price: "From RWF 4,000", tone: "kitchen", icon: "üç≤", badge: "Free delivery" },
+  { name: "Atelier Hair Studio", type: "Salons", tag: "Hair ¬∑ Beauty", rating: "5.0", distance: "2.1 km", time: "Book a slot", price: "Services from RWF 8,000", tone: "salon", icon: "‚úÇÔ∏è", badge: "Open today" },
+  { name: "Makuza Home & Living", type: "Shops", tag: "Home ¬∑ Lifestyle", rating: "4.7", distance: "1.6 km", time: "Same-day delivery", price: "From RWF 6,000", tone: "home", icon: "ü™¥", badge: "Verified" },
+  { name: "Inzora Coffee House", type: "Restaurants", tag: "Coffee ¬∑ Bakery", rating: "4.9", distance: "0.5 km", time: "10‚Äì20 min", price: "From RWF 1,500", tone: "coffee", icon: "‚òï", badge: "Nearby" },
+  { name: "The Curl Corner", type: "Salons", tag: "Natural hair ¬∑ Nails", rating: "4.8", distance: "3.0 km", time: "Book a slot", price: "Services from RWF 5,000", tone: "curl", icon: "üíáüèΩ‚Äç‚ôÄÔ∏è", badge: "Top rated" },
+];
+
+const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, businesses: [], selectedListing: null, authMode: "signin" };
+let editingListingId = null;
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+let toastTimer;
+let supabaseClient = null;
+let supabaseLoad = null;
+const SUPABASE_JS_URL = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/+esm";
+
+async function getSupabase() {
+  const config = window.TRADEBRIDGE_SUPABASE;
+  if (!config?.url || !config?.publishableKey) throw new Error("TradeBridge database settings are missing.");
+  if (!supabaseLoad) supabaseLoad = import(SUPABASE_JS_URL).then(({ createClient }) => {
+    supabaseClient = createClient(config.url, config.publishableKey);
+    return supabaseClient;
+  });
+  return supabaseLoad;
+}
+
+function escapeHtml(value = "") {
+  return String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
+}
+
+function requireAccount() {
+  if (state.session?.user) return true;
+  openAuth();
+  toast("Sign in to continue.");
+  return false;
+}
+
+function openAuth(mode = "signin") {
+  state.authMode = mode;
+  $("#auth-title").textContent = mode === "signup" ? "Create your account" : "Welcome back";
+  $("#auth-description").textContent = mode === "signup" ? "Join TradeBridge to save places and place orders." : "Sign in to save places and manage your orders.";
+  $("#auth-name-wrap").hidden = mode !== "signup";
+  $("#auth-form").elements.full_name.required = mode === "signup";
+  $("#auth-role-wrap").hidden = mode !== "signup";
+  $("#auth-phone-wrap").hidden = mode !== "signup";
+  $("#auth-submit").textContent = mode === "signup" ? "Create account" : "Sign in";
+  $("#auth-switch-prompt").textContent = mode === "signup" ? "Already have an account?" : "New to TradeBridge?";
+  $("#auth-switch").textContent = mode === "signup" ? "Sign in" : "Create an account";
+  $("#auth-dialog").showModal();
+}
+
+function updateAccountLabel() {
+  const user = state.session?.user;
+  const name = user ? (state.profile?.full_name || user.email || "Account") : "Sign in";
+  $("#account-label").textContent = name.length > 22 ? `${name.slice(0, 19)}‚Ä¶` : name;
+  $("#sidebar-account-label").textContent = name;
+  $("#sidebar-account-subtitle").textContent = user ? (state.profile?.role === "admin" ? "Administrator" : "TradeBridge member") : "Save your account";
+}
+
+async function loadProfile() {
+  if (!state.session?.user) { state.profile = null; state.saved = new Set(); $("#saved-count").textContent = ""; updateAccountLabel(); return; }
+  const client = await getSupabase();
+  const { data, error } = await client.from("profiles").select("id, full_name, phone, role").eq("id", state.session.user.id).maybeSingle();
+  if (error) throw error;
+  state.profile = data;
+  updateAccountLabel();
+  const { data: saved, error: savedError } = await client.from("listing_feedback").select("listing_id").eq("buyer_id", state.session.user.id).eq("liked", true);
+  if (savedError) throw savedError;
+  state.saved = new Set(saved.map((row) => row.listing_id));
+  $("#saved-count").textContent = state.saved.size || "";
+}
+
+async function refreshListings() {
+  const client = await getSupabase();
+  const { data, error } = await client.from("listings")
+    .select("id,shop_id,title,description,price_rwf,stock,duration_min,active,shops!inner(name,type,district,address,phone,status,payment_methods,payment_instructions)")
+    .eq("active", true).eq("shops.status", "approved").order("created_at", { ascending: false });
+  if (error) throw error;
+  const categoryNames = { shop: "Shops", restaurant: "Restaurants", salon: "Salons" };
+  const icons = { shop: "üõçÔ∏è", restaurant: "üç≤", salon: "‚úÇÔ∏è" };
+  state.liveListings = data.map((listing, index) => ({
+    id: listing.id, shopId: listing.shop_id, name: listing.title,
+    type: categoryNames[listing.shops.type] || "Shops",
+    tag: `${listing.shops.name} ¬∑ ${listing.duration_min ? `${listing.duration_min} min service` : "Local listing"}`,
+    rating: "New", distance: listing.shops.district || "Kigali", time: listing.shops.type === "salon" ? "Book a slot" : "Pickup",
+    price: `RWF ${Number(listing.price_rwf).toLocaleString()}`,
+    priceValue: Number(listing.price_rwf), tone: ["market", "kitchen", "salon", "home", "coffee", "curl"][index % 6], icon: icons[listing.shops.type] || "üõçÔ∏è", badge: listing.stock === 0 ? "Out of stock" : "Local",
+    description: listing.description, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
+  }));
+  renderPlaces();
+  const notice = $(".preview-notice", $("#buyer-view"));
+  if (notice) notice.innerHTML = state.liveListings.length
+    ? '<span>‚ú≥</span><span><strong>Live marketplace</strong> ‚Äî These listings are published by TradeBridge businesses.</span>'
+    : '<span>‚ú≥</span><span><strong>No verified listings yet</strong> ‚Äî Sample places are shown while sellers add their businesses.</span>';
+}
+
+async function initializeBackend() {
+  try {
+    const client = await getSupabase();
+    const { data: { session }, error } = await client.auth.getSession();
+    if (error) throw error;
+    state.session = session;
+    client.auth.onAuthStateChange((_event, nextSession) => {
+      state.session = nextSession;
+      queueMicrotask(async () => {
+        const results = await Promise.allSettled([loadProfile(), refreshListings()]);
+        results.filter((result) => result.status === "rejected").forEach((result) => { console.error(result.reason); toast(result.reason?.message || "Could not refresh TradeBridge data."); });
+      });
+    });
+    const initialResults = await Promise.allSettled([loadProfile(), refreshListings()]);
+    initialResults.filter((result) => result.status === "rejected").forEach((result) => { console.error(result.reason); });
+  } catch (error) {
+    console.error("TradeBridge backend is not available:", error);
+    const notice = $(".preview-notice", $("#buyer-view"));
+    if (notice) notice.innerHTML = '<span>‚ú≥</span><span><strong>Preview mode</strong> ‚Äî Connect to the internet to load verified businesses and account features.</span>';
+  }
+}
+
+async function showBuyerOrders() {
+  if (!requireAccount()) return;
+  try {
+    const client = await getSupabase();
+    const { data, error } = await client.from("orders")
+      .select("id,status,fulfillment,address,total_rwf,created_at,shops(name),order_items(title,qty,price_rwf),order_payments(method,status,transaction_reference)")
+      .eq("buyer_id", state.session.user.id).order("created_at", { ascending: false }).limit(30);
+    if (error) throw error;
+    const list = $("#buyer-order-list");
+    list.innerHTML = data.length ? data.map((order) => {
+      const payment = order.order_payments?.[0];
+      return `<article class="backend-list-item"><div><strong>${escapeHtml(order.shops?.name || "TradeBridge order")}</strong><small>${new Date(order.created_at).toLocaleString()} ¬∑ ${escapeHtml(order.fulfillment)}</small><small>${(order.order_items || []).map((item) => `${escapeHtml(item.title)} √ó ${item.qty}`).join(", ")}</small><small>Payment: ${escapeHtml(payment?.status || "Not recorded")}${payment?.transaction_reference ? ` ¬∑ ${escapeHtml(payment.transaction_reference)}` : ""}</small></div><span class="order-pill">${escapeHtml(order.status.replaceAll("_", " "))}</span><b>RWF ${Number(order.total_rwf).toLocaleString()}</b>${order.status === "new" ? `<button class="row-action" data-cancel-order="${escapeHtml(order.id)}">Cancel order</button>` : ""}</article>`;
+    }).join("") : '<p class="empty-backend">Your placed orders will appear here.</p>';
+    $("#buyer-orders-dialog").showModal();
+  } catch (error) { toast(error.message || "Could not load your orders."); }
+}
+
+async function loadSellerWorkspace() {
+  if (!requireAccount()) return;
+  if (state.profile?.role !== "seller") {
+    toast("Choose a seller account when creating your account to open Seller Studio.");
+    openAuth("signup");
+    $("#auth-form").elements.role.value = "seller";
+    return;
+  }
+  try {
+    const client = await getSupabase();
+    const { data, error } = await client.from("shops").select("id,name,type,district,address,phone,status,created_at").eq("owner_id", state.session.user.id).order("created_at", { ascending: false });
+    if (error) throw error;
+    state.businesses = data;
+    const ids = data.map((shop) => shop.id);
+    state.sellerListings = [];
+    state.sellerOrders = [];
+    state.sellerCustomers = [];
+    if (ids.length) {
+      const [listings, orders] = await Promise.all([
+        client.from("listings").select("id,shop_id,title,description,price_rwf,stock,duration_min,active,created_at").in("shop_id", ids).order("created_at", { ascending: false }),
+        client.from("orders").select("id,shop_id,buyer_id,status,fulfillment,total_rwf,created_at,shops(name),order_items(title,qty),order_payments(status,method,transaction_reference)").in("shop_id", ids).order("created_at", { ascending: false }).limit(40)
+      ]);
+      if (listings.error) throw listings.error;
+      if (orders.error) throw orders.error;
+      state.sellerListings = listings.data;
+      state.sellerOrders = orders.data;
+      const buyerIds = [...new Set(orders.data.map((order) => order.buyer_id).filter(Boolean))];
+      if (buyerIds.length) {
+        const { data: customers, error: customerError } = await client.from("profiles").select("id,full_name,phone").in("id", buyerIds);
+        if (customerError) throw customerError;
+        state.sellerCustomers = customers;
+      }
+    }
+    setRole("seller");
+  } catch (error) { toast(error.message || "Could not load Seller Studio."); }
+}
+
+async function loadAdminWorkspace() {
+  if (!requireAccount()) return;
+  try {
+    await loadProfile();
+    if (state.profile?.role !== "admin") { toast("The admin portal is restricted to authorized administrators."); return; }
+    const client = await getSupabase();
+    const { data, error } = await client.from("shops").select("id,name,type,district,address,phone,status,created_at,profiles!shops_owner_id_fkey(full_name)").order("created_at", { ascending: false }).limit(100);
+    if (error) throw error;
+    state.adminBusinesses = data;
+    const [{ data: orders, error: orderError }, { data: customers, error: customerError }, { data: payments, error: paymentError }] = await Promise.all([
+      client.from("orders").select("id,status,total_rwf,created_at,shops(name)").order("created_at", { ascending: false }).limit(100),
+      client.from("profiles").select("id,full_name,phone,role,created_at").order("created_at", { ascending: false }).limit(100),
+      client.from("order_payments").select("id,order_id,amount_rwf,method,status,transaction_reference,created_at,shops(name)").order("created_at", { ascending: false }).limit(100)
+    ]);
+    if (orderError) throw orderError;
+    if (customerError) throw customerError;
+    if (paymentError) throw paymentError;
+    state.adminOrders = orders;
+    state.adminCustomers = customers;
+    state.adminPayments = payments;
+    setRole("admin");
+  } catch (error) { toast(error.message || "Could not load the admin portal."); }
+}
+
+async function openListingForm() {
+  if (!requireAccount()) return;
+  if (state.profile?.role !== "seller") { toast("A seller account is required to add a listing."); return; }
+  try {
+    const client = await getSupabase();
+    const { data, error } = await client.from("shops").select("id,name,status").eq("owner_id", state.session.user.id).order("created_at", { ascending: false });
+    if (error) throw error;
+    const select = $("#listing-form").elements.shop_id;
+    select.innerHTML = data.map((shop) => `<option value="${escapeHtml(shop.id)}">${escapeHtml(shop.name)}${shop.status !== "approved" ? " (pending approval)" : ""}</option>`).join("");
+    if (!data.length) { toast("Add your business first."); $("#business-dialog").showModal(); return; }
+    if (!editingListingId) { $("#listing-form").reset(); $("#listing-title").textContent = "Add a listing"; $("#listing-form").querySelector("button[type=submit]").textContent = "Save listing"; }
+    $("#listing-dialog").showModal();
+  } catch (error) { toast(error.message || "Could not load your businesses."); }
+}
+
+function setRole(role) {
+  state.role = role;
+  $("#breadcrumb-role").textContent = `${role[0].toUpperCase()}${role.slice(1)} portal`;
+  $("#buyer-view").hidden = role !== "buyer";
+  $("#seller-view").hidden = role !== "seller";
+  $("#admin-view").hidden = role !== "admin";
+  $$("[data-role]").forEach((button) => button.classList.toggle("active", button.dataset.role === role));
+  if (role === "seller") renderSeller();
+  if (role === "admin") renderAdmin();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toast(message) {
+  const element = $("#toast");
+  element.textContent = message;
+  element.hidden = false;
+  window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(() => { element.hidden = true; }, 2600);
+}
+
+function renderPlaces() {
+  const grid = $("#listing-grid");
+  const source = state.liveListings?.length ? state.liveListings : places;
+  const filtered = source.filter((place) => {
+    const matchesCategory = state.category === "All" || place.type === state.category;
+    const matchesQuery = `${place.name} ${place.type} ${place.tag}`.toLowerCase().includes(state.query.toLowerCase());
+    return matchesCategory && matchesQuery;
+  });
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty-state"><span>‚åï</span><strong>No places found</strong><p>Try a different search or category.</p></div>';
+    return;
+  }
+  grid.innerHTML = filtered.map((place) => {
+    const savedKey = place.id || place.name;
+    const saved = state.saved.has(savedKey);
+    return `<article class="listing-card">
+      <div class="listing-visual ${escapeHtml(place.tone)}"><span class="listing-emoji">${escapeHtml(place.icon)}</span><span class="listing-badge"><span>‚ú¶</span> ${escapeHtml(place.badge)}</span><button aria-label="${saved ? "Remove" : "Save"} ${escapeHtml(place.name)}" class="save-button ${saved ? "saved" : ""}" data-save="${escapeHtml(savedKey)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${saved ? "‚ô•" : "‚ô°"}</button><span class="visual-deco">‚ú≥</span></div>
+      <div class="listing-info"><div class="listing-title-row"><h3>${escapeHtml(place.name)}</h3><span class="rating">${place.id ? "New" : `‚òÖ ${escapeHtml(place.rating)}`}</span></div><p>${escapeHtml(place.tag)}</p><div class="listing-meta"><span>‚åñ ${escapeHtml(place.distance)}</span><span>¬∑</span><span>${escapeHtml(place.time)}</span></div><div class="listing-bottom"><span>${escapeHtml(place.price)}</span><button aria-label="${place.id ? "Order" : "View"} ${escapeHtml(place.name)}" data-view="${escapeHtml(place.name)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${place.id ? "Order" : "‚Üó"}</button></div></div>
+    </article>`;
+  }).join("");
+}
+
+function renderSeller() {
+  const tabs = ["Overview", "Orders", "Listings", "Customers"];
+  const view = $("#seller-view");
+  const tabButtons = tabs.map((tab) => `<button class="portal-tab ${state.sellerTab === tab ? "active" : ""}" data-seller-tab="${tab}">${tab}${tab === "Orders" && state.sellerOrders?.length ? `<span class="count-pill">${state.sellerOrders.length}</span>` : ""}</button>`).join("");
+  const shops = state.businesses || [];
+  const orders = state.sellerOrders || [];
+  const listings = state.sellerListings || [];
+  let body;
+  if (state.sellerTab === "Overview") {
+    body = shops.length ? `<section class="backend-list">${shops.map((shop) => `<article class="backend-list-item"><div><strong>${escapeHtml(shop.name)}</strong><small>${escapeHtml(shop.type)} ¬∑ ${escapeHtml(shop.district || "Kigali")}</small></div><span class="order-pill">${escapeHtml(shop.status)}</span></article>`).join("")}</section><div class="metric-grid">${metric("Orders", orders.length, "Live", "from your businesses", "‚ñ§")}${metric("Listings", listings.length, "Live", "products and services", "‚ñ¶")}${metric("Awaiting response", orders.filter((order) => order.status === "new").length, "Now", "new customer orders", "‚ó∑")}${metric("Business applications", shops.filter((shop) => shop.status === "pending").length, "Review", "awaiting approval", "‚åÇ")}</div>` : '<section class="panel tab-placeholder"><span class="placeholder-icon">‚ñ¶</span><h2>Set up your business</h2><p>Submit your shop, restaurant, or salon for review. You can add listings after creating your business.</p><button class="primary-button" data-action="add-business">Ôºã Add your business</button></section>';
+  } else if (state.sellerTab === "Listings") {
+    body = listings.length ? `<section class="backend-list">${listings.map((item) => `<article class="backend-list-item"><div><strong>${escapeHtml(item.title)}</strong><small>RWF ${Number(item.price_rwf).toLocaleString()} ¬∑ ${item.stock === null ? "Stock not tracked" : `${item.stock} in stock`}</small></div><span class="order-pill">${item.active ? "Visible" : "Hidden"}</span><button class="row-action" data-edit-listing="${escapeHtml(item.id)}">Edit</button><button class="row-action" data-toggle-listing="${escapeHtml(item.id)}" data-active="${item.active}">${item.active ? "Hide" : "Publish"}</button></article>`).join("")}</section>` : '<p class="empty-backend">No listings yet. Add your first product, menu item, or service.</p>';
+  } else if (state.sellerTab === "Orders") {
+    body = orders.length ? `<section class="backend-list">${orders.map((order) => `<article class="backend-list-item"><div><strong>Order ${escapeHtml(order.id.slice(0, 8))} ¬∑ ${escapeHtml(order.shops?.name || "Business")}</strong><small>${(order.order_items || []).map((item) => `${escapeHtml(item.title)} √ó ${item.qty}`).join(", ")} ¬∑ ${escapeHtml(order.fulfillment)}</small><small>RWF ${Number(order.total_rwf).toLocaleString()} ¬∑ ${new Date(order.created_at).toLocaleString()}</small><small>Payment: ${escapeHtml(order.order_payments?.[0]?.status || "Pending")}</small></div><label class="order-status-control"><span>${escapeHtml(order.status.replaceAll("_", " "))}</span><select aria-label="Update order status" data-order-status="${escapeHtml(order.id)}" data-current-status="${escapeHtml(order.status)}">${["new", "confirmed", "preparing", "ready", "out_for_delivery", "completed", "cancelled"].map((status) => `<option value="${status}" ${status === order.status ? "selected" : ""}>${status.replaceAll("_", " ")}</option>`).join("")}</select></label></article>`).join("")}</section>` : '<p class="empty-backend">Customer orders will appear here.</p>';
+  } else body = state.sellerCustomers?.length ? `<section class="backend-list">${state.sellerCustomers.map((customer) => { const customerOrders = orders.filter((order) => order.buyer_id === customer.id); return `<article class="backend-list-item"><div><strong>${escapeHtml(customer.full_name || "TradeBridge customer")}</strong><small>${escapeHtml(customer.phone || "No phone provided")}</small><small>${customerOrders.length} order${customerOrders.length === 1 ? "" : "s"} ¬∑ RWF ${customerOrders.reduce((sum, order) => sum + Number(order.total_rwf || 0), 0).toLocaleString()} total</small></div>${customer.phone ? `<a class="row-action" href="tel:${escapeHtml(customer.phone)}">Call customer</a>` : ""}</article>`; }).join("")}</section>` : '<p class="empty-backend">Customer names and contact details appear here after your first order.</p>';
+  view.innerHTML = `<section class="portal-heading"><div><div class="eyebrow"><span class="live-dot"></span> SELLER STUDIO</div><h1>Your business workspace</h1><p class="intro">Manage your businesses, listings, and customer orders.</p></div><button class="primary-button" data-action="add-business">Ôºã Add a business</button></section><div class="portal-tabs">${tabButtons}</div>${body}<footer class="footer"><span>¬© 2026 TradeBridge</span><span>Seller studio ¬∑ Kigali</span><div><a href="#help" data-action="help">Help</a><a href="#terms" data-action="terms">Terms</a></div></footer>`;
+}
+
+function renderAdmin() {
+  const tabs = ["Overview", "Businesses", "Orders", "Payments", "Customers", "Reports"];
+  const view = $("#admin-view");
+  const tabButtons = tabs.map((tab) => `<button class="portal-tab ${state.adminTab === tab ? "active" : ""}" data-admin-tab="${tab}">${tab}${tab === "Businesses" ? `<span class="count-pill alert-count">${(state.adminBusinesses || []).filter((shop) => shop.status === "pending").length}</span>` : ""}</button>`).join("");
+  const businesses = state.adminBusinesses || [];
+  const body = state.adminTab === "Overview" || state.adminTab === "Businesses"
+    ? `<div class="admin-metrics">${metric("Businesses", businesses.length, "Live", "registered marketplace vendors", "‚ñ¶")}${metric("Pending approval", businesses.filter((shop) => shop.status === "pending").length, "Review", "business applications", "‚ó∑")}${metric("Orders", (state.adminOrders || []).length, "Live", "tracked customer orders", "‚ñ§")}${metric("Marketplace volume", `RWF ${(state.adminOrders || []).reduce((total, order) => total + Number(order.total_rwf || 0), 0).toLocaleString()}`, "Live", "orders recorded", "‚Üó")}</div><section class="panel admin-business-panel"><div class="panel-heading"><div><h3>${state.adminTab === "Businesses" ? "All businesses" : "Business applications"}</h3><p>Approve or suspend marketplace vendors.</p></div></div><div class="backend-list">${businesses.length ? businesses.map((shop) => `<article class="backend-list-item"><div><strong>${escapeHtml(shop.name)}</strong><small>${escapeHtml(shop.type)} ¬∑ ${escapeHtml(shop.district)} ¬∑ ${escapeHtml(shop.profiles?.full_name || "Seller")}</small></div><span class="order-pill">${escapeHtml(shop.status)}</span><span>${shop.status === "pending" ? `<button class="review-button" data-shop-review="${escapeHtml(shop.id)}" data-next-status="approved">Approve</button>` : shop.status === "approved" ? `<button class="row-action" data-shop-review="${escapeHtml(shop.id)}" data-next-status="suspended">Suspend</button>` : `<button class="review-button" data-shop-review="${escapeHtml(shop.id)}" data-next-status="approved">Reinstate</button>`}</span></article>`).join("") : '<p class="empty-backend">No business applications yet.</p>'}</div></section>`
+    : state.adminTab === "Orders" ? `<section class="backend-list">${(state.adminOrders || []).map((order) => `<article class="backend-list-item"><div><strong>${escapeHtml(order.shops?.name || "Business")} ¬∑ ${escapeHtml(order.id.slice(0, 8))}</strong><small>${escapeHtml(order.status)} ¬∑ ${new Date(order.created_at).toLocaleString()}</small></div><b>RWF ${Number(order.total_rwf).toLocaleString()}</b></article>`).join("") || '<p class="empty-backend">No orders yet.</p>'}</section>`
+    : state.adminTab === "Payments" ? `<section class="backend-list">${(state.adminPayments || []).map((payment) => `<article class="backend-list-item"><div><strong>${escapeHtml(payment.shops?.name || "Seller")} ¬∑ RWF ${Number(payment.amount_rwf).toLocaleString()}</strong><small>${escapeHtml(payment.method.replaceAll("_", " "))} ¬∑ Order ${escapeHtml(payment.order_id.slice(0, 8))}</small><small>Reference: ${escapeHtml(payment.transaction_reference || "Not supplied")}</small></div><span class="order-pill">${escapeHtml(payment.status)}</span>${payment.status === "pending" ? `<button class="review-button" data-payment-id="${escapeHtml(payment.id)}" data-payment-review="paid">Confirm</button><button class="row-action" data-payment-id="${escapeHtml(payment.id)}" data-payment-review="rejected">Reject</button>` : ""}</article>`).join("") || '<p class="empty-backend">No payment records yet.</p>'}</section>`
+    : state.adminTab === "Customers" ? `<section class="backend-list">${(state.adminCustomers || []).map((customer) => `<article class="backend-list-item"><div><strong>${escapeHtml(customer.full_name || "TradeBridge member")}</strong><small>${escapeHtml(customer.phone || "No phone added")}</small></div><span class="order-pill">${escapeHtml(customer.role)}</span><small>${new Date(customer.created_at).toLocaleDateString()}</small></article>`).join("") || '<p class="empty-backend">No accounts yet.</p>'}</section>`
+    : `<div class="admin-metrics">${metric("Completed orders", (state.adminOrders || []).filter((order) => order.status === "completed").length, "All time", "marked complete", "‚úì")}${metric("Open orders", (state.adminOrders || []).filter((order) => !["completed", "cancelled"].includes(order.status)).length, "Now", "need fulfillment", "‚ó∑")}${metric("Paid records", (state.adminPayments || []).filter((payment) => payment.status === "paid").length, "Verified", "seller payments", "‚ñ§")}${metric("Pending payments", (state.adminPayments || []).filter((payment) => payment.status === "pending").length, "Review", "awaiting confirmation", "‚Üó", true)}</div><section class="panel"><div class="panel-heading"><div><h3>Marketplace activity</h3><p>Orders placed in the last seven days ¬∑ from the latest 100 records.</p></div><button class="outline-button" data-action="export">Download CSV</button></div><div class="backend-list">${Array.from({length: 7}, (_, i) => { const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - (6 - i)); const dayOrders = (state.adminOrders || []).filter((o) => new Date(o.created_at).toDateString() === d.toDateString()); return `<article class="backend-list-item"><div><strong>${d.toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"})}</strong><small>${dayOrders.length} order${dayOrders.length === 1 ? "" : "s"}</small></div><b>RWF ${dayOrders.reduce((sum,o) => sum + Number(o.total_rwf || 0), 0).toLocaleString()}</b></article>`; }).join("")}</div></section>`;
+  view.innerHTML = `<section class="portal-heading"><div><div class="eyebrow"><span class="live-dot"></span> ADMIN CONSOLE</div><h1>Marketplace management</h1><p class="intro">Review businesses and monitor orders.</p></div></section><div class="portal-tabs">${tabButtons}</div>${body}<footer class="footer"><span>¬© 2026 TradeBridge</span><span>Admin console ¬∑ Kigali</span></footer>`;
+}
+
+function metric(label, value, change, sub, icon, warning = false) {
+  return `<article class="metric-card"><div class="metric-top"><span>${label}</span><i>${icon}</i></div><strong class="metric-value">${value}</strong><div class="metric-foot"><b class="${warning ? "warning-change" : "positive-change"}">${change}</b><span>${sub}</span></div></article>`;
+}
+
+function showBuyerPanel(title, content) {
+  let dialog = $("#buyer-panel-dialog");
+  if (!dialog) {
+    dialog = document.createElement("dialog"); dialog.id = "buyer-panel-dialog"; dialog.className = "install-dialog orders-dialog";
+    dialog.innerHTML = '<form method="dialog"><button class="dialog-close" aria-label="Close">√ó</button></form><p class="install-kicker">TRADEBRIDGE</p><h2 id="buyer-panel-title"></h2><div id="buyer-panel-content"></div>';
+    document.body.append(dialog);
+  }
+  $("#buyer-panel-title", dialog).textContent = title;
+  $("#buyer-panel-content", dialog).innerHTML = content;
+  dialog.showModal();
+}
+
+function showSavedPlaces() {
+  if (!requireAccount()) return;
+  const items = (state.liveListings || []).filter((item) => state.saved.has(item.id));
+  showBuyerPanel("Saved places", items.length ? `<section class="backend-list">${items.map((item) => `<article class="backend-list-item"><div><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.shop.name)} ¬∑ RWF ${item.priceValue.toLocaleString()}</small></div><button class="review-button" data-view="${escapeHtml(item.name)}" data-listing-id="${escapeHtml(item.id)}">Order</button><button class="row-action" data-unsave="${escapeHtml(item.id)}">Remove</button></article>`).join("")}</section>` : '<p class="empty-backend">Save a shop, meal or service from Explore and it will be kept here.</p>');
+}
+
+async function showBuyerMessages() {
+  if (!requireAccount()) return;
+  try {
+    const { data, error } = await (await getSupabase()).from("orders").select("id,status,created_at,shops(name,phone)").eq("buyer_id", state.session.user.id).order("created_at", { ascending: false }).limit(20);
+    if (error) throw error;
+    const rows = data.map((order) => `<article class="backend-list-item"><div><strong>${escapeHtml(order.shops?.name || "Seller")}</strong><small>Order ${escapeHtml(order.id.slice(0,8))} ¬∑ ${escapeHtml(order.status.replaceAll("_"," "))} ¬∑ ${new Date(order.created_at).toLocaleDateString()}</small></div>${order.shops?.phone ? `<a class="row-action" href="https://wa.me/${encodeURIComponent(order.shops.phone.replace(/\D/g,""))}" target="_blank" rel="noopener">WhatsApp seller ‚Üó</a>` : "<small>Seller contact not listed</small>"}</article>`).join("");
+    showBuyerPanel("Seller contacts", `<p class="install-description">Your order updates are here. For a quick question, contact the business directly.</p>${rows ? `<section class="backend-list">${rows}</section>` : '<p class="empty-backend">Place an order to see seller contact options here.</p>'}`);
+  } catch (error) { toast(error.message || "Could not load seller contacts."); }
+}
+
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("button, a");
+  if (!button) return;
+  if (button.dataset.role) {
+    if (button.dataset.role === "buyer") setRole("buyer");
+    if (button.dataset.role === "seller") loadSellerWorkspace();
+    if (button.dataset.role === "admin") loadAdminWorkspace();
+    return;
+  }
+  if (button.dataset.category) {
+    state.category = button.dataset.category;
+    $$(".category-tab").forEach((tab) => tab.classList.toggle("selected", tab === button));
+    renderPlaces();
+    return;
+  }
+  if (button.dataset.save) {
+    const wasSaved = state.saved.has(button.dataset.save);
+    if (button.dataset.listingId && !requireAccount()) return;
+    wasSaved ? state.saved.delete(button.dataset.save) : state.saved.add(button.dataset.save);
+    $("#saved-count").textContent = state.saved.size || "";
+    renderPlaces();
+    if (button.dataset.listingId) {
+      (async () => {
+        try {
+          const client = await getSupabase();
+          const query = wasSaved
+            ? client.from("listing_feedback").update({ liked: false }).eq("buyer_id", state.session.user.id).eq("listing_id", button.dataset.listingId)
+            : client.from("listing_feedback").upsert({ buyer_id: state.session.user.id, listing_id: button.dataset.listingId, liked: true }, { onConflict: "listing_id,buyer_id" });
+          const { error } = await query;
+          if (error) throw error;
+        } catch (error) { toast(error.message || "Could not update your saved places."); }
+      })();
+    }
+    return;
+  }
+  if (button.dataset.view) {
+    if (!button.dataset.listingId) { toast(`Business details for ${button.dataset.view} will be connected when its seller joins.`); return; }
+    if (!requireAccount()) return;
+    state.selectedListing = state.liveListings.find((listing) => listing.id === button.dataset.listingId);
     if (!state.selectedListing) { toast("This listing is no longer available."); return; }
     $("#checkout-item").textContent = `${state.selectedListing.name} ¬∑ RWF ${state.selectedListing.priceValue.toLocaleString()} from ${state.selectedListing.shop.name}`;
     const fulfillment = $("#checkout-form").elements.fulfillment;
@@ -42,20 +398,43 @@ f¢Ê÷S∞¢BÇ"76ñFV&"÷66˜VÁB÷∆&V¬"íÁFWáD6ˆÁFVÁB“Ê÷S∞¢BÇ"76ñFV&"÷66˜V
     })();
     return;
   }
+  if (button.dataset.unsave) {
+    (async () => { try { const { error } = await (await getSupabase()).from("listing_feedback").update({ liked: false }).eq("buyer_id", state.session.user.id).eq("listing_id", button.dataset.unsave); if (error) throw error; state.saved.delete(button.dataset.unsave); $("#saved-count").textContent = state.saved.size || ""; await loadProfile(); showSavedPlaces(); renderPlaces(); } catch (error) { toast(error.message || "Could not remove this saved place."); } })();
+    return;
+  }
+  if (button.dataset.cancelOrder) {
+    (async () => { try { const { error } = await (await getSupabase()).from("orders").update({ status: "cancelled" }).eq("id", button.dataset.cancelOrder).eq("buyer_id", state.session.user.id).eq("status", "new"); if (error) throw error; toast("Order cancelled."); await showBuyerOrders(); } catch (error) { toast(error.message || "Could not cancel this order."); } })();
+    return;
+  }
+  if (button.dataset.toggleListing) {
+    (async () => { try { const item = state.sellerListings.find((listing) => listing.id === button.dataset.toggleListing); const { error } = await (await getSupabase()).from("listings").update({ active: !item.active }).eq("id", item.id); if (error) throw error; await loadSellerWorkspace(); await refreshListings(); toast(item.active ? "Listing hidden from customers." : "Listing published."); } catch (error) { toast(error.message || "Could not update listing."); } })();
+    return;
+  }
+  if (button.dataset.editListing) {
+    const item = state.sellerListings.find((listing) => listing.id === button.dataset.editListing);
+    if (!item) return;
+    (async () => { await openListingForm(); editingListingId = item.id; const form = $("#listing-form"); form.elements.shop_id.value = item.shop_id; form.elements.title.value = item.title; form.elements.description.value = item.description || ""; form.elements.price_rwf.value = item.price_rwf; form.elements.stock.value = item.stock ?? ""; form.elements.duration_min.value = item.duration_min ?? ""; $("#listing-title").textContent = "Edit listing"; form.querySelector("button[type=submit]").textContent = "Save changes"; })();
+    return;
+  }
   if (button.dataset.sellerTab) { state.sellerTab = button.dataset.sellerTab; renderSeller(); return; }
   if (button.dataset.adminTab) { state.adminTab = button.dataset.adminTab; renderAdmin(); return; }
   if (button.dataset.review) { toast(`Opening ${button.dataset.review} application for review.`); return; }
 
   const action = button.dataset.action;
   const messages = {
-    location: "Location settings will be available in a later step.", saved: state.saved.size ? `You have ${state.saved.size} saved ${state.saved.size === 1 ? "place" : "places"}.` : "Save a place to find it here.",
-    orders: "", messages: "Messaging will be added in a later step.", help: "Help center coming soon.", profile: "", notifications: "You‚Äôre all caught up.",
+    location: "Location settings will be available in a later step.", saved: "", orders: "", messages: "", help: "Help center coming soon.", profile: "", notifications: "You‚Äôre all caught up.",
     "edit-business": "Business profile editing will be added in a later step.", "add-listing": "", "add-business": "", inventory: "Inventory management will be added in a later step.", promotion: "Promotion tools coming soon.",
     "seller-next": "This seller workspace will be connected in a later step.", "admin-next": "Admin management will be connected in a later step.", export: "Report export coming soon.", insights: "Marketplace insights coming soon.",
     about: "TradeBridge connects customers with trusted local businesses.", privacy: "Privacy information will be added before launch.", terms: "Terms will be added before launch.", security: "Security tools coming soon.", "all-listings": "You‚Äôre seeing all available demo places."
   };
   if (action === "explore") { $("#discover").scrollIntoView({ behavior: "smooth" }); return; }
   if (action === "orders") { showBuyerOrders(); return; }
+  if (action === "saved") { showSavedPlaces(); return; }
+  if (action === "messages") { showBuyerMessages(); return; }
+  if (action === "export") {
+    const csv = [["Order ID", "Business", "Status", "Total RWF", "Created"], ...(state.adminOrders || []).map((order) => [order.id, order.shops?.name || "", order.status, order.total_rwf, order.created_at])].map((row) => row.map((cell) => `"${String(cell ?? "").replaceAll('"','""')}"`).join(",")).join("\n");
+    const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })); link.download = "tradebridge-orders.csv"; link.click(); URL.revokeObjectURL(link.href); return;
+  }
   if (action === "profile") {
     if (!state.session?.user) openAuth();
     else (async () => { const { error } = await (await getSupabase()).auth.signOut(); if (error) toast(error.message); else { state.session = null; state.profile = null; updateAccountLabel(); setRole("buyer"); toast("You have signed out."); } })();
@@ -130,14 +509,19 @@ $("#listing-form").addEventListener("submit", async (event) => {
   const values = Object.fromEntries(new FormData(form));
   try {
     const client = await getSupabase();
-    const { error } = await client.from("listings").insert({
+    const listingValues = {
       shop_id: values.shop_id, title: values.title.trim(), description: (values.description || "").trim(),
       price_rwf: Number(values.price_rwf), stock: values.stock === "" ? null : Number(values.stock),
       duration_min: values.duration_min === "" ? null : Number(values.duration_min)
-    });
+    };
+    const result = editingListingId
+      ? await client.from("listings").update(listingValues).eq("id", editingListingId)
+      : await client.from("listings").insert(listingValues);
+    const { error } = result;
     if (error) throw error;
     $("#listing-dialog").close(); form.reset();
-    toast("Listing saved. It will be visible after its business is approved."); await loadSellerWorkspace(); await refreshListings();
+    const wasEditing = Boolean(editingListingId); editingListingId = null;
+    toast(wasEditing ? "Listing changes saved." : "Listing saved. It will be visible after its business is approved."); await loadSellerWorkspace(); await refreshListings();
   } catch (error) { toast(error.message || "Could not save the listing."); }
 });
 
