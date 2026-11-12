@@ -1,0 +1,29 @@
+{
+  "id": "./",
+  "name": "TradeBridge — Kigali, connected",
+  "short_name": "TradeBridge",
+  "description": "Discover local shops, restaurants, and salons in Kigali.",
+  "lang": "en-RW",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#faf8f5",
+  "theme_color": "#E95B2A",
+  "categories": ["shopping", "lifestyle", "food"],
+  "icons": [
+    {
+      "src": "assets/tradebridge-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/tradebridge-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
