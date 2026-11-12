@@ -60,6 +60,11 @@
 #checkout-dialog{width:min(560px,calc(100vw - 32px));max-height:min(88dvh,780px);overflow-y:auto;padding:32px}
 #checkout-dialog h2{margin:0 42px 7px 0}
 #checkout-item{border:1px solid #e7ece4;border-radius:9px;background:#f7f9f5;color:#405644;padding:12px 14px;margin:14px 0}
+#checkout-dialog .quantity-picker{display:flex;align-items:center;gap:10px;border:1px solid #dfe6dc;border-radius:8px;padding:6px 9px;background:#fff}
+#checkout-dialog .quantity-picker button{width:32px;height:32px;border:0;border-radius:6px;background:#edf4ed;color:#326447;font-size:18px;cursor:pointer}
+#checkout-dialog .quantity-picker output{min-width:28px;text-align:center;color:#263428;font-size:14px;font-weight:700}
+#checkout-dialog .quantity-picker span{margin-left:auto;color:#899389;font-size:10px;font-weight:400}
+#checkout-total{margin:0;padding:11px 13px;border-radius:8px;background:#f3f7f1;color:#315d3d;font-size:13px;font-weight:700}
 #checkout-dialog .backend-form{gap:13px}
 #checkout-dialog .backend-form>label{font-size:12px}
 #checkout-dialog .backend-form input,#checkout-dialog .backend-form select,#checkout-dialog .backend-form textarea{padding:11px 12px;font-size:13px}
