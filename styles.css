@@ -189,6 +189,12 @@ body{font-size:15px;background:var(--canvas);color:var(--ink)}
 .category-rail>button.active{background:#fff0e9;color:var(--brand-dark)}
 .category-rail>button.active>span{color:var(--brand-dark)}
 .category-tabs{flex-wrap:wrap}
+.brand{gap:0}
+.brand-logo{display:block;width:194px;height:45px;flex:0 0 auto}
+.brand-logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}
+.welcome-brand-icon{display:block;width:38px;height:38px;border-radius:12px;box-shadow:0 5px 13px #e95b2a30}
+.welcome-panel-brand{gap:10px}
+@media(max-width:800px){.brand-logo{width:40px;height:40px}.brand-logo img{object-position:center}.brand{justify-content:center}}
 @media(max-width:800px){.listing-visual{height:132px}.welcome-row h1,.portal-heading h1{font-size:27px}.nav-item{font-size:0}.nav-item>span{font-size:18px}.brand-name,.brand-name small{display:none}}
 @media(max-width:520px){.listing-visual{height:118px}.listing-title-row h3,.listing-title-button h3{font-size:13px}.listing-info>p{font-size:11px}.listing-meta{font-size:10px}.listing-bottom{font-size:11px}.welcome-row h1,.portal-heading h1{font-size:24px}.section-heading h2{font-size:20px}.nav-item{font-size:0}.promo-slide-copy h2{font-size:20px}.seller-callout,.footer{font-size:10px}}
 
