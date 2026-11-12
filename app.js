@@ -5,6 +5,7 @@ const places = [
   { name: "Everyday tote bag", type: "Shops", category: "Clothing", tag: "Makuza Home & Living · Accessories", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 8,000", priceValue: 8000, tone: "home", icon: "👜", badge: "Sample listing", shopName: "Makuza Home & Living", description: "A practical reusable carry bag for everyday errands.", details: "Sample product. Sellers can include dimensions, materials, and care instructions." },
   { name: "Silk press appointment", type: "Salons", category: "Beauty", tag: "Atelier Hair Studio · Hair care", rating: "Sample", distance: "Kigali", time: "Book a time", price: "RWF 15,000", priceValue: 15000, tone: "salon", icon: "✂️", badge: "Sample listing", shopName: "Atelier Hair Studio", description: "A salon appointment tailored to your hair and preferred finish.", details: "Sample service. Sellers can explain what is included, how long it takes, and what customers should prepare." },
   { name: "Fresh juice · 500 ml", type: "Restaurants", category: "Food & drink", tag: "Umurava Kitchen · Made fresh", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 3,000", priceValue: 3000, tone: "market", icon: "🥭", badge: "Sample listing", shopName: "Umurava Kitchen", description: "Fresh seasonal fruit blended to order.", details: "Sample menu item. Add ingredients, size options, and allergy information to the product details." },
+  { name: "Kigali Classic Sneakers", type: "Shops", category: "Shoes", tag: "Kigali Streetwear · Footwear", rating: "Sample", distance: "Kigali", time: "Pickup", price: "RWF 28,000", priceValue: 28000, tone: "fashion", icon: "👟", badge: "Sample listing", shopName: "Kigali Streetwear", description: "Everyday low-top sneakers with a clean, versatile look.", details: "Sample product preview. A seller can add available sizes, materials, care instructions, stock, and multiple product photos." },
 ];
 
 const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, banners: [], bannerIndex: 0, adminListings: [], adminBanners: [], businesses: [], selectedListing: null, selectedQuantity: 1, authMode: "signin" };
@@ -350,7 +351,7 @@ function toast(message) {
 
 function renderPlaces() {
   const grid = $("#listing-grid");
-  const source = state.liveListings?.length ? state.liveListings : places;
+  const source = state.liveListings?.length ? [...state.liveListings, places.at(-1)] : places;
   const filtered = source.filter((place) => {
     const matchesCategory = state.category === "All" || place.type === state.category;
     const matchesQuery = `${place.name} ${place.category || ""} ${place.type} ${place.tag}`.toLowerCase().includes(state.query.toLowerCase());
