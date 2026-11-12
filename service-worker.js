@@ -1,4 +1,4 @@
-const CACHE_NAME = "tradebridge-shell-v9";
+const CACHE_NAME = "tradebridge-shell-v10";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -6,9 +6,8 @@ const APP_SHELL = [
   "./app.js",
   "./supabase-config.js",
   "./manifest.webmanifest",
-  "./assets/tradebridge-192.png",
-  "./assets/tradebridge-512.png",
-  "./assets/apple-touch-icon.png"
+  "./assets/tradebridge-logo.svg",
+  "./assets/tradebridge-icon.svg"
 ];
 
 self.addEventListener("install", (event) => {
