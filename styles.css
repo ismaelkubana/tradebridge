@@ -181,6 +181,14 @@ body{font-size:15px;background:var(--canvas);color:var(--ink)}
 .promo-slide-copy h2{color:#392d28}
 .promo-slide-art{background:#ffffff8c}
 .listing-visual.fashion{background:linear-gradient(130deg,#f4e4d9,#e7c3ae)}
+.welcome-account-state{display:grid;gap:7px;margin:12px 0 14px;padding:11px;border:1px solid #f0e4dc;border-radius:8px;background:#fff8f4}
+.welcome-account-state[hidden],.welcome-panel-actions[hidden]{display:none}
+.welcome-account-state strong{font-size:13px;color:#342d28;overflow-wrap:anywhere}
+.welcome-account-state>span{font-size:11px;color:#8b7162}
+.welcome-account-state .outline-button{justify-self:start;padding:8px 10px;font-size:11px}
+.category-rail>button.active{background:#fff0e9;color:var(--brand-dark)}
+.category-rail>button.active>span{color:var(--brand-dark)}
+.category-tabs{flex-wrap:wrap}
 @media(max-width:800px){.listing-visual{height:132px}.welcome-row h1,.portal-heading h1{font-size:27px}.nav-item{font-size:0}.nav-item>span{font-size:18px}.brand-name,.brand-name small{display:none}}
 @media(max-width:520px){.listing-visual{height:118px}.listing-title-row h3,.listing-title-button h3{font-size:13px}.listing-info>p{font-size:11px}.listing-meta{font-size:10px}.listing-bottom{font-size:11px}.welcome-row h1,.portal-heading h1{font-size:24px}.section-heading h2{font-size:20px}.nav-item{font-size:0}.promo-slide-copy h2{font-size:20px}.seller-callout,.footer{font-size:10px}}
 
