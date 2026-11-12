@@ -9,6 +9,7 @@ const places = [
 
 const state = { role: "buyer", category: "All", query: "", saved: new Set(), sellerTab: "Overview", adminTab: "Overview", session: null, profile: null, liveListings: null, businesses: [], selectedListing: null, authMode: "signin" };
 let editingListingId = null;
+let editingListingImageUrl = null;
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 let toastTimer;
@@ -75,7 +76,7 @@ async function loadProfile() {
 async function refreshListings() {
   const client = await getSupabase();
   const { data, error } = await client.from("listings")
-    .select("id,shop_id,title,description,price_rwf,stock,duration_min,active,shops!inner(name,type,district,address,phone,status,payment_methods,payment_instructions)")
+    .select("id,shop_id,title,description,image_url,price_rwf,stock,duration_min,active,shops!inner(name,type,district,address,phone,status,payment_methods,payment_instructions)")
     .eq("active", true).eq("shops.status", "approved").order("created_at", { ascending: false });
   if (error) throw error;
   const categoryNames = { shop: "Shops", restaurant: "Restaurants", salon: "Salons" };
@@ -87,7 +88,7 @@ async function refreshListings() {
     rating: "New", distance: listing.shops.district || "Kigali", time: listing.shops.type === "salon" ? "Book a slot" : "Pickup",
     price: `RWF ${Number(listing.price_rwf).toLocaleString()}`,
     priceValue: Number(listing.price_rwf), tone: ["market", "kitchen", "salon", "home", "coffee", "curl"][index % 6], icon: icons[listing.shops.type] || "🛍️", badge: listing.stock === 0 ? "Out of stock" : "Local",
-    description: listing.description, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
+    description: listing.description, imageUrl: listing.image_url, shop: listing.shops, fulfillment: listing.shops.type === "salon" ? "booking" : "pickup"
   }));
   renderPlaces();
   const notice = $(".preview-notice", $("#buyer-view"));
@@ -154,7 +155,7 @@ async function loadSellerWorkspace() {
     state.sellerCustomers = [];
     if (ids.length) {
       const [listings, orders] = await Promise.all([
-        client.from("listings").select("id,shop_id,title,description,price_rwf,stock,duration_min,active,created_at").in("shop_id", ids).order("created_at", { ascending: false }),
+        client.from("listings").select("id,shop_id,title,description,image_url,price_rwf,stock,duration_min,active,created_at").in("shop_id", ids).order("created_at", { ascending: false }),
         client.from("orders").select("id,shop_id,buyer_id,status,fulfillment,total_rwf,created_at,shops(name),order_items(title,qty),order_payments(status,method,transaction_reference)").in("shop_id", ids).order("created_at", { ascending: false }).limit(40)
       ]);
       if (listings.error) throw listings.error;
@@ -206,7 +207,7 @@ async function openListingForm() {
     const select = $("#listing-form").elements.shop_id;
     select.innerHTML = data.map((shop) => `<option value="${escapeHtml(shop.id)}">${escapeHtml(shop.name)}${shop.status !== "approved" ? " (pending approval)" : ""}</option>`).join("");
     if (!data.length) { toast("Add your business first."); $("#business-dialog").showModal(); return; }
-    if (!editingListingId) { $("#listing-form").reset(); $("#listing-title").textContent = "Add a listing"; $("#listing-form").querySelector("button[type=submit]").textContent = "Save listing"; }
+    if (!editingListingId) { $("#listing-form").reset(); editingListingImageUrl = null; $("#listing-image-preview").hidden = true; $("#listing-title").textContent = "Add a listing"; $("#listing-form").querySelector("button[type=submit]").textContent = "Publish listing"; }
     $("#listing-dialog").showModal();
   } catch (error) { toast(error.message || "Could not load your businesses."); }
 }
@@ -247,7 +248,7 @@ function renderPlaces() {
     const savedKey = place.id || place.name;
     const saved = state.saved.has(savedKey);
     return `<article class="listing-card">
-      <div class="listing-visual ${escapeHtml(place.tone)}"><span class="listing-emoji">${escapeHtml(place.icon)}</span><span class="listing-badge"><span>✦</span> ${escapeHtml(place.badge)}</span><button aria-label="${saved ? "Remove" : "Save"} ${escapeHtml(place.name)}" class="save-button ${saved ? "saved" : ""}" data-save="${escapeHtml(savedKey)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${saved ? "♥" : "♡"}</button><span class="visual-deco">✳</span></div>
+      <div class="listing-visual ${escapeHtml(place.tone)}">${place.imageUrl ? `<img class="listing-photo" src="${escapeHtml(place.imageUrl)}" alt="${escapeHtml(place.name)}" loading="lazy">` : `<span class="listing-emoji">${escapeHtml(place.icon)}</span>`}<span class="listing-badge"><span>✦</span> ${escapeHtml(place.badge)}</span><button aria-label="${saved ? "Remove" : "Save"} ${escapeHtml(place.name)}" class="save-button ${saved ? "saved" : ""}" data-save="${escapeHtml(savedKey)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${saved ? "♥" : "♡"}</button><span class="visual-deco">✳</span></div>
       <div class="listing-info"><div class="listing-title-row"><h3>${escapeHtml(place.name)}</h3><span class="rating">${place.id ? "New" : `★ ${escapeHtml(place.rating)}`}</span></div><p>${escapeHtml(place.tag)}</p><div class="listing-meta"><span>⌖ ${escapeHtml(place.distance)}</span><span>·</span><span>${escapeHtml(place.time)}</span></div><div class="listing-bottom"><span>${escapeHtml(place.price)}</span><button aria-label="${place.id ? "Order" : "View"} ${escapeHtml(place.name)}" data-view="${escapeHtml(place.name)}" ${place.id ? `data-listing-id="${escapeHtml(place.id)}"` : ""}>${place.id ? "Order" : "↗"}</button></div></div>
     </article>`;
   }).join("");
@@ -264,11 +265,28 @@ function renderSeller() {
   if (state.sellerTab === "Overview") {
     body = shops.length ? `<section class="backend-list">${shops.map((shop) => `<article class="backend-list-item"><div><strong>${escapeHtml(shop.name)}</strong><small>${escapeHtml(shop.type)} · ${escapeHtml(shop.district || "Kigali")}</small></div><span class="order-pill">${escapeHtml(shop.status)}</span></article>`).join("")}</section><div class="metric-grid">${metric("Orders", orders.length, "Live", "from your businesses", "▤")}${metric("Listings", listings.length, "Live", "products and services", "▦")}${metric("Awaiting response", orders.filter((order) => order.status === "new").length, "Now", "new customer orders", "◷")}${metric("Business applications", shops.filter((shop) => shop.status === "pending").length, "Review", "awaiting approval", "⌂")}</div>` : '<section class="panel tab-placeholder"><span class="placeholder-icon">▦</span><h2>Set up your business</h2><p>Submit your shop, restaurant, or salon for review. You can add listings after creating your business.</p><button class="primary-button" data-action="add-business">＋ Add your business</button></section>';
   } else if (state.sellerTab === "Listings") {
-    body = listings.length ? `<section class="backend-list">${listings.map((item) => `<article class="backend-list-item"><div><strong>${escapeHtml(item.title)}</strong><small>RWF ${Number(item.price_rwf).toLocaleString()} · ${item.stock === null ? "Stock not tracked" : `${item.stock} in stock`}</small></div><span class="order-pill">${item.active ? "Visible" : "Hidden"}</span><button class="row-action" data-edit-listing="${escapeHtml(item.id)}">Edit</button><button class="row-action" data-toggle-listing="${escapeHtml(item.id)}" data-active="${item.active}">${item.active ? "Hide" : "Publish"}</button></article>`).join("")}</section>` : '<p class="empty-backend">No listings yet. Add your first product, menu item, or service.</p>';
+    body = listings.length ? `<section class="backend-list">${listings.map((item) => `<article class="backend-list-item seller-listing-row">${item.image_url ? `<img class="seller-listing-thumb" src="${escapeHtml(item.image_url)}" alt="">` : '<span class="seller-listing-thumb seller-listing-placeholder">▦</span>'}<div><strong>${escapeHtml(item.title)}</strong><small>RWF ${Number(item.price_rwf).toLocaleString()} · ${item.stock === null ? "Stock not tracked" : `${item.stock} in stock`}</small></div><span class="order-pill">${item.active ? "Visible" : "Hidden"}</span><button class="row-action" data-edit-listing="${escapeHtml(item.id)}">Edit</button><button class="row-action" data-toggle-listing="${escapeHtml(item.id)}" data-active="${item.active}">${item.active ? "Hide" : "Publish"}</button></article>`).join("")}</section>` : '<p class="empty-backend">No listings yet. Add your first product, menu item, or service.</p>';
   } else if (state.sellerTab === "Orders") {
     body = orders.length ? `<section class="backend-list">${orders.map((order) => `<article class="backend-list-item"><div><strong>Order ${escapeHtml(order.id.slice(0, 8))} · ${escapeHtml(order.shops?.name || "Business")}</strong><small>${(order.order_items || []).map((item) => `${escapeHtml(item.title)} × ${item.qty}`).join(", ")} · ${escapeHtml(order.fulfillment)}</small><small>RWF ${Number(order.total_rwf).toLocaleString()} · ${new Date(order.created_at).toLocaleString()}</small><small>Payment: ${escapeHtml(order.order_payments?.[0]?.status || "Pending")}</small></div><label class="order-status-control"><span>${escapeHtml(order.status.replaceAll("_", " "))}</span><select aria-label="Update order status" data-order-status="${escapeHtml(order.id)}" data-current-status="${escapeHtml(order.status)}">${["new", "confirmed", "preparing", "ready", "out_for_delivery", "completed", "cancelled"].map((status) => `<option value="${status}" ${status === order.status ? "selected" : ""}>${status.replaceAll("_", " ")}</option>`).join("")}</select></label></article>`).join("")}</section>` : '<p class="empty-backend">Customer orders will appear here.</p>';
   } else body = state.sellerCustomers?.length ? `<section class="backend-list">${state.sellerCustomers.map((customer) => { const customerOrders = orders.filter((order) => order.buyer_id === customer.id); return `<article class="backend-list-item"><div><strong>${escapeHtml(customer.full_name || "TradeBridge customer")}</strong><small>${escapeHtml(customer.phone || "No phone provided")}</small><small>${customerOrders.length} order${customerOrders.length === 1 ? "" : "s"} · RWF ${customerOrders.reduce((sum, order) => sum + Number(order.total_rwf || 0), 0).toLocaleString()} total</small></div>${customer.phone ? `<a class="row-action" href="tel:${escapeHtml(customer.phone)}">Call customer</a>` : ""}</article>`; }).join("")}</section>` : '<p class="empty-backend">Customer names and contact details appear here after your first order.</p>';
   view.innerHTML = `<section class="portal-heading"><div><div class="eyebrow"><span class="live-dot"></span> SELLER STUDIO</div><h1>Your business workspace</h1><p class="intro">Manage your businesses, listings, and customer orders.</p></div><button class="primary-button" data-action="add-business">＋ Add a business</button></section><div class="portal-tabs">${tabButtons}</div>${body}<footer class="footer"><span>© 2026 TradeBridge</span><span>Seller studio · Kigali</span><div><a href="#help" data-action="help">Help</a><a href="#terms" data-action="terms">Terms</a></div></footer>`;
+}
+
+function renderAdminOverview() {
+  const businesses = state.adminBusinesses || [];
+  const orders = state.adminOrders || [];
+  const payments = state.adminPayments || [];
+  const pending = businesses.filter((shop) => shop.status === "pending");
+  return '<div class="admin-metrics">' +
+    metric("Businesses", businesses.length, "Live", "registered vendors", "▦") +
+    metric("Awaiting review", pending.length, "Action", "business applications", "◷", pending.length > 0) +
+    metric("Open orders", orders.filter((order) => !["completed", "cancelled"].includes(order.status)).length, "Live", "latest 100 orders", "▤") +
+    metric("Payments to check", payments.filter((payment) => payment.status === "pending").length, "Review", "seller confirmations", "↗", payments.some((payment) => payment.status === "pending")) +
+    '</div><div class="admin-overview-grid"><section class="panel"><div class="panel-heading"><div><h3>Business applications</h3><p>Review new vendors before they appear on TradeBridge.</p></div><button class="text-link" data-admin-tab="Businesses">View all</button></div><div class="backend-list">' +
+    (pending.length ? pending.slice(0, 5).map((shop) => '<article class="backend-list-item"><div><strong>' + escapeHtml(shop.name) + '</strong><small>' + escapeHtml(shop.type) + ' · ' + escapeHtml(shop.district || "Kigali") + ' · ' + escapeHtml(shop.profiles?.full_name || "Seller") + '</small></div><button class="review-button" data-shop-review="' + escapeHtml(shop.id) + '" data-next-status="approved">Approve</button></article>').join("") : '<p class="empty-backend">No applications are waiting for review.</p>') +
+    '</div></section><section class="panel"><div class="panel-heading"><div><h3>Recent orders</h3><p>Most recent marketplace activity.</p></div><button class="text-link" data-admin-tab="Orders">View all</button></div><div class="backend-list">' +
+    (orders.length ? orders.slice(0, 5).map((order) => '<article class="backend-list-item"><div><strong>' + escapeHtml(order.shops?.name || "Business") + ' · ' + escapeHtml(order.id.slice(0, 8)) + '</strong><small>' + escapeHtml(order.status.replaceAll("_", " ")) + ' · ' + new Date(order.created_at).toLocaleDateString() + '</small></div><b>RWF ' + Number(order.total_rwf).toLocaleString() + '</b></article>').join("") : '<p class="empty-backend">Customer orders will appear here.</p>') +
+    '</div></section></div>';
 }
 
 function renderAdmin() {
@@ -276,13 +294,14 @@ function renderAdmin() {
   const view = $("#admin-view");
   const tabButtons = tabs.map((tab) => `<button class="portal-tab ${state.adminTab === tab ? "active" : ""}" data-admin-tab="${tab}">${tab}${tab === "Businesses" ? `<span class="count-pill alert-count">${(state.adminBusinesses || []).filter((shop) => shop.status === "pending").length}</span>` : ""}</button>`).join("");
   const businesses = state.adminBusinesses || [];
-  const body = state.adminTab === "Overview" || state.adminTab === "Businesses"
+  const body = state.adminTab === "Businesses"
     ? `<div class="admin-metrics">${metric("Businesses", businesses.length, "Live", "registered marketplace vendors", "▦")}${metric("Pending approval", businesses.filter((shop) => shop.status === "pending").length, "Review", "business applications", "◷")}${metric("Orders", (state.adminOrders || []).length, "Recent", "latest 100 recorded", "▤")}${metric("Marketplace volume", `RWF ${(state.adminOrders || []).reduce((total, order) => total + Number(order.total_rwf || 0), 0).toLocaleString()}`, "Recent", "latest 100 orders", "↗")}</div><section class="panel admin-business-panel"><div class="panel-heading"><div><h3>${state.adminTab === "Businesses" ? "All businesses" : "Business applications"}</h3><p>Approve or suspend marketplace vendors.</p></div></div><div class="backend-list">${businesses.length ? businesses.map((shop) => `<article class="backend-list-item"><div><strong>${escapeHtml(shop.name)}</strong><small>${escapeHtml(shop.type)} · ${escapeHtml(shop.district)} · ${escapeHtml(shop.profiles?.full_name || "Seller")}</small></div><span class="order-pill">${escapeHtml(shop.status)}</span><span>${shop.status === "pending" ? `<button class="review-button" data-shop-review="${escapeHtml(shop.id)}" data-next-status="approved">Approve</button>` : shop.status === "approved" ? `<button class="row-action" data-shop-review="${escapeHtml(shop.id)}" data-next-status="suspended">Suspend</button>` : `<button class="review-button" data-shop-review="${escapeHtml(shop.id)}" data-next-status="approved">Reinstate</button>`}</span></article>`).join("") : '<p class="empty-backend">No business applications yet.</p>'}</div></section>`
-    : state.adminTab === "Orders" ? `<section class="backend-list">${(state.adminOrders || []).map((order) => `<article class="backend-list-item"><div><strong>${escapeHtml(order.shops?.name || "Business")} · ${escapeHtml(order.id.slice(0, 8))}</strong><small>${escapeHtml(order.status)} · ${new Date(order.created_at).toLocaleString()}</small></div><b>RWF ${Number(order.total_rwf).toLocaleString()}</b></article>`).join("") || '<p class="empty-backend">No orders yet.</p>'}</section>`
+    : state.adminTab === "Overview" ? renderAdminOverview()
+    : state.adminTab === "Orders" ? `<section class="backend-list">${(state.adminOrders || []).map((order) => `<article class="backend-list-item"><div><strong>${escapeHtml(order.shops?.name || "Business")} · ${escapeHtml(order.id.slice(0, 8))}</strong><small>${escapeHtml(order.status.replaceAll("_", " "))} · ${new Date(order.created_at).toLocaleString()}</small></div><b>RWF ${Number(order.total_rwf).toLocaleString()}</b><label class="order-status-control"><span>Update order</span><select aria-label="Update order status" data-admin-order-status="${escapeHtml(order.id)}" data-current-status="${escapeHtml(order.status)}">${["new", "confirmed", "preparing", "ready", "out_for_delivery", "completed", "cancelled"].map((status) => `<option value="${status}" ${status === order.status ? "selected" : ""}>${status.replaceAll("_", " ")}</option>`).join("")}</select></label></article>`).join("") || '<p class="empty-backend">No orders yet.</p>'}</section>`
     : state.adminTab === "Payments" ? `<section class="backend-list">${(state.adminPayments || []).map((payment) => `<article class="backend-list-item"><div><strong>${escapeHtml(payment.shops?.name || "Seller")} · RWF ${Number(payment.amount_rwf).toLocaleString()}</strong><small>${escapeHtml(payment.method.replaceAll("_", " "))} · Order ${escapeHtml(payment.order_id.slice(0, 8))}</small><small>Reference: ${escapeHtml(payment.transaction_reference || "Not supplied")}</small></div><span class="order-pill">${escapeHtml(payment.status)}</span>${payment.status === "pending" ? `<button class="review-button" data-payment-id="${escapeHtml(payment.id)}" data-payment-review="paid">Confirm</button><button class="row-action" data-payment-id="${escapeHtml(payment.id)}" data-payment-review="rejected">Reject</button>` : ""}</article>`).join("") || '<p class="empty-backend">No payment records yet.</p>'}</section>`
     : state.adminTab === "Customers" ? `<section class="backend-list">${(state.adminCustomers || []).map((customer) => `<article class="backend-list-item"><div><strong>${escapeHtml(customer.full_name || "TradeBridge member")}</strong><small>${escapeHtml(customer.phone || "No phone added")}</small></div><span class="order-pill">${escapeHtml(customer.role)}</span><small>${new Date(customer.created_at).toLocaleDateString()}</small></article>`).join("") || '<p class="empty-backend">No accounts yet.</p>'}</section>`
     : `<div class="admin-metrics">${metric("Completed orders", (state.adminOrders || []).filter((order) => order.status === "completed").length, "All time", "marked complete", "✓")}${metric("Open orders", (state.adminOrders || []).filter((order) => !["completed", "cancelled"].includes(order.status)).length, "Now", "need fulfillment", "◷")}${metric("Paid records", (state.adminPayments || []).filter((payment) => payment.status === "paid").length, "Verified", "seller payments", "▤")}${metric("Pending payments", (state.adminPayments || []).filter((payment) => payment.status === "pending").length, "Review", "awaiting confirmation", "↗", true)}</div><section class="panel"><div class="panel-heading"><div><h3>Marketplace activity</h3><p>Orders placed in the last seven days · from the latest 100 records.</p></div><button class="outline-button" data-action="export">Download CSV</button></div><div class="backend-list">${Array.from({length: 7}, (_, i) => { const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() - (6 - i)); const dayOrders = (state.adminOrders || []).filter((o) => new Date(o.created_at).toDateString() === d.toDateString()); return `<article class="backend-list-item"><div><strong>${d.toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"})}</strong><small>${dayOrders.length} order${dayOrders.length === 1 ? "" : "s"}</small></div><b>RWF ${dayOrders.reduce((sum,o) => sum + Number(o.total_rwf || 0), 0).toLocaleString()}</b></article>`; }).join("")}</div></section>`;
-  view.innerHTML = `<section class="portal-heading"><div><div class="eyebrow"><span class="live-dot"></span> ADMIN CONSOLE</div><h1>Marketplace management</h1><p class="intro">Review businesses and monitor orders.</p></div></section><div class="portal-tabs">${tabButtons}</div>${body}<footer class="footer"><span>© 2026 TradeBridge</span><span>Admin console · Kigali</span></footer>`;
+  view.innerHTML = `<section class="portal-heading"><div><div class="eyebrow"><span class="live-dot"></span> ADMIN CONSOLE</div><h1>Marketplace management</h1><p class="intro">Review applications, keep orders moving, and check seller payments.</p></div></section><div class="portal-tabs">${tabButtons}</div>${body}<footer class="footer"><span>© 2026 TradeBridge</span><span>Admin console · Kigali</span></footer>`;
 }
 
 function metric(label, value, change, sub, icon, warning = false) {
@@ -413,7 +432,7 @@ document.addEventListener("click", (event) => {
   if (button.dataset.editListing) {
     const item = state.sellerListings.find((listing) => listing.id === button.dataset.editListing);
     if (!item) return;
-    (async () => { await openListingForm(); editingListingId = item.id; const form = $("#listing-form"); form.elements.shop_id.value = item.shop_id; form.elements.title.value = item.title; form.elements.description.value = item.description || ""; form.elements.price_rwf.value = item.price_rwf; form.elements.stock.value = item.stock ?? ""; form.elements.duration_min.value = item.duration_min ?? ""; $("#listing-title").textContent = "Edit listing"; form.querySelector("button[type=submit]").textContent = "Save changes"; })();
+    (async () => { editingListingId = item.id; await openListingForm(); const form = $("#listing-form"); form.elements.shop_id.value = item.shop_id; form.elements.title.value = item.title; form.elements.description.value = item.description || ""; form.elements.price_rwf.value = item.price_rwf; form.elements.stock.value = item.stock ?? ""; form.elements.duration_min.value = item.duration_min ?? ""; editingListingImageUrl = item.image_url || null; if (editingListingImageUrl) { const preview = $("#listing-image-preview"); preview.querySelector("img").src = editingListingImageUrl; preview.querySelector("span").textContent = "Current product photo"; preview.hidden = false; } $("#listing-title").textContent = "Edit listing"; form.querySelector("button[type=submit]").textContent = "Save changes"; })();
     return;
   }
   if (button.dataset.sellerTab) { state.sellerTab = button.dataset.sellerTab; renderSeller(); return; }
@@ -503,27 +522,73 @@ $("#business-form").addEventListener("submit", async (event) => {
   } catch (error) { toast(error.message || "Could not submit your business."); }
 });
 
+$("#listing-form").elements.image.addEventListener("change", (event) => {
+  const file = event.target.files?.[0];
+  const preview = $("#listing-image-preview");
+  if (!file) { if (!editingListingImageUrl) preview.hidden = true; return; }
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 3 * 1024 * 1024) {
+    event.target.value = "";
+    toast("Choose a JPG, PNG or WebP image under 3 MB.");
+    return;
+  }
+  preview.querySelector("img").src = URL.createObjectURL(file);
+  preview.querySelector("span").textContent = file.name;
+  preview.hidden = false;
+});
+
+$("#listing-dialog").addEventListener("click", (event) => {
+  if (!event.target.closest("[data-clear-listing-image]")) return;
+  $("#listing-form").elements.image.value = "";
+  editingListingImageUrl = null;
+  $("#listing-image-preview").hidden = true;
+});
+
+$("#listing-dialog").addEventListener("close", () => {
+  editingListingId = null;
+  editingListingImageUrl = null;
+});
+
 $("#listing-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!requireAccount()) return;
   const form = event.currentTarget;
   const values = Object.fromEntries(new FormData(form));
+  let client = null;
+  let uploadedPath = null;
+  const previousImageUrl = editingListingImageUrl;
   try {
-    const client = await getSupabase();
+    client = await getSupabase();
+    const image = form.elements.image.files?.[0];
+    let imageUrl = editingListingImageUrl;
+    if (image) {
+      const extension = image.type === "image/jpeg" ? "jpg" : image.type.split("/")[1];
+      uploadedPath = values.shop_id + "/" + crypto.randomUUID() + "." + extension;
+      const { data: upload, error: uploadError } = await client.storage.from("listing-images").upload(uploadedPath, image, { cacheControl: "3600", contentType: image.type, upsert: false });
+      if (uploadError) throw uploadError;
+      imageUrl = client.storage.from("listing-images").getPublicUrl(upload.path).data.publicUrl;
+    }
     const listingValues = {
       shop_id: values.shop_id, title: values.title.trim(), description: (values.description || "").trim(),
       price_rwf: Number(values.price_rwf), stock: values.stock === "" ? null : Number(values.stock),
-      duration_min: values.duration_min === "" ? null : Number(values.duration_min)
+      duration_min: values.duration_min === "" ? null : Number(values.duration_min), image_url: imageUrl
     };
     const result = editingListingId
       ? await client.from("listings").update(listingValues).eq("id", editingListingId)
       : await client.from("listings").insert(listingValues);
     const { error } = result;
     if (error) throw error;
-    $("#listing-dialog").close(); form.reset();
-    const wasEditing = Boolean(editingListingId); editingListingId = null;
+    $("#listing-dialog").close(); form.reset(); $("#listing-image-preview").hidden = true;
+    const wasEditing = Boolean(editingListingId); editingListingId = null; editingListingImageUrl = null;
+    if (wasEditing && previousImageUrl && previousImageUrl !== imageUrl) {
+      const marker = "/storage/v1/object/public/listing-images/";
+      const index = previousImageUrl.indexOf(marker);
+      if (index >= 0) await client.storage.from("listing-images").remove([decodeURIComponent(previousImageUrl.slice(index + marker.length))]);
+    }
     toast(wasEditing ? "Listing changes saved." : "Listing saved. It will be visible after its business is approved."); await loadSellerWorkspace(); await refreshListings();
-  } catch (error) { toast(error.message || "Could not save the listing."); }
+  } catch (error) {
+    if (uploadedPath && client) await client.storage.from("listing-images").remove([uploadedPath]);
+    toast(error.message || "Could not save the listing.");
+  }
 });
 
 $("#checkout-form").elements.fulfillment.addEventListener("change", (event) => {
@@ -563,6 +628,20 @@ $("#checkout-form").addEventListener("submit", async (event) => {
     toast(paymentError ? `Order placed (${String(orderId).slice(0, 8)}); payment record needs attention.` : `Order placed (${String(orderId).slice(0, 8)}). Follow the seller’s payment instructions.`);
     await refreshListings();
   } catch (error) { toast(error.message || "Could not place the order."); }
+});
+
+$("#admin-view").addEventListener("change", async (event) => {
+  const select = event.target.closest("[data-admin-order-status]");
+  if (!select || select.value === select.dataset.currentStatus) return;
+  try {
+    const { error } = await (await getSupabase()).from("orders").update({ status: select.value }).eq("id", select.dataset.adminOrderStatus);
+    if (error) throw error;
+    toast("Order status updated.");
+    await loadAdminWorkspace();
+  } catch (error) {
+    toast(error.message || "Could not update the order.");
+    select.value = select.dataset.currentStatus;
+  }
 });
 
 $("#seller-view").addEventListener("change", async (event) => {
