@@ -55,17 +55,19 @@
 
         <div id="buyer-view" class="page-content">
           <section class="welcome-row">
-            <div><div class="eyebrow"><span class="live-dot"></span> YOUR NEIGHBORHOOD, IN ONE PLACE</div><h1>Find a little good in Kigali <span class="wave">✳</span></h1><p class="intro">Discover local shops, good food, and people who help you feel your best.</p></div>
+            <div><div class="eyebrow"><span class="live-dot"></span> KIGALI’S LOCAL MARKETPLACE</div><h1>Find your next favorite <span class="wave">✳</span></h1><p class="intro">Shop local stores, good food, and trusted services in one place.</p></div>
             <button class="location-pill" data-action="location"><span>⌖</span>Kigali, Rwanda<span class="chevron">⌄</span></button>
           </section>
-          <section class="hero">
-            <div class="hero-copy"><div class="hero-kicker">MADE FOR KIGALI</div><h2>Your city has<br>good things in store.</h2><p>Meet local businesses, find your next favorite, and keep more of your day close to home.</p><button class="hero-button" data-action="explore">Browse Kigali businesses <span>→</span></button></div>
-            <div class="hero-art" aria-hidden="true"><div class="sun-disc"></div><div class="hero-blob blob-one"></div><div class="hero-blob blob-two"></div><div class="hero-card hero-card-top"><span>✦</span>A little closer to home</div><div class="hero-card hero-card-bottom"><span>⌖</span><div><small>MADE FOR YOUR NEIGHBORHOOD</small><strong>Discover something good.</strong></div></div><div class="hero-stamp">LOCAL<br><b>LOVE</b><span>✳</span></div></div>
+          <section class="storefront-grid" aria-label="Shop TradeBridge">
+            <aside class="category-rail"><h2>Shop by category</h2><button data-category="Shops"><span>▧</span> Shops & groceries <b>›</b></button><button data-category="Restaurants"><span>♨</span> Restaurants <b>›</b></button><button data-category="Salons"><span>✂</span> Beauty & salons <b>›</b></button><button data-category="All"><span>⌂</span> Home & services <b>›</b></button><button class="category-all" data-action="all-listings">Browse all businesses <b>→</b></button></aside>
+            <div class="storefront-center"><section id="hero-carousel" class="promo-carousel" aria-label="TradeBridge promotions"><div id="hero-banner-content"></div><div id="hero-banner-dots" class="banner-dots"></div><button class="banner-arrow banner-prev" data-banner-prev aria-label="Previous promotion">‹</button><button class="banner-arrow banner-next" data-banner-next aria-label="Next promotion">›</button></section>
+              <div class="promo-tiles"><button class="promo-tile tile-food" data-category="Restaurants"><span>Fresh from Kigali</span><strong>Good food, close to home</strong><em>Explore food →</em><b aria-hidden="true">🥘</b></button><button class="promo-tile tile-style" data-category="Salons"><span>Make time for you</span><strong>Find your next look</strong><em>Explore salons →</em><b aria-hidden="true">✂</b></button><button class="promo-tile tile-market" data-category="Shops"><span>Picked nearby</span><strong>Everyday local finds</strong><em>Shop Kigali →</em><b aria-hidden="true">🧺</b></button></div>
+            </div>
+            <aside class="welcome-panel"><div class="welcome-panel-brand"><span class="brand-mark">T</span><small>TRADEBRIDGE · KIGALI</small></div><h2>Welcome to your local market</h2><p>Save favorites, follow orders, and meet the businesses around you.</p><div class="welcome-panel-actions"><button class="primary-button" data-action="profile">Log in</button><button class="outline-button" data-action="register">Create account</button></div><div class="trust-points"><div><span>⌖</span><p><b>Made for Kigali</b><small>Discover nearby businesses</small></p></div><div><span>↗</span><p><b>Shop with confidence</b><small>Seller details on every listing</small></p></div><div><span>♡</span><p><b>Support local</b><small>Keep business close to home</small></p></div></div></aside>
           </section>
           <div class="preview-notice"><span>✳</span><span><strong>Website preview</strong> — Sample businesses, ratings, and prices are shown while we build TradeBridge.</span></div>
-          <section class="stats-strip" aria-label="TradeBridge categories"><div class="stat"><span class="stat-icon mint">⌖</span><div><strong>Explore nearby</strong><small>Find businesses in Kigali</small></div></div><span class="stat-divider"></span><div class="stat"><span class="stat-icon peach">✦</span><div><strong>Support local</strong><small>Meet independent businesses</small></div></div><span class="stat-divider"></span><div class="stat"><span class="stat-icon lavender">♡</span><div><strong>One easy place</strong><small>Shop, eat, and book</small></div></div></section>
           <section class="discover-section" id="discover">
-            <div class="section-heading"><div><div class="eyebrow muted-eyebrow">KIGALI FAVORITES</div><h2>What are you looking for?</h2></div><button class="text-link" data-action="all-listings">See all places <span>→</span></button></div>
+            <div class="section-heading"><div><div class="eyebrow muted-eyebrow">LOCAL FAVORITES</div><h2>Popular around Kigali</h2></div><button class="text-link" data-action="all-listings">See all products <span>→</span></button></div>
             <div class="filter-row"><div class="category-tabs" role="group" aria-label="Filter by category"><button class="category-tab selected" data-category="All"><span>✳</span>All</button><button class="category-tab" data-category="Shops"><span>▧</span>Shops</button><button class="category-tab" data-category="Restaurants"><span>♨</span>Restaurants</button><button class="category-tab" data-category="Salons"><span>✂</span>Salons</button></div><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search places, services..." autocomplete="off"><kbd>⌘ K</kbd></label></div>
             <div id="listing-grid" class="listing-grid" aria-live="polite"></div>
           </section>
@@ -112,13 +114,26 @@
       <form id="listing-form" class="backend-form">
         <label>Business<select name="shop_id" required></select></label>
         <label>Name<input name="title" required maxlength="120"></label>
-        <label>Description<textarea name="description" rows="3" maxlength="500"></textarea></label>
+        <label>Category<select name="category"><option>General</option><option>Groceries</option><option>Clothing</option><option>Shoes</option><option>Electronics</option><option>Home</option><option>Beauty</option><option>Food & drink</option><option>Service</option><option>Other</option></select></label>
+        <label>Short description<textarea name="description" rows="2" maxlength="500" placeholder="What is it and who is it for?"></textarea></label>
+        <label>Product details<textarea name="details" rows="4" maxlength="3000" placeholder="Materials, size, ingredients, care, service details, or delivery notes"></textarea></label>
         <label>Price (RWF)<input name="price_rwf" type="number" min="0" step="1" required></label>
-        <label>Product photo<input name="image" type="file" accept="image/jpeg,image/png,image/webp"><span class="field-hint">JPG, PNG or WebP · up to 3 MB</span></label>
-        <div id="listing-image-preview" class="image-upload-preview" hidden><img alt="Selected product photo"><span></span><button type="button" class="row-action" data-clear-listing-image>Remove photo</button></div>
+        <label>Product photos<input name="images" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="field-hint">Add up to 5 JPG, PNG or WebP photos · up to 3 MB each. Choose one as the cover photo.</span></label>
+        <div id="listing-image-gallery" class="listing-image-gallery" aria-live="polite"></div>
         <label>Stock quantity (optional)<input name="stock" type="number" min="0" step="1"></label>
         <label>Service duration in minutes (optional)<input name="duration_min" type="number" min="1" step="1"></label>
         <button class="primary-button" type="submit">Save listing</button>
+      </form>
+    </dialog>
+    <dialog id="product-dialog" class="install-dialog product-dialog" aria-labelledby="product-name">
+      <form method="dialog"><button class="dialog-close" aria-label="Close product details">×</button></form>
+      <div class="product-detail-layout"><div><div id="product-gallery-main" class="product-gallery-main"></div><div id="product-gallery-thumbs" class="product-gallery-thumbs"></div></div><div class="product-detail-copy"><p class="install-kicker" id="product-category"></p><h2 id="product-name"></h2><strong id="product-price" class="product-detail-price"></strong><p id="product-shop" class="product-shop-line"></p><p id="product-short-description" class="install-description"></p><section class="product-detail-block"><h3>Product details</h3><p id="product-details-text"></p></section><p id="product-stock-note" class="product-stock-note"></p><button id="product-order-button" class="primary-button" type="button">Order this item</button></div></div>
+    </dialog>
+    <dialog id="banner-dialog" class="install-dialog banner-dialog" aria-labelledby="banner-editor-title">
+      <form method="dialog"><button class="dialog-close" aria-label="Close promotion editor">×</button></form>
+      <p class="install-kicker">WEBSITE CONTENT</p><h2 id="banner-editor-title">Add a promotion</h2>
+      <form id="banner-form" class="backend-form">
+        <label>Headline<input name="title" required maxlength="120"></label><label>Description<textarea name="subtitle" rows="3" maxlength="300"></textarea></label><label>Button label<input name="cta_label" required maxlength="40"></label><label>Button category<select name="cta_category"><option>All</option><option>Shops</option><option>Restaurants</option><option>Salons</option></select></label><label>Banner photo<input name="image" type="file" accept="image/jpeg,image/png,image/webp"><span class="field-hint">JPG, PNG or WebP · up to 3 MB</span></label><div id="banner-image-preview" class="image-upload-preview" hidden><img alt="Banner preview"><span></span></div><label>Artwork style<select name="theme"><option value="market">Market</option><option value="food">Food</option><option value="salon">Salon</option><option value="home">Home</option></select></label><label>Display order<input name="sort_order" type="number" min="1" step="1" value="1"></label><label><span><input name="active" type="checkbox" checked> Show this promotion</span></label><button class="primary-button" type="submit">Save promotion</button>
       </form>
     </dialog>
     <dialog id="checkout-dialog" class="install-dialog" aria-labelledby="checkout-title">
