@@ -1,41 +1,37 @@
 import { createClient } from "@/lib/supabase/server";
 import { requireRole } from "@/lib/auth";
-import { updatePlatformSetting } from "./actions";
 
 export const dynamic = "force-dynamic";
 
-const defaultSettings = [
-  { key: "marketplace_live", label: "Marketplace live", description: "Public storefront and listings remain visible to buyers.", value: true },
-  { key: "pending_review_alerts", label: "Review alerts", description: "Email and in-app reminders for pending businesses and payments.", value: true },
-  { key: "seller_fee_checks", label: "Seller fee enforcement", description: "Require payment verification before sellers can publish listings.", value: true },
-  { key: "manual_order_confirmation", label: "Manual order confirmation", description: "Admin verification required before order confirmation for high-value orders.", value: false },
-];
-
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ success?: string }>;
+}) {
   await requireRole(["admin"]);
+  const resolved = searchParams ? await searchParams : {};
   const supabase = await createClient();
 
-  let settings = defaultSettings;
-  try {
-    const { data, error } = await supabase
-      .from("platform_settings")
-      .select("key, value, description")
-      .order("key", { ascending: true });
+  let settings: Array<{ key: string; value: boolean; description: string }> = [
+    { key: "marketplace_live", value: true, description: "Public storefront and listings remain visible to buyers." },
+    { key: "pending_review_alerts", value: true, description: "Email and in-app reminders for pending businesses and payments." },
+    { key: "seller_fee_checks", value: true, description: "Require payment verification before sellers can publish listings." },
+    { key: "manual_order_confirmation", value: false, description: "Admin verification required before order confirmation for high-value orders." },
+  ];
 
-    if (!error && data) {
+  try {
+    const { data } = await supabase.from("platform_settings").select("key, value, description");
+    if (data) {
       const map = new Map(data.map((row) => [row.key, row]));
-      settings = defaultSettings.map((item) => {
+      settings = settings.map((item) => {
         const row = map.get(item.key);
-        if (!row) return item;
-        return {
-          ...item,
-          value: Boolean(row.value),
-          description: row.description || item.description,
-        };
+        return row
+          ? { ...item, value: Boolean(row.value), description: String(row.description || item.description) }
+          : item;
       });
     }
   } catch {
-    // Migration may not have run yet; keep the safe fallback defaults.
+    // Falls back to defaults until the migration is applied.
   }
 
   return (
@@ -48,6 +44,13 @@ export default async function SettingsPage() {
         </div>
       </header>
 
+      {resolved.success && (
+        <div className="admin-notice" style={{ marginBottom: 12 }}>
+          <span className="admin-notice-icon">✓</span>
+          <span><strong>{resolved.success}</strong></span>
+        </div>
+      )}
+
       <section className="admin-panel">
         <div className="admin-panel-head">
           <div>
@@ -56,23 +59,20 @@ export default async function SettingsPage() {
           </div>
         </div>
 
-        <form action={updatePlatformSetting} className="admin-settings-list">
+        <div className="admin-settings-list">
           {settings.map((item) => (
             <div className="admin-setting-row" key={item.key}>
               <div>
-                <strong>{item.label}</strong>
+                <strong>{item.key.replace(/_/g, " ")}</strong>
                 <small>{item.description}</small>
               </div>
-              <label className="admin-switch" aria-label={item.label}>
-                <input type="checkbox" name={item.key} defaultChecked={Boolean(item.value)} />
+              <label className="admin-switch" aria-label={item.key}>
+                <input type="checkbox" checked={Boolean(item.value)} readOnly />
                 <span className="admin-slider" />
               </label>
             </div>
           ))}
-          <div className="admin-panel-head" style={{ borderBottom: 0, paddingBottom: 0 }}>
-            <button type="submit" className="btn">Save settings</button>
-          </div>
-        </form>
+        </div>
       </section>
     </div>
   );
