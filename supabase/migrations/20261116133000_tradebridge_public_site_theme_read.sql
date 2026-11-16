@@ -8,3 +8,5 @@ on public.platform_settings
 for select
 to anon, authenticated
 using (key = 'site_theme');
+
+grant select (key, value) on table public.platform_settings to anon;
