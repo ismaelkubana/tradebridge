@@ -39,3 +39,17 @@ export async function reviewOrderPayment(formData: FormData) {
   revalidatePath("/seller/orders");
   redirect("/admin/payments?success=" + encodeURIComponent(status === "paid" ? "Payment verified." : "Payment rejected."));
 }
+
+
+export async function setListingVisibility(formData: FormData) {
+  await requireRole(["admin"]);
+  const id = String(formData.get("id") ?? "");
+  const active = String(formData.get("active") ?? "") === "true";
+  if (!id) return;
+  const supabase = await createClient();
+  const { error } = await supabase.from("listings").update({ active }).eq("id", id);
+  if (error) redirect("/admin/products?error=" + encodeURIComponent("Product visibility could not be updated."));
+  revalidatePath("/admin/products");
+  revalidatePath("/browse");
+  redirect("/admin/products?success=" + encodeURIComponent(active ? "Product restored to the marketplace." : "Product hidden from the marketplace."));
+}
