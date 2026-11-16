@@ -30,7 +30,7 @@ export default async function AdminDashboardPage() {
  const max=Math.max(1,...bars.map(b=>b.value));
  const stats=[
   {label:"Total customers",value:buyers.toLocaleString(),hint:"Buyer accounts",icon:"◎",accent:"bg-sky-50 text-sky-700"},
-  {label:"Active sellers",value:sellers.toLocaleString(),hint:"Seller accounts",icon:"♙",accent:"bg-violet-50 text-violet-700"},
+  {label:"Seller accounts",value:sellers.toLocaleString(),hint:"Registered seller profiles",icon:"♙",accent:"bg-violet-50 text-violet-700"},
   {label:"Approved businesses",value:approvedShops.toLocaleString(),hint:"Published storefronts",icon:"▤",accent:"bg-emerald-50 text-emerald-700"},
   {label:"Total orders",value:orders.toLocaleString(),hint:"All order records",icon:"⇄",accent:"bg-amber-50 text-amber-700"},
   {label:"Completed sales",value:formatRWF(volume),hint:"Gross completed order value",icon:"R",accent:"bg-emerald-50 text-emerald-700"},
