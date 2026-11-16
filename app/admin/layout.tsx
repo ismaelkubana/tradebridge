@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { requireRole } from "@/lib/auth";
+import AdminRealtimeRefresh from "./AdminRealtimeRefresh";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,13 @@ const groups = [
       { href: "/admin/billing", label: "Seller billing", icon: "R" },
     ],
   },
+  {
+    title: "Governance",
+    links: [
+      { href: "/admin/audit", label: "Activity audit log", icon: "≋" },
+      { href: "/admin/settings", label: "System settings", icon: "⚙" },
+    ],
+  },
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -27,28 +35,27 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="min-h-[70vh]">
+      <AdminRealtimeRefresh />
       <header className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-lg font-black text-white">T</div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">TradeBridge</p>
-            <h1 className="text-lg font-bold text-gray-950">Control center</h1>
+            <h1 className="text-lg font-bold text-gray-950">Super Admin Control Center</h1>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <span className="hidden rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 sm:inline-flex">● Secure admin session</span>
+          <span className="hidden rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 sm:inline-flex">● Live Supabase sync</span>
           <div className="text-right">
             <p className="text-sm font-semibold text-gray-900">{admin.full_name || "Administrator"}</p>
-            <p className="text-xs text-gray-500">Administrator</p>
+            <p className="text-xs text-gray-500">Authorized administrator</p>
           </div>
         </div>
       </header>
 
       <div className="grid items-start gap-6 lg:grid-cols-[230px_minmax(0,1fr)]">
         <aside className="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm">
-          <div className="mb-3 px-3 pt-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">Workspace</p>
-          </div>
+          <div className="mb-3 px-3 pt-2"><p className="text-xs font-semibold uppercase tracking-wider text-gray-400">Workspace</p></div>
           {groups.map((group) => (
             <div key={group.title} className="mb-5 last:mb-1">
               <p className="mb-2 px-3 text-[11px] font-bold uppercase tracking-wider text-gray-400">{group.title}</p>
@@ -63,8 +70,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </div>
           ))}
           <div className="mt-4 rounded-xl bg-gray-50 p-3">
-            <p className="text-xs font-semibold text-gray-800">Admin access</p>
-            <p className="mt-1 text-xs leading-5 text-gray-500">Actions are protected by your signed-in TradeBridge administrator role.</p>
+            <p className="text-xs font-semibold text-gray-800">Protected administration</p>
+            <p className="mt-1 text-xs leading-5 text-gray-500">Every page is guarded by your existing signed-in administrator role.</p>
           </div>
         </aside>
         <main className="min-w-0">{children}</main>
