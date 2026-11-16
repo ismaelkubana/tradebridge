@@ -8,6 +8,7 @@ const groups = [
   { title: "Workspace", links: [
     { href: "/admin", label: "Overview", icon: "⌂" },
     { href: "/admin/shops", label: "Businesses", icon: "▤" },
+    { href: "/admin/products", label: "Products & inventory", icon: "▣" },
     { href: "/admin/users", label: "Users & roles", icon: "♙" },
     { href: "/admin/users?role=buyer", label: "Customers", icon: "◎" },
   ]},
